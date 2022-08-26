@@ -3,7 +3,10 @@ import React from "react";
 function Header(props) {
   return (
     <h1>
-      <a href="/"> {props.title}</a>
+      <a href="/" onClick={ (event)=>{
+        event.preventDefault();
+        props.onChangMode();
+      } }> {props.title}</a>
     </h1>
   );
 }
