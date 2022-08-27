@@ -36,10 +36,26 @@ function App() {
       }
     }
     content = <Article title={title} body={body}></Article>
-    contextControl=<li><a href={"/update/"+id} onClick={event=>{
+    contextControl=
+    <>
+    <li><a href={"/update/"+id} onClick={event=>{
       event.preventDefault();
       setMode("UPDATE");
     }}>Update</a></li>
+    <li>
+      <input type="button" value="Delete" onClick={()=>{
+        const newTopics=[];
+        for(let i=0;i<topics.length;i++){
+          if(topics[i].id !== id){
+            newTopics.push(topics[i]);
+          }
+        }
+        //for 문에서 id 가 같은 값만 setTopics에 반영하기에 id 가 다른 경우는 정상 출력이 되며 같은 경우는 출력하지 않는다.
+        setTopics(newTopics);
+        setMode("WELCOME");
+      }} />
+    </li>
+    </>
   }
   else if(mode === "CREATE"){
     content = <Create onCreate={
