@@ -4,6 +4,7 @@ import Header from './Header'
 import Nav from './Nav'
 import Article from './Article'
 import Create from './Create';
+import Update from './Update';
 import { useState } from 'react';
 
 function App() {
@@ -22,15 +23,23 @@ function App() {
     { id: 3, title: 'javascript', body: 'javascript is ...' }
   ])
   let content = null;
+  let contextControl = null;
   if (mode === "WELCOME") {
     content = <Article title="Welcome" body="Hello, WEB"></Article>
   }
   else if (mode === "READ") {
+    let title,body=null;
     for(let i=0;i<topics.length;i++){ 
       if(id===topics[i].id){
-        content = <Article title={topics[i].title} body={topics[i].body}></Article>
+        title = topics[i].title;
+        body=topics[i].body;
       }
     }
+    content = <Article title={title} body={body}></Article>
+    contextControl=<li><a href={"/update/"+id} onClick={event=>{
+      event.preventDefault();
+      setMode("UPDATE");
+    }}>Update</a></li>
   }
   else if(mode === "CREATE"){
     content = <Create onCreate={
@@ -43,6 +52,27 @@ function App() {
         setId(nextId);
         setNextId(nextId+1);
     }}></Create>
+  }
+  else if(mode==="UPDATE"){
+    let title,body=null;
+    for(let i=0;i<topics.length;i++){ 
+      if(id===topics[i].id){
+        title = topics[i].title;
+        body=topics[i].body;
+      }
+    }
+    content = <Update title={title} body={body} onUpdate={(title,body)=>{
+      const newTopics = [...topics];
+      const updatedTopic = {id: id ,title:title,body:body};
+      for(let i = 0 ;i<newTopics.length;i++){
+        if(newTopics[i].id===id){
+          newTopics[i] = updatedTopic;
+          break;
+        }
+      }
+      setTopics(newTopics);
+      setMode("READ");
+    }}></Update>
   }
   return (
     <div>
@@ -60,12 +90,15 @@ function App() {
       } />
       {content} 
       <br/>
-      <a href="create" onClick={
+      <ul>
+      <li><a href="create" onClick={
         event=>{
           event.preventDefault();
           setMode("CREATE");
         }
-      }>create</a>
+      }>create</a></li>
+      {contextControl}
+      </ul>
     </div>
   );
 }
