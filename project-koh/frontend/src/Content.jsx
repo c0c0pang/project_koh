@@ -14,7 +14,7 @@ function Content() {
         ,{title:"IT"}
         ,{title:"기타"}
     ]
-    console.log(CollectionsList);
+    // console.log(CollectionsList);
   return (
     <ContentDiv>
     <CollectionsDiv>

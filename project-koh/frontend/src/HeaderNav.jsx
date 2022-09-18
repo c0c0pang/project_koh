@@ -20,6 +20,7 @@ function HeaderNav(props) {
         window.open("https://metamask.io/download.html");
     });
   };
+  
   return (
     <HeaderNavdiv>
       <MainTitle>

@@ -23,6 +23,7 @@ export const HeaderNavdiv = styled.div`
         }
     }
 `
+
 export const Search = styled.div`
     display: flex;
     height: 40px;
@@ -80,8 +81,8 @@ export const ContentDiv=styled.div`
 `
 export const CollectionsDiv=styled.div`
     display: grid;
-    grid-template-columns: 300px 300px 300px;
-    grid-template-rows: 250px 250px 250px;
+    grid-template-columns: 270px 270px 270px;
+    grid-template-rows: 230px 230px 230px;
     
 `
 
@@ -96,4 +97,48 @@ export const CardList=styled.div`
     font-family: 'NEXON Lv1 Gothic OTF Light';
     font-weight: bolder;
     background: linear-gradient(#EBD5D5 100%, #C6BCBC 33%);
+`
+export const LectureBack = styled.div`
+height: 200px;
+/* border-bottom: solid 1px #CCCCCC; */
+background-color: #CACBDB;
+`
+export const LectureTitle=styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 80px;
+    background-color: #CCBEBE;
+    border-radius: 10px;
+    position:relative;
+    left:50px;
+    top:160px;
+`
+export const LectureContent = styled.div`
+    display: grid;
+    
+    grid-template-columns: 1fr 6fr;
+`
+
+export const LectureLeft = styled.div`
+border-right: solid 1px #CCCCCC;
+`
+
+export const LectureRight = styled.div`
+
+`
+export const AllSub = styled.div`
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+`
+export const SubTtile = styled.div`
+    margin-bottom: 10px;
+`
+export const SubText = styled.h2`
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    font-size: 18px;
+    cursor: pointer;
 `

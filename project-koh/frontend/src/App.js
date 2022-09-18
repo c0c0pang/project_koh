@@ -8,16 +8,16 @@ import Update from './Update';
 import {GlobalStyles} from './Style';
 import { useState } from 'react';
 import { Routes, Route ,BrowserRouter} from "react-router-dom";
+import Lecture from './Lecture';
 
 function App() {
-
-
   return (
     <BrowserRouter>
     <GlobalStyles />
     <HeaderNav />
     <Routes>
         <Route path="/" element={<Content />}></Route>
+        <Route path="/Lecture/:title" element={<Lecture />}></Route>
     </Routes>
     </BrowserRouter>
 
