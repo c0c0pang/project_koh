@@ -9,6 +9,7 @@ import {GlobalStyles} from './Style';
 import { useState } from 'react';
 import { Routes, Route ,BrowserRouter} from "react-router-dom";
 import Lecture from './Lecture';
+import LectureContentList from './LectureContentList'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
     <Routes>
         <Route path="/" element={<Content />}></Route>
         <Route path="/Lecture/:title" element={<Lecture />}></Route>
+        <Route path="/Lecture/:title/:Lecturename" element={<LectureContentList />}></Route>
     </Routes>
     </BrowserRouter>
 
