@@ -99,8 +99,7 @@ export const CardList=styled.div`
     font-size: 23px;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     font-weight: bolder;
-    background: linear-gradient(#EBD5D5 100%, #C6BCBC 33%);
-
+    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
@@ -167,7 +166,7 @@ export const LectureListDiv = styled.div`
     justify-content: center;
     height: 200px;
     border-radius:10px;
-    box-shadow:  0 0 1rem 0 rgba(0,0,0,.1);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     margin: 40px;
 `
 export const LectureBox = styled.div`
@@ -210,7 +209,7 @@ export const LectureContainer = styled.div`
     grid-template-columns: 150px 500px;
     height: 100px;
     margin-top: 30px;
-    box-shadow:  0 0 1rem 0 rgba(0,0,0,.1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius:10px;
 `
 export const LectureContainerLeft = styled.div`
