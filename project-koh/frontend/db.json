@@ -1,0 +1,23 @@
+{
+  "title": [
+    "인문",
+    "사회",
+    "교육",
+    "공학",
+    "자연",
+    "의약",
+    "예체능",
+    "IT",
+    "기타"
+  ],
+  "Lecture":[
+      {"title":"인문","Lecturename":"인문 세미나1","teacher":"최원석"},
+      {"title":"인문","Lecturename":"인문 세미나2","teacher":"최원석"},
+      {"title":"인문","Lecturename":"인문 세미나3","teacher":"최원석"},
+      {"title":"인문","Lecturename":"인문 세미나4","teacher":"최원석"},
+      {"title":"사회","Lecturename":"사회 세미나1","teacher":"김영욱"},
+      {"title":"사회","Lecturename":"사회 세미나2","teacher":"김영욱"},
+      {"title":"사회","Lecturename":"사회 세미나3","teacher":"김영욱"},
+      {"title":"사회","Lecturename":"사회 세미나4","teacher":"김영욱"}
+  ]
+}

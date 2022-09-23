@@ -144,7 +144,7 @@ export const LectureContentListDiv = styled.div`
 `
 export const LectureLeft = styled.div`
 /* border-right: solid 1px #CCCCCC; */
-
+border-right: solid 1px #CCCCCC;
 width: 200px;
 /* margin-left: 10px; */
 `
@@ -153,6 +153,7 @@ export const LectureRight = styled.div`
     max-height: 800px;
     overflow: scroll;
     grid-template-columns: repeat(4,300px);
+
 `
 export const LectureContentRight = styled.div`
     display: flex;
@@ -168,6 +169,7 @@ export const LectureListDiv = styled.div`
     border-radius:10px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     margin: 40px;
+    cursor: pointer;    
 `
 export const LectureBox = styled.div`
     height: 20px;
@@ -196,7 +198,7 @@ export const AllSub = styled.div`
     margin-top: 70px;
 `
 export const SubTtile = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 20px;    
 `
 export const SubText = styled.h2`
     font-family: 'NEXON Lv1 Gothic OTF Light';
@@ -209,7 +211,7 @@ export const LectureContainer = styled.div`
     grid-template-columns: 150px 500px;
     height: 100px;
     margin-top: 30px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     border-radius:10px;
 `
 export const LectureContainerLeft = styled.div`
@@ -231,6 +233,6 @@ export const LectureContainerRightView = styled.div`
     justify-content: center;
     width: 60px;
     height: 30px;
-    background-color: #A9A8C0;
+    background-color: #CCCBEE;
     border-radius: 5px;
 `
