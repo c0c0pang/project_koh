@@ -1,15 +1,17 @@
 import React from "react";
-import {HeaderNavdiv,Search,MainTitle,MenuTitle,SearchForm} from './StyledComponent'
+import axios from "axios";
+import {HeaderNavdiv,Search,MainTitle,MenuTitle,SearchForm,LectureRight} from './StyledComponent'
 import { Link } from "react-router-dom";
-import search from './img/search.png'
+import searchimg from './img/searchimg.png'
 import user from './img/user.png'
 import wallet from './img/wallet.png'
 import { useWeb3React } from '@web3-react/core';
 import { injected } from './lib/connectors';
 import { isNoEthereumObject } from "./lib/errors";
+import SearchList from "./SearchList";
 function HeaderNav(props) {
-  const { chainId, account, active, activate, deactivate } = useWeb3React();
 
+  const { chainId, account, active, activate, deactivate } = useWeb3React();
   const handleConnect = () => {
     if (active) {
       deactivate();
@@ -22,6 +24,7 @@ function HeaderNav(props) {
   };
   
   return (
+    <>
     <HeaderNavdiv>
       <MainTitle>
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -30,15 +33,11 @@ function HeaderNav(props) {
       </MainTitle>
 
       <Search className="searchbox">
-
         <div className="searchimg">
-          <img src={search} />
+          <img src={searchimg} />
         </div>
-        <SearchForm>
-          <input type="text" name="" id="" />
-          <input type="submit" value="ad" id="Id"  />
-        </SearchForm>
-        
+        <SearchList >
+        </SearchList>
       </Search>
 
       <MenuTitle>강의실</MenuTitle>
@@ -52,6 +51,8 @@ function HeaderNav(props) {
           <img src={wallet} />
         </div>
     </HeaderNavdiv>
+  
+    </>
   );
 }
 export default HeaderNav;

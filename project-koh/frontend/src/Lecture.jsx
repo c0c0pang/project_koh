@@ -9,10 +9,8 @@ function Lecture() {
   const ColletionKeyApi="http://localhost:4000/title";
   const LectureKeyApi="http://localhost:4000/Lecture";
   const [CollectionsList,setCollectionsList] =useState([]);
-  // const [humanitiesLectureList,sethumanitiesLectureList]= useState([]);
-  // const [SocialLectureList,setSocialLectureList]= useState([]);
   const [LectureList,setLectureList]= useState([{}]);
-  const [newLectureList,setnewLectureList]=useState([{}]);
+  // const [newLectureList,setnewLectureList]=useState([{}]);
   const Params = useParams();
   useEffect(() => {
     axios
@@ -35,19 +33,9 @@ function Lecture() {
     LectureKeyApi
     )
     .then((response) => {
-    // console.log(response.data)
     setLectureList(response.data)
     });
   },[]);
-  // console.log(LectureList.filter((element)=> Params.title===element.title))
-  // console.log(LectureList);
-    // useEffect(()=>{
-    //   setnewLectureList(
-    //     LectureList.filter(
-    //       (item)=>Params.title===item.title
-    //     )
-    //   )
-    // },[LectureList])
   //무엇을 받을지 state에 미리 설정!
   return (
     
@@ -61,7 +49,6 @@ function Lecture() {
         <LectureLeft>
         {newCollectionsList.map((element,index) => (
                         <ColletionsSubTitle
-                            // getLecture={getLecture}
                             key={index}
                             title={element}
                         />

@@ -4,7 +4,8 @@ import {useNavigate} from 'react-router-dom'
 function LectureListCrad({title,Lecturename,teacher}) {
   const navigate = useNavigate();
   const goPost = () => {
-    navigate(`${"/Lecture/" +title+"/"+ Lecturename}`);
+    var url = "/Lecture/" +title+"/"+ Lecturename+"/";
+    navigate(url);
   };
   return (
     <LectureListDiv onClick={goPost}>

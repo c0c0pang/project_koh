@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Routes, Route ,BrowserRouter} from "react-router-dom";
 import Lecture from './Lecture';
 import LectureContentList from './LectureContentList'
+import SearchViewPage from './SearchViewPage';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
     <Routes>
         <Route path="/" element={<Content />}></Route>
         <Route path="/Lecture/:title" element={<Lecture />}></Route>
-        <Route path="/Lecture/:title/:Lecturename" element={<LectureContentList />}></Route>
+        <Route path="/Lecture/:title/:Lecturename/" element={<LectureContentList />}></Route>
+        <Route path="/Search/:name" element={<SearchViewPage />}></Route>
     </Routes>
     </BrowserRouter>
 

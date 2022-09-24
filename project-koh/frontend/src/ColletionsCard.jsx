@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 function ColletionsCard({title}) {
   const navigate = useNavigate();
   const goPost = () => {
-    navigate(`${"/Lecture/" + title}`);
+    var url = `${"/Lecture/" + title}`;
+    navigate(url);
   };
   return (
 
