@@ -15,10 +15,10 @@ function App() {
     <GlobalStyles />
     <HeaderNav />
     <Routes>
-        <Route path="/" element={<Content />}></Route>
+        <Route path="/" exact element={<Content />}></Route>
         <Route path="/Lecture/:title" element={<Lecture />}></Route>
         <Route path="/Lecture/:title/:Lecturename/" element={<LectureContentList />}></Route>
-        <Route path="/Search/:name" element={<SearchViewPage />}></Route>
+        <Route path="/Search/:name" exact element={<SearchViewPage />}></Route>
     </Routes>
     </BrowserRouter>
 
