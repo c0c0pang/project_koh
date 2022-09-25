@@ -54,6 +54,7 @@ function Lecture() {
                         />
       ))}
         </LectureLeft>
+        
         <LectureRight>
         {LectureList
         .filter((element)=> Params.title===element.title)

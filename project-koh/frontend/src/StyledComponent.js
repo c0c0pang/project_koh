@@ -127,7 +127,6 @@ export const LectureTitle=styled.div`
 `
 export const LectureContent = styled.div`
     display: grid;
-    place-items: center;
     grid-template-columns: 1fr 6fr;
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -152,8 +151,8 @@ export const LectureRight = styled.div`
     display: grid;
     max-height: 800px;
     overflow: scroll;
-    grid-template-columns: repeat(4,300px);
-
+    grid-template-columns: repeat(3,380px);
+    /* background-color: red; */
 `
 export const LectureContentRight = styled.div`
     display: flex;
@@ -195,7 +194,9 @@ export const AllSub = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
-    margin-top: 70px;
+    margin-bottom: 40px;
+    position: relative;
+    top: 60px;
 `
 export const SubTtile = styled.div`
     margin-bottom: 20px;    
