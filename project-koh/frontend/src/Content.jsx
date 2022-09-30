@@ -6,14 +6,14 @@ import { useState } from 'react';
 function Content() {
   const ColletionKeyApi="http://localhost:4000/title";
   useEffect(() => {
-    axios
-    .get(
+    axios.get(
       ColletionKeyApi
     )
     .then((response) => {
       setCollectionsList(response.data)
     });
   },[]);
+
     const [CollectionsList,setCollectionsList] =useState([]);
   return (
     <ContentDiv>
@@ -29,3 +29,5 @@ function Content() {
   )
 };
 export default Content;
+
+

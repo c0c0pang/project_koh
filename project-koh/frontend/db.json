@@ -21,5 +21,9 @@
       {"title":"사회","Lecturename":"사회 세미나4","teacher":"김영욱"},
       {"title":"사회","Lecturename":"사회 세미나5","teacher":"김영욱"},
       {"title":"사회","Lecturename":"사회 세미나6","teacher":"김영욱"}
+  ],
+  "Lecture_Detail":[
+    {"subtitle":"인문 1주차"}
   ]
+
 }

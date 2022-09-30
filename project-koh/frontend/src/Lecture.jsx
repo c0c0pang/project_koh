@@ -1,10 +1,9 @@
 import React,{useState,useEffect}from 'react';
 import axios from 'axios';
 import { useParams} from "react-router-dom";
-import{LectureTitle,LectureBack,LectureContent,LectureLeft,LectureRight} from './StyledComponent';
+import{LectureTitle,LectureBack,LectureContent,LectureLeft,LectureRight,LectureLeftDiv,LectureRightDiv} from './StyledComponent';
 import LectureListCrad from './LectureListCrad'
 import ColletionsSubTitle from './ColletionsSubTitle';
-import { useCallback } from 'react';
 function Lecture() {
   const ColletionKeyApi="http://localhost:4000/title";
   const LectureKeyApi="http://localhost:4000/Lecture";
@@ -33,6 +32,7 @@ function Lecture() {
     LectureKeyApi
     )
     .then((response) => {
+      console.log(response.data);
     setLectureList(response.data)
     });
   },[]);
@@ -41,11 +41,11 @@ function Lecture() {
     
     <>
     <LectureBack>
-
     <LectureTitle>{Params.title}</LectureTitle>
     </LectureBack>
     
     <LectureContent>
+      <LectureLeftDiv>
         <LectureLeft>
         {newCollectionsList.map((element,index) => (
                         <ColletionsSubTitle
@@ -54,7 +54,8 @@ function Lecture() {
                         />
       ))}
         </LectureLeft>
-        
+        </LectureLeftDiv>
+        <LectureRightDiv>
         <LectureRight>
         {LectureList
         .filter((element)=> Params.title===element.title)
@@ -64,10 +65,10 @@ function Lecture() {
                             title={element.title}
                             Lecturename={element.Lecturename}
                             teacher = {element.teacher}
-
                         />
       ))}
         </LectureRight>
+        </LectureRightDiv>
     </LectureContent>
     </>
   )

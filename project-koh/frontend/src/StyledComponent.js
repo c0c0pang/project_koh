@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import './font.css'
 
-
+export const MediaDiv = styled.div`
+    margin: 0px auto;
+    color: ${(props) => props.theme.fontColor};
+    background-color: ${(props) => props.theme.bgColor};
+`;
 
 export const HeaderNavdiv = styled.div`
     display: flex;
@@ -18,7 +22,16 @@ export const HeaderNavdiv = styled.div`
         img{
             width: 30px;
         }
+        
     }
+    .userimg:hover .tool{
+        visibility: visible;
+        transition: 1;
+    }
+    .userimg .tool::after{
+        background-color: red;
+    }
+    
     .walletimg{
         img{
             width: 30px;
@@ -56,10 +69,11 @@ export const Search = styled.div`
     
     
 `
-export const MainTitle = styled.h2`
+export const MainTitle = styled.h1`
   font-family: 'NEXON Lv1 Gothic OTF';
   font-weight: bold;
   font-size: 35px;
+  cursor: pointer;
 `
 export const MenuTitle = styled.h2`
 font-family: 'GmarketSansLight';
@@ -85,7 +99,16 @@ export const CollectionsDiv=styled.div`
     display: grid;
     grid-template-columns: 270px 270px 270px;
     grid-template-rows: 230px 230px 230px;
-    
+    #box:hover{
+    background: linear-gradient(180deg, #E4E3E3 0%, rgba(250, 114, 114, 0.33) 99.99%);
+    color: #050801;
+    box-shadow: 0 0 10px 0 rgba(107, 83, 83,.15),
+                0 0 10px 0 rgba(107, 83, 83,.15),
+                0 0 10px 0 rgba(107, 83, 83,.15),
+                0 0 10px 0 rgba(107, 83, 83,.15);
+     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+     transition: all ease 0.7s 0s;
+}
 `
 
 export const CardList=styled.div`
@@ -99,7 +122,7 @@ export const CardList=styled.div`
     font-size: 23px;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     font-weight: bolder;
-    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
+    background: linear-gradient(180deg, #F8E5E5 0%, rgba(214, 204, 204, 0.33) 99.99%);
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
@@ -141,18 +164,21 @@ export const LectureContentListDiv = styled.div`
     -ms-user-select:none;
     user-select:none;
 `
-export const LectureLeft = styled.div`
-/* border-right: solid 1px #CCCCCC; */
+export const LectureLeftDiv=styled.div`
 border-right: solid 1px #CCCCCC;
 width: 200px;
-/* margin-left: 10px; */
+height: auto;
+`
+export const LectureLeft = styled.div`
+`
+
+export const LectureRightDiv=styled.div`
 `
 export const LectureRight = styled.div`
     display: grid;
     max-height: 800px;
     overflow: scroll;
-    grid-template-columns: repeat(3,380px);
-    /* background-color: red; */
+    grid-template-columns: repeat(4 ,300px);
 `
 export const LectureContentRight = styled.div`
     display: flex;
@@ -167,7 +193,7 @@ export const LectureListDiv = styled.div`
     height: 200px;
     border-radius:10px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-    margin: 40px;
+    margin: 15px;
     cursor: pointer;    
 `
 export const LectureBox = styled.div`
@@ -194,12 +220,11 @@ export const AllSub = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 40px;
-    position: relative;
-    top: 60px;
+    /* margin-top: 50px; */
 `
 export const SubTtile = styled.div`
-    margin-bottom: 20px;    
+    margin-top: 60px;           
+    margin-bottom: 10px;
 `
 export const SubText = styled.h2`
     font-family: 'NEXON Lv1 Gothic OTF Light';
@@ -241,4 +266,37 @@ export const SearchDiv=styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`
+export const ModalDiv=styled.div`   
+    position: absolute;
+    right: 7%;
+    margin-top: 10px;
+    visibility: hidden;
+    transition: 1s;
+`
+export const Modalbox=styled.div`
+    display: grid;
+    place-content: center;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+`
+export const ModalTextDiv=styled.div`
+    font-size: 20px;
+    width: 200px;
+
+    font-family: 'NEXON Lv1 Gothic OTF';
+    font-weight: bold;
+    border-bottom: solid 1px #CCCCCC;
+    border-radius: 5px;
+    div{
+        display: flex;
+        align-items: center;
+        /* background-color: red; */
+        padding: 15px;
+        #imgbox{
+            width: 20px;
+            margin-right: 20px;
+        }
+    }
 `

@@ -3,16 +3,24 @@ import {CardList} from './StyledComponent'
 import { useNavigate } from 'react-router-dom';
 function ColletionsCard({title}) {
   const navigate = useNavigate();
+
+  var url = `${"/Lecture/" + title}`;
   const goPost = () => {
-    var url = `${"/Lecture/" + title}`;
     navigate(url);
   };
+  const reload=()=>{
+    window.location.replace(url);
+  }
   return (
 
-    <CardList onClick={goPost}>  
-      <div className='box'>{title}</div>  
+    <CardList id='box' onClick={()=>{
+      goPost()
+      reload()
+    }}>  
+      <div>{title}</div>
     </CardList>
 
   )
 };
 export default ColletionsCard;
+

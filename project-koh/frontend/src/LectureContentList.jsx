@@ -23,6 +23,7 @@ import ColletionsSubTitle from './ColletionsSubTitle';
             newCollectionsList.push(CollectionsList[i]);
         }
     }
+    
   return (
     <>
     <LectureBack>
