@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from backend_api.views import LectureListAPI
 
+app_name = 'backend_api'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/lecture/', LectureListAPI.as_view()),
+    #path('get/', LectureListAPI.as_view()),
+    path('get/', include('backend_api.urls')),
+
+
 ]

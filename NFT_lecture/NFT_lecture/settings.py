@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-+eid@@5&6eufsa_taje)f%7oeq53fb_z8zo0f3u(1(2&o$0@-0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -76,14 +76,14 @@ WSGI_APPLICATION = "NFT_lecture.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'board',
-    #     'USER': 'root',
-    #     'PASSWORD': '4135',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306'
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'board',
+        'USER': 'root',
+        'PASSWORD': '4135',
+        'HOST': 'localhost',
+        'PORT': '3306'
+    }
 }
 
 
