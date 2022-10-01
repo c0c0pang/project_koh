@@ -8,15 +8,10 @@ function ColletionsCard({title}) {
   const goPost = () => {
     navigate(url);
   };
-  const reload=()=>{
-    window.location.replace(url);
-  }
+
   return (
 
-    <CardList id='box' onClick={()=>{
-      goPost()
-      reload()
-    }}>  
+    <CardList id='box' onClick={goPost}>  
       <div>{title}</div>
     </CardList>
 

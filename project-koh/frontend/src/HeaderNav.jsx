@@ -9,40 +9,46 @@ import { useWeb3React } from '@web3-react/core';
 import { injected } from './lib/connectors';
 import SearchList from "./SearchList";
 import Modal from "./Modal";
+import menu from './img/menu.png'
+import Logout from './img/logout.png'
+import { useEffect } from "react";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
   const { connector, library, chainId, account, active, error, activate, deactivate } = useWeb3React();
-  const connectWallet = async () => {
-		try {
-			await activate(injected, (error) => {
-				if ('/No Ethereum provider was found on window.ethereum/')
-					throw new Error('Metamask 익스텐션을 설치해주세요');
-			});
-		} catch (err) {
-			alert(err);
-			window.open('https://metamask.io/download.html');
-		}
+  
+  const connectWallet =   async () => {
+      try {
+        await activate(injected, (error) => {
+          if ('/No Ethereum provider was found on window.ethereum/')
+          throw new Error('Metamask 익스텐션을 설치해주세요');
+          // localStorage.clear()
+        });
+      } catch (err) {
+        alert(err);
+        window.open('https://metamask.io/download.html');
+      } 
   }
-  console.log(active);
+  if(active===true){
+    localStorage.setItem('id',account)
+  }
+   const accountId=localStorage.getItem('id')
+
   const goHome=()=>{
     navigate('./');
-  }
-
-  const reload=()=>{
-    window.location.replace('./');
   }
   const userinfo=[
     {text:"Profil",img:user},
     {text:"Favorited",img:love},
     {text:"Night Mode",img:wallet},
+  ] 
+   const userwallet=[
+    {text:"Logout",img:Logout},
   ]
+
   return (
     <>
     <HeaderNavdiv>
-      <MainTitle onClick={()=>{
-        goHome()
-        reload()
-      }}>
+      <MainTitle onClick={goHome}>
         KOH
       </MainTitle>
       <Search className="searchbox">
@@ -62,17 +68,18 @@ function HeaderNav({ darkMode, setDarkMode }) {
         )} */}
         <div className="userimg">
           <div >
-            <img src={user} />
+            <img src={menu} />
           </div>
           <Modal userinfo={userinfo} darkMode={darkMode} setDarkMode={setDarkMode}>
            </Modal>
         </div>
-        <div className="walletimg" onClick={connectWallet} style={{cursor:"pointer"}}>
-          <img src={wallet} />
+        <div className="walletimg" >
+          <img src={wallet} onClick={connectWallet} style={{cursor:"pointer"}}/>
+          <Modal userinfo={userwallet} >
+           </Modal>
         </div>
-        {account?.substr(0, 6)}...{account?.substr(account.length-4, account.length)}
+        {accountId?.substr(0, 6)}...{accountId?.substr(accountId.length-4, accountId.length)}
     </HeaderNavdiv>
-  
     </>
   );
 }

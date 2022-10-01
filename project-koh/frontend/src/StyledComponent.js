@@ -26,10 +26,6 @@ export const HeaderNavdiv = styled.div`
     }
     .userimg:hover .tool{
         visibility: visible;
-        transition: 1;
-    }
-    .userimg .tool::after{
-        background-color: red;
     }
     
     .walletimg{
@@ -37,6 +33,11 @@ export const HeaderNavdiv = styled.div`
             width: 30px;
         }
     }
+    .walletimg:hover .tool {
+        visibility: visible;
+        
+    }
+
 `
 
 export const Search = styled.div`
@@ -272,27 +273,28 @@ export const ModalDiv=styled.div`
     right: 7%;
     margin-top: 10px;
     visibility: hidden;
-    transition: 1s;
+    border-radius: 12px 12px 0px 0px;
+
 `
 export const Modalbox=styled.div`
     display: grid;
     place-content: center;
     width: 200px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px 12px 0px 0px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    transition: all 0.2s;
 `
 export const ModalTextDiv=styled.div`
     font-size: 20px;
     width: 200px;
-
     font-family: 'NEXON Lv1 Gothic OTF';
     font-weight: bold;
     border-bottom: solid 1px #CCCCCC;
-    border-radius: 5px;
+    
     div{
         display: flex;
         align-items: center;
-        /* background-color: red; */
         padding: 15px;
         #imgbox{
             width: 20px;
