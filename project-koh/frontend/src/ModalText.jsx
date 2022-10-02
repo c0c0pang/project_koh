@@ -7,7 +7,7 @@ import { useWeb3React } from '@web3-react/core';
 function ModalText({text,src,accountinfo,darkMode,setDarkMode}) {
     const [nightcheck,setNightCheck]=useState(true);
     const {deactivate,active } = useWeb3React();
-    const [logcheck,setLogCheck]=useState(active);
+    const [cnt,setCnt] = useState(1);
     // console.log(active);
     const toggleDarkMode = () => {
         setDarkMode((darkMode) => !darkMode);
@@ -18,19 +18,20 @@ function ModalText({text,src,accountinfo,darkMode,setDarkMode}) {
         }
       },[])
 
-      useEffect(()=>{
-          setLogCheck(active);
-      },[active])
       const notConnectWallet = () =>{
         deactivate();
-        localStorage.clear();
+        setCnt(0)  
       }
-      console.log(logcheck );
+      if(cnt===0){
+        localStorage.setItem('user_id_check',active);
+        setCnt(1)
+        window.location.replace('http://localhost:3000');
+      }
   return (
     <>
     <div>{accountinfo}</div>
     <ModalTextDiv>
-        {(text ==="Logout") ? (
+        {(text ==="Logout" ) ? (
           <div>
             <img id='imgbox' src={src}/> 
             <h2 onClick={notConnectWallet} style={{cursor:"pointer"}}>{text} </h2>

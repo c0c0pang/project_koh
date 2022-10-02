@@ -1,7 +1,7 @@
 import React,{useState,useEffect}from 'react';
 import axios from 'axios';
 import { useParams} from "react-router-dom";
-import{LectureTitle,LectureBack,LectureContent,LectureLeft,LectureRight,LectureLeftDiv,LectureRightDiv} from './StyledComponent';
+import{LectureTitle,LectureBack,LectureContent,LectureLeft,LectureRight,LectureLeftDiv,LectureRightDiv,RegisterButton} from './StyledComponent';
 import LectureListCrad from './LectureListCrad'
 import ColletionsSubTitle from './ColletionsSubTitle';
 function Lecture() {
@@ -42,6 +42,7 @@ function Lecture() {
     <>
     <LectureBack>
     <LectureTitle>{Params.title}</LectureTitle>
+    <RegisterButton>강의등록</RegisterButton>
     </LectureBack>
     
     <LectureContent>

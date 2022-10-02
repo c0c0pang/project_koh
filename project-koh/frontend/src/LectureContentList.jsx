@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams} from "react-router-dom";
 
-import{LectureTitle,LectureBack,LectureContentListDiv,LectureLeft,LectureContentRight,LectureContainer, LectureContainerRight,LectureContainerLeft,LectureContainerRightView} from './StyledComponent';
+import{LectureTitle,LectureBack,LectureContentListDiv,LectureLeft,LectureContentRight,LectureContainer, LectureContainerRight,LectureContainerLeft,LectureContainerRightView,RegisterButton,ReviseButton} from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
 
  function LectureContentList() {
@@ -27,10 +27,11 @@ import ColletionsSubTitle from './ColletionsSubTitle';
   return (
     <>
     <LectureBack>
-
-    <LectureTitle>
-          {Params.Lecturename}
-          </LectureTitle>
+      <LectureTitle>
+        {Params.Lecturename}
+      </LectureTitle>
+      <RegisterButton>영상등록</RegisterButton>
+      <ReviseButton>영상수정</ReviseButton>
     </LectureBack>
     
     <LectureContentListDiv>

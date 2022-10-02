@@ -132,8 +132,7 @@ export const CardList=styled.div`
 `
 export const LectureBack = styled.div`
 height: 200px;
-/* border-bottom: solid 1px #CCCCCC; */
-background-color: #CACBDB;
+background: linear-gradient(180deg, #7483B9 0%, rgba(149, 147, 225, 0.33) 99.99%);
 `
 export const LectureTitle=styled.div`
     display: flex;
@@ -166,11 +165,13 @@ export const LectureContentListDiv = styled.div`
     user-select:none;
 `
 export const LectureLeftDiv=styled.div`
-border-right: solid 1px #CCCCCC;
-width: 200px;
-height: auto;
+
 `
 export const LectureLeft = styled.div`
+width: 200px;
+height: auto;
+border-right: solid 1px #CCCCCC;
+
 `
 
 export const LectureRightDiv=styled.div`
@@ -301,4 +302,40 @@ export const ModalTextDiv=styled.div`
             margin-right: 20px;
         }
     }
+`
+export const RegisterButton=styled.div`
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 69px;
+    height: 26px;
+    position: relative;
+    left:94%;
+    top: 43%;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+`
+export const ReviseButton=styled.div`
+        -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 69px;
+    height: 26px;
+    position: relative;
+    left:88%;
+    top: 30%;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 `

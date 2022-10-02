@@ -5,7 +5,7 @@ function SearchList() {
   const [search,setSearch]=useState("");
   const [check,setCheck] = useState("");
   const navigate = useNavigate();
-  const goPost = () => {
+  const goPost = (e) => {
     navigate(`${"/Search/"+search}`);
   };
   const onChangeSearch = (e)=>{
@@ -13,7 +13,6 @@ function SearchList() {
     setSearch(e.target.value);
   }
   return (
-    
     <SearchForm onSubmit={e => {setSearch("");  }}>
           <input type="text" value={search} onChange={onChangeSearch}/>
           <input type="submit" id="Id" onClick={goPost}/>

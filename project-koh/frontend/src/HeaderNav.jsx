@@ -15,24 +15,27 @@ import { useEffect } from "react";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
   const { connector, library, chainId, account, active, error, activate, deactivate } = useWeb3React();
-  
   const connectWallet =   async () => {
-      try {
-        await activate(injected, (error) => {
-          if ('/No Ethereum provider was found on window.ethereum/')
-          throw new Error('Metamask 익스텐션을 설치해주세요');
-          // localStorage.clear()
-        });
-      } catch (err) {
-        alert(err);
-        window.open('https://metamask.io/download.html');
-      } 
-  }
-  if(active===true){
-    localStorage.setItem('id',account)
-  }
-   const accountId=localStorage.getItem('id')
+      
+        try {
+          await activate(injected, (error) => {
+            if ('/No Ethereum provider was found on window.ethereum/' && localStorage.getItem('user_id')===null)
+            throw new Error('Metamask 익스텐션을 설치해주세요');
+          });
+        } catch (err) {
+          alert(err);
+          window.open('https://metamask.io/download.html');
+        } 
+  };
 
+  if(active===true){
+    localStorage.setItem('user_id',account)
+    localStorage.setItem('user_id_check',active)
+  };
+
+  const user_id=localStorage.getItem('user_id');
+  const user_id_check=localStorage.getItem('user_id_check');
+  console.log(user_id_check);
   const goHome=()=>{
     navigate('./');
   }
@@ -78,7 +81,12 @@ function HeaderNav({ darkMode, setDarkMode }) {
           <Modal userinfo={userwallet} >
            </Modal>
         </div>
-        {accountId?.substr(0, 6)}...{accountId?.substr(accountId.length-4, accountId.length)}
+        { user_id_check==='true' ? (
+            <div>{user_id?.substr(0, 6)}...{user_id?.substr(user_id.length-4, user_id.length)}</div>
+          ) :(
+            <div>...</div>
+          )
+      }
     </HeaderNavdiv>
     </>
   );
