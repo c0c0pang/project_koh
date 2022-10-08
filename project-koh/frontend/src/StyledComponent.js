@@ -5,6 +5,7 @@ export const MediaDiv = styled.div`
     margin: 0px auto;
     color: ${(props) => props.theme.fontColor};
     background-color: ${(props) => props.theme.bgColor};
+    
 `;
 
 export const HeaderNavdiv = styled.div`
@@ -12,19 +13,19 @@ export const HeaderNavdiv = styled.div`
     height: 80px;
     justify-content: space-around;
     align-items: center;
-
+    
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
 
-    .userimg{
+    .menuimg{
         img{
             width: 30px;
         }
         
     }
-    .userimg:hover .tool{
+    .menuimg:hover .tool{
         visibility: visible;
     }
     
@@ -133,6 +134,7 @@ export const CardList=styled.div`
 export const LectureBack = styled.div`
 height: 200px;
 background: linear-gradient(180deg, #7483B9 0%, rgba(149, 147, 225, 0.33) 99.99%);
+border-bottom: 1px solid #CCCCCC;
 `
 export const LectureTitle=styled.div`
     display: flex;
@@ -140,10 +142,10 @@ export const LectureTitle=styled.div`
     justify-content: center;
     width: 110px;
     height: 80px;
-    background-color: #FFF6F5;
+    background-color: #fFF0F0;
     border-radius: 10px;
     position:relative;
-    left:50px;
+    left:45px;
     top:160px;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     font-weight: bold;
@@ -175,6 +177,7 @@ border-right: solid 1px #CCCCCC;
 `
 
 export const LectureRightDiv=styled.div`
+
 `
 export const LectureRight = styled.div`
     display: grid;
@@ -275,6 +278,7 @@ export const ModalDiv=styled.div`
     margin-top: 10px;
     visibility: hidden;
     border-radius: 12px 12px 0px 0px;
+    
 
 `
 export const Modalbox=styled.div`
@@ -285,6 +289,7 @@ export const Modalbox=styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
     background-color: white;
     transition: all 0.2s;
+    
 `
 export const ModalTextDiv=styled.div`
     font-size: 20px;
@@ -302,6 +307,7 @@ export const ModalTextDiv=styled.div`
             margin-right: 20px;
         }
     }
+
 `
 export const RegisterButton=styled.div`
     -webkit-user-select:none;
@@ -320,9 +326,10 @@ export const RegisterButton=styled.div`
     font-family: 'NEXON Lv1 Gothic OTF';
     background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 `
 export const ReviseButton=styled.div`
-        -webkit-user-select:none;
+    -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
@@ -338,4 +345,138 @@ export const ReviseButton=styled.div`
     font-family: 'NEXON Lv1 Gothic OTF';
     background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+`
+
+export const LectureRightForm = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+`
+export const RegisterDiv = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+width: 500px;
+height: 500px;
+/* background-color: blue; */
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+margin-top: 80px;
+
+`
+export const RegisterForm = styled.form`
+display: grid;
+/* grid-template-columns: repeat(1 ,300px); */
+font-family: 'GmarketSansLight';
+place-content: center;
+place-items: center;
+grid-gap: 30px;
+
+/* background-color: blue; */
+ .text{
+    width: 140px;
+    height: 20px;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 3px;
+    border-radius: 5px;
+}
+ #file{
+    display: none;
+ }
+ .imgbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+ }
+ .subbtn{
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    font-family: inherit;
+    width: 90px;
+    height: 40px;
+    cursor: pointer;
+    transition: all ease 0.5s 0s;
+    font-size: 18px;
+    border-radius: 5px;
+ }
+ .subbtn:hover{
+    box-shadow: 0 0 5px 0 rgba(239, 239, 239, .5),
+                0 0 5px 0 rgba(239, 239, 239, .5),
+                0 0 5px 0 rgba(239, 239, 239, .5),
+                0 0 5px 0 rgba(239, 239, 239, .5);
+    color: white;
+    background-color: black;
+    transition: all ease 0.5s 0s;
+ }
+ select{
+    width: 150px; 
+    padding:10px;
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+    font-family: inherit;
+    border: 1px solid #999; 
+    border-radius: 5px; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+ }
+ img{
+    width: 230px;
+    height: 150px;
+ }
+`
+
+export const ProfileBack = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E7E7E7;
+    height: 260px;
+    transition: all ease 0.3s 0s;
+    overflow: hidden;
+    :hover{
+        background-color: rgba(33, 33, 33, 0.56);
+        transition: all ease 0.3s 0s;
+        visibility: visible;
+    }
+    :hover #edit{
+        visibility: visible;
+    }
+    #edit{
+        position: relative;
+        width: 40px;
+        left: 50%;
+        visibility: hidden;
+    }
+    #imgurl{    
+        width: 100%;
+    }
+    .backfile{
+        display: none;
+    }
+    
+    
+`
+
+
+export const ProfileImg = styled.div`
+    position: relative;
+    bottom: 70px;
+    left: 60px;
+    box-sizing: border-box;
+    width: 180px;
+    height: 180px;
+    border: 4px solid white;
+    border-radius: 150px;
+    background-color: #A161D4;
+    
 `

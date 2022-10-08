@@ -34,6 +34,8 @@ function SearchViewPage() {
   useEffect(()=>{
     setSearchview(getSearchView());
   },[LectureList]);
+
+  
   return (
     <SearchDiv>
     <LectureRight>

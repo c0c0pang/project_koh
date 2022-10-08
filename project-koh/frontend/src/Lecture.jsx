@@ -1,16 +1,24 @@
 import React,{useState,useEffect}from 'react';
 import axios from 'axios';
-import { useParams} from "react-router-dom";
-import{LectureTitle,LectureBack,LectureContent,LectureLeft,LectureRight,LectureLeftDiv,LectureRightDiv,RegisterButton} from './StyledComponent';
+import { useParams,useNavigate} from "react-router-dom";
+import { LectureTitle, LectureBack, LectureContent, LectureLeft, LectureRight, LectureLeftDiv, LectureRightDiv, RegisterButton,LectureRightForm } from './StyledComponent';
 import LectureListCrad from './LectureListCrad'
 import ColletionsSubTitle from './ColletionsSubTitle';
+import LcetureRegisterfrom from './LcetureRegisterfrom'
 function Lecture() {
   const ColletionKeyApi="http://localhost:4000/title";
   const LectureKeyApi="http://localhost:4000/Lecture";
   const [CollectionsList,setCollectionsList] =useState([]);
   const [LectureList,setLectureList]= useState([{}]);
+  const [register,setRegister] = useState(false);
   // const [newLectureList,setnewLectureList]=useState([{}]);
   const Params = useParams();
+  const RegisterCheck = () => {
+    setRegister(true);
+  };  
+  const RegisterNotCheck = () => {
+    setRegister(false);
+  };
   useEffect(() => {
     axios
     .get(
@@ -42,7 +50,7 @@ function Lecture() {
     <>
     <LectureBack>
     <LectureTitle>{Params.title}</LectureTitle>
-    <RegisterButton>강의등록</RegisterButton>
+    <RegisterButton onClick={RegisterCheck}>강의등록</RegisterButton>
     </LectureBack>
     
     <LectureContent>
@@ -52,23 +60,38 @@ function Lecture() {
                         <ColletionsSubTitle
                             key={index}
                             title={element}
+                            RegisterNotCheck={RegisterNotCheck}
                         />
       ))}
         </LectureLeft>
         </LectureLeftDiv>
+
         <LectureRightDiv>
-        <LectureRight>
-        {LectureList
-        .filter((element)=> Params.title===element.title)
-        .map((element,index) => (
-                        <LectureListCrad
-                            key={index}
-                            title={element.title}
-                            Lecturename={element.Lecturename}
-                            teacher = {element.teacher}
-                        />
-      ))}
-        </LectureRight>
+
+          {register ? (
+            <LectureRightForm>
+              <LcetureRegisterfrom register={register} setRegister={setRegister}></LcetureRegisterfrom>
+            </LectureRightForm>
+          ) : (
+            <LectureRight>
+              {LectureList
+                .filter((element) => Params.title === element.title)
+                .map((element, index) => (
+                  <LectureListCrad
+                    key={index}
+                    title={element.title}
+                    Lecturename={element.Lecturename}
+                    teacher={element.teacher}
+                  />
+                )
+                )
+              }
+            </LectureRight>
+          )
+
+          }
+        
+
         </LectureRightDiv>
     </LectureContent>
     </>

@@ -11,15 +11,14 @@ import SearchList from "./SearchList";
 import Modal from "./Modal";
 import menu from './img/menu.png'
 import Logout from './img/logout.png'
-import { useEffect } from "react";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
   const { connector, library, chainId, account, active, error, activate, deactivate } = useWeb3React();
+  const [connectCheck,setConnectCheck]=useState(false);
   const connectWallet =   async () => {
-      
         try {
           await activate(injected, (error) => {
-            if ('/No Ethereum provider was found on window.ethereum/' && localStorage.getItem('user_id')===null)
+            if ('/No Ethereum provider was found on window.ethereum/' && localStorage.getItem('user_id')===undefined)
             throw new Error('Metamask 익스텐션을 설치해주세요');
           });
         } catch (err) {
@@ -27,27 +26,25 @@ function HeaderNav({ darkMode, setDarkMode }) {
           window.open('https://metamask.io/download.html');
         } 
   };
-
   if(active===true){
     localStorage.setItem('user_id',account)
     localStorage.setItem('user_id_check',active)
-  };
-
+  }
   const user_id=localStorage.getItem('user_id');
   const user_id_check=localStorage.getItem('user_id_check');
-  console.log(user_id_check);
+
+  
   const goHome=()=>{
     navigate('./');
   }
   const userinfo=[
-    {text:"Profil",img:user},
+    {text:"Profile",img:user},
     {text:"Favorited",img:love},
     {text:"Night Mode",img:wallet},
   ] 
    const userwallet=[
     {text:"Logout",img:Logout},
   ]
-
   return (
     <>
     <HeaderNavdiv>
@@ -64,12 +61,7 @@ function HeaderNav({ darkMode, setDarkMode }) {
       <MenuTitle>강의실</MenuTitle>
       <MenuTitle>강의실</MenuTitle>
       <MenuTitle>강의실</MenuTitle>
-      {/* {darkMode ? (
-          <FontAwesomeIcon onClick={toggleDarkMode} icon={faSun} />
-        ) : (
-          <FontAwesomeIcon onClick={toggleDarkMode} icon={faMoon} />
-        )} */}
-        <div className="userimg">
+        <div className="menuimg">
           <div >
             <img src={menu} />
           </div>

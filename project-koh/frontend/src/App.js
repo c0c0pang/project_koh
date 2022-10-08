@@ -6,6 +6,7 @@ import { Routes, Route ,BrowserRouter} from "react-router-dom";
 import Lecture from './Lecture';
 import LectureContentList from './LectureContentList'
 import SearchViewPage from './SearchViewPage';
+import ProfilePage from './ProfilePage'
 import { ThemeProvider } from "styled-components";
 import {useState} from 'react';
 import {MediaDiv} from './StyledComponent'
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Lecture/:title" element={<Lecture />}></Route>
         <Route path="/Lecture/:title/:Lecturename/" element={<LectureContentList />}></Route>
         <Route path="/Search/:name" element={<SearchViewPage />}></Route>
+        <Route path="/Profile" element={<ProfilePage/>}></Route>
     </Routes>
     </MediaDiv>
     </ThemeProvider>

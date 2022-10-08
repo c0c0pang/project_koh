@@ -3,7 +3,6 @@ import {SearchForm} from './StyledComponent'
 import {useNavigate} from 'react-router-dom'
 function SearchList() {
   const [search,setSearch]=useState("");
-  const [check,setCheck] = useState("");
   const navigate = useNavigate();
   const goPost = (e) => {
     navigate(`${"/Search/"+search}`);
@@ -21,3 +20,4 @@ function SearchList() {
 }
 
 export default SearchList;
+
