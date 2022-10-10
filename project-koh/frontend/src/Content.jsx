@@ -14,7 +14,7 @@ function Content() {
     });
   },[]);
 
-    const [CollectionsList,setCollectionsList] =useState([]);
+  const [CollectionsList,setCollectionsList] =useState([]);
   return (
     <ContentDiv>
     <CollectionsDiv>

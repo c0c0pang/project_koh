@@ -28,6 +28,7 @@ function Lecture() {
       setCollectionsList(response.data)
     });
   },[]);
+
   const newCollectionsList=[]
   for(let i=0;i<CollectionsList.length;i++){
       if(Params.title!==CollectionsList[i]){
@@ -40,7 +41,6 @@ function Lecture() {
     LectureKeyApi
     )
     .then((response) => {
-      console.log(response.data);
     setLectureList(response.data)
     });
   },[]);

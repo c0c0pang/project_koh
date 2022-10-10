@@ -37,6 +37,11 @@ function HeaderNav({ darkMode, setDarkMode }) {
   const goHome=()=>{
     navigate('./');
   }
+  const goProfile=()=>{
+    if(user_id_check==='false'){
+      navigate('./');
+    }
+  }
   const userinfo=[
     {text:"Profile",img:user},
     {text:"Favorited",img:love},
@@ -69,16 +74,13 @@ function HeaderNav({ darkMode, setDarkMode }) {
            </Modal>
         </div>
         <div className="walletimg" >
-          <img src={wallet} onClick={connectWallet} style={{cursor:"pointer"}}/>
+          <img src={wallet} onClick={()=>{
+            connectWallet()
+            goProfile()
+            }} style={{cursor:"pointer"}}/>
           <Modal userinfo={userwallet} >
            </Modal>
         </div>
-        { user_id_check==='true' ? (
-            <div>{user_id?.substr(0, 6)}...{user_id?.substr(user_id.length-4, user_id.length)}</div>
-          ) :(
-            <div>...</div>
-          )
-      }
     </HeaderNavdiv>
     </>
   );

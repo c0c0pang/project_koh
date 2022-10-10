@@ -274,7 +274,7 @@ export const SearchDiv=styled.div`
 `
 export const ModalDiv=styled.div`   
     position: absolute;
-    right: 7%;
+    right: 2%;
     margin-top: 10px;
     visibility: hidden;
     border-radius: 12px 12px 0px 0px;
@@ -463,11 +463,7 @@ export const ProfileBack = styled.div`
     .backfile{
         display: none;
     }
-    
-    
 `
-
-
 export const ProfileImg = styled.div`
     position: relative;
     bottom: 70px;
@@ -478,5 +474,90 @@ export const ProfileImg = styled.div`
     border: 4px solid white;
     border-radius: 150px;
     background-color: #A161D4;
+`
+export const ProfileimgDiv = styled.div`
+
+    /* background-color: red; */
+    width: 300px;
+    /* height: ; */
+`
+export const ProfileInfoDiv = styled.div`
+
+    font-family: 'NEXON Lv1 Gothic OTF';
+    font-weight: bold;
+    #etheimg{
+        width: 23px;
+        margin-right: 2px;
+    }
+    #useridtext{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: blue; */
+    }
+    position: relative;
+    bottom: 65px;
+    width: 300px;
     
+`
+export const ProfileContentDiv = styled.div`
+    display: flex;
+`
+export const ProfileListDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+`
+export const MyColletionsDiv = styled.div`
+margin :0 ;
+padding: 0;
+`
+export const MyColletionText =styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    font-weight: bold;
+    margin-top: 30px;
+    width: 150px;
+    cursor: pointer;
+    border-bottom: 1px solid ${({isBorder})=> isBorder===1 ? 'black' : '#CCCCCC'};
+    transition: ease 0.4s;
+    position: relative;
+    top: 1px;
+`
+export const MyColletionsTextDiv = styled.div`
+    display: flex;
+    justify-content: space-around;
+    width: 1000px;
+    border-bottom: 1px solid #CCCCCC;
+    height: 60px;
+    /* background-color: red; */
+
+`
+export const MyColletionListDiv = styled.div`
+    height: 600px;
+    /* background-color: blue; */
+`
+export const MyColletionList = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4,200px);
+    place-content: center;
+    grid-gap: 20px;
+`
+export const MyColletionListCardDiv = styled.div`
+    
+`
+export const MyColletionCardList= styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 100px;
+    border-radius: 5px;
+    margin-top: 10px;
+    background-color: #5DC7FD;
+    
+    font-family: 'NEXON Lv1 Gothic OTF';
 `
