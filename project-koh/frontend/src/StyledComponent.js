@@ -122,8 +122,8 @@ export const CardList=styled.div`
     border-radius: 10px;
     margin:20px;
     font-size: 23px;
-    font-family: 'NEXON Lv1 Gothic OTF Light';
-    font-weight: bolder;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    font-weight: bold;
     background: linear-gradient(180deg, #F8E5E5 0%, rgba(214, 204, 204, 0.33) 99.99%);
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -143,6 +143,7 @@ export const LectureTitle=styled.div`
     width: 110px;
     height: 80px;
     background-color: #fFF0F0;
+    border: 3px solid black;
     border-radius: 10px;
     position:relative;
     left:45px;
@@ -236,7 +237,10 @@ export const SubText = styled.h2`
     font-size: 18px;
     cursor: pointer;
 `
-
+export const LectureVideoDiv = styled.div`
+    display: grid;
+    grid-template-rows: repeat(${({num})=>num},130px);
+`
 export const LectureContainer = styled.div`
     display: grid;
     grid-template-columns: 150px 500px;
@@ -421,7 +425,7 @@ grid-gap: 30px;
  select{
     width: 150px; 
     padding:10px;
-    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */  
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
     font-family: inherit;
     border: 1px solid #999; 
     border-radius: 5px; 
@@ -538,6 +542,7 @@ export const MyColletionsTextDiv = styled.div`
 `
 export const MyColletionListDiv = styled.div`
     height: 600px;
+    
     /* background-color: blue; */
 `
 export const MyColletionList = styled.div`
@@ -545,6 +550,7 @@ export const MyColletionList = styled.div`
     grid-template-columns: repeat(4,200px);
     place-content: center;
     grid-gap: 20px;
+    
 `
 export const MyColletionListCardDiv = styled.div`
     
@@ -558,6 +564,6 @@ export const MyColletionCardList= styled.div`
     border-radius: 5px;
     margin-top: 10px;
     background-color: #5DC7FD;
-    
     font-family: 'NEXON Lv1 Gothic OTF';
+
 `

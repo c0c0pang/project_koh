@@ -1,4 +1,4 @@
-"""koh URL Configuration
+"""NFT_lecture URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+app_name = 'backend_api'
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #path('get/', LectureListAPI.as_view()),
+    path('get/', include('backend_api.urls')),
+
+
 ]

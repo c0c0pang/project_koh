@@ -5,7 +5,6 @@ import ethereum from './img/ethereum.png'
 import { useEffect } from 'react';
 import MyColletionCard from './MyColletionCard'
 import axios from 'axios';
-import styled from 'styled-components';
 function ProfilePage() {
   const MyColletionKeyApi="http://localhost:4000/MyColletion";
   const MyDibsKeyApi="http://localhost:4000/MyDibs";
@@ -14,10 +13,8 @@ function ProfilePage() {
   const [user_id,setUser_id] = useState();
   const [MyColletion,setMyColletion]= useState([{}]);
   const [MyDibs,setMyDibs]= useState([{}]);
-  const [change,setChange]= useState(true);
-  const [McCheck,setMcCheck]= useState(true);
-  const [MdCheck,setMdCheck]= useState(false);
-  const BorderBtn = useRef(null);
+  const [McCheck,setMcCheck]= useState(1);
+  const [MdCheck,setMdCheck]= useState(0);
   useEffect(() => {
     axios
     .get(
@@ -57,7 +54,6 @@ function ProfilePage() {
   const MC = ()=>{
     setMcCheck(1)
     setMdCheck(0)
-    BorderBtn.current.style.borderBottom = 'red'
   }
   const MD = ()=>{
     setMcCheck(0)
@@ -98,7 +94,7 @@ function ProfilePage() {
         <ProfileListDiv>
           <MyColletionsDiv>
             <MyColletionsTextDiv>
-              <MyColletionText id='MyColl'  isBorder={McCheck} onClick={()=>{MC();}}>나의 컬렉션</MyColletionText>
+              <MyColletionText id='MyColl'  isBorder={McCheck} onClick={()=>{MC();}}>등록한 컬렉션</MyColletionText>
               <MyColletionText id='MyDi'  isBorder={MdCheck} onClick={()=>{MD();}}>나의 찜목록</MyColletionText>
             </MyColletionsTextDiv>
             <MyColletionListDiv>
@@ -121,8 +117,6 @@ function ProfilePage() {
                     />
                   ))
                 )}
-
-
               </MyColletionList>
               <MyColletionList></MyColletionList>
             </MyColletionListDiv>

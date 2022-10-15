@@ -70,7 +70,7 @@ function Lecture() {
 
           {register ? (
             <LectureRightForm>
-              <LcetureRegisterfrom register={register} setRegister={setRegister}></LcetureRegisterfrom>
+              <LcetureRegisterfrom></LcetureRegisterfrom>
             </LectureRightForm>
           ) : (
             <LectureRight>
