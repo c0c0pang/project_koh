@@ -3,7 +3,7 @@ import {MyColletionListCardDiv,MyColletionCardList} from './StyledComponent'
 import axios from 'axios';
 function MyColletionCard({title,Lecturename,teacher}) {
   return (
-    <MyColletionListCardDiv>
+    <MyColletionListCardDiv >
         <MyColletionCardList>{Lecturename} {teacher}</MyColletionCardList>
     </MyColletionListCardDiv>
   )

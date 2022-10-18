@@ -11,6 +11,7 @@ import SearchList from "./SearchList";
 import Modal from "./Modal";
 import menu from './img/menu.png'
 import Logout from './img/logout.png'
+import { useEffect } from "react";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
   const { connector, library, chainId, account, active, error, activate, deactivate } = useWeb3React();
@@ -26,20 +27,32 @@ function HeaderNav({ darkMode, setDarkMode }) {
           window.open('https://metamask.io/download.html');
         } 
   };
-  if(active===true){
-    localStorage.setItem('user_id',account)
-    localStorage.setItem('user_id_check',active)
+  const setWithExpiry = (key,value,ttl)=>{
+    const now = new Date();
+    const item = {
+      value:value,
+      expiry:now.getTime()+ttl
+    };
+    localStorage.setItem(key,JSON.stringify(item));
   }
+
+  if(active){
+    setWithExpiry("user_id",account,72000000)
+    setWithExpiry("user_id_check",active,72000000)
+  }
+  // 72000000 -> 120분
   const user_id=localStorage.getItem('user_id');
   const user_id_check=localStorage.getItem('user_id_check');
 
-  
+  const item = JSON.parse(user_id_check);
   const goHome=()=>{
     navigate('./');
   }
   const goProfile=()=>{
-    if(user_id_check==='false'){
-      navigate('./');
+    if(!item.value){
+      // window.location.reload();
+      // navigate('/Profile');
+    window.location.replace('http://localhost:3000');
     }
   }
   const userinfo=[
