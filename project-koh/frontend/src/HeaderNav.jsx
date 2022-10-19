@@ -15,7 +15,6 @@ import { useEffect } from "react";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
   const { connector, library, chainId, account, active, error, activate, deactivate } = useWeb3React();
-  const [connectCheck,setConnectCheck]=useState(false);
   const connectWallet =   async () => {
         try {
           await activate(injected, (error) => {
@@ -49,11 +48,11 @@ function HeaderNav({ darkMode, setDarkMode }) {
     navigate('./');
   }
   const goProfile=()=>{
-    if(!item.value){
-      // window.location.reload();
-      // navigate('/Profile');
-    window.location.replace('http://localhost:3000');
-    }
+    // if(!item.value){
+    //   // window.location.reload();
+    //   // navigate('/Profile');
+    // // window.location.replace('http://localhost:3000');
+    // }
   }
   const userinfo=[
     {text:"Profile",img:user},

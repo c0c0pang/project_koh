@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import {RegisterDiv,RegisterForm} from './StyledComponent'
 import axios from 'axios'
 function LcetureRegisterfrom({RegiCollections}) {
-
+  
   return (
     <RegisterDiv>
         <RegisterForm>

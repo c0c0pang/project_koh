@@ -10,46 +10,199 @@
     "IT",
     "기타"
   ],
-  "Lecture":[
-      {"title":"인문","Lecturename":"인문 세미나1","teacher":"최원석"},
-      {"title":"인문","Lecturename":"인문 세미나2","teacher":"최원석"},
-      {"title":"인문","Lecturename":"인문 세미나3","teacher":"최원석"},
-      {"title":"인문","Lecturename":"인문 세미나4","teacher":"최원석"},
-      {"title":"사회","Lecturename":"사회 세미나1","teacher":"김영욱"},
-      {"title":"사회","Lecturename":"사회 세미나2","teacher":"김영욱"},
-      {"title":"사회","Lecturename":"사회 세미나3","teacher":"김영욱"},
-      {"title":"사회","Lecturename":"사회 세미나4","teacher":"김영욱"},
-      {"title":"사회","Lecturename":"사회 세미나5","teacher":"김영욱"},
-      {"title":"교육","Lecturename":"교육 세미나1","teacher":"김태훈"},
-      {"title":"자연","Lecturename":"자연 세미나1","teacher":"최원석"},
-      {"title":"의약","Lecturename":"의약 세미나1","teacher":"김영욱"},
-      {"title":"예체능","Lecturename":"예체능 세미나1","teacher":"김영욱"}
-  ], 
-  "Lecture_Video":[
-    {"title":"인문","Introduce":"설명은 생략","titlename":"인문세미나1 OT","Lecturename":"인문 세미나1"},
-    {"title":"인문","Introduce":"설명은 생략","titlename":"1주차 강의","Lecturename":"인문 세미나1"},
-    {"title":"인문","Introduce":"설명은 생략","titlename":"2주차 강의","Lecturename":"인문 세미나1"},
-    {"title":"인문","Introduce":"설명은 생략","titlename":"인문세미나2 OT","Lecturename":"인문 세미나2"},
-    {"title":"인문","Introduce":"설명은 생략","titlename":"인문세미나3 OT","Lecturename":"인문 세미나3"},
-    {"title":"사회","Introduce":"설명은 생략","titlename":"사회세미나4 OT","Lecturename":"사회 세미나4"},
-    {"title":"사회","Introduce":"설명은 생략","titlename":"사회세미나1 OT","Lecturename":"사회 세미나1"},
-    {"title":"교육","Introduce":"설명은 생략","titlename":"교육세미나2 OT","Lecturename":"교육 세미나1"},
-    {"title":"자연","Introduce":"설명은 생략","titlename":"자연세미나4 OT","Lecturename":"자연 세미나1"}
-], 
-  "MyColletion":[
-    {"title":"인문","Lecturename":"인문 세미나1","teacher":"최원석"},
-    {"title":"인문","Lecturename":"인문 세미나4","teacher":"최원석"},
-    {"title":"사회","Lecturename":"사회 세미나1","teacher":"김영욱"},
-    {"title":"사회","Lecturename":"사회 세미나6","teacher":"김영욱"},
-    {"title":"인문","Lecturename":"인문 세미나1","teacher":"최원석"},
-    {"title":"인문","Lecturename":"인문 세미나4","teacher":"최원석"},
-    {"title":"사회","Lecturename":"사회 세미나1","teacher":"김영욱"},
-    {"title":"사회","Lecturename":"사회 세미나6","teacher":"김영욱"}
-],
-"MyDibs":[
-  {"title":"인문","Lecturename":"인문 세미나3","teacher":"최원석"},
-  {"title":"사회","Lecturename":"사회 세미나2","teacher":"김영욱"},
-  {"title":"사회","Lecturename":"사회 세미나3","teacher":"김영욱"}
-]
-
+  "Lecture": [
+    {
+      "id": 1,
+      "title": "인문",
+      "Lecturename": "인문 세미나1",
+      "teacher": "최원석"
+    },
+    {
+      "id": 2,
+      "title": "인문",
+      "Lecturename": "인문 세미나2",
+      "teacher": "최원석"
+    },
+    {
+      "id": 3,
+      "title": "인문",
+      "Lecturename": "인문 세미나3",
+      "teacher": "최원석"
+    },
+    {
+      "id": 4,
+      "title": "인문",
+      "Lecturename": "인문 세미나4",
+      "teacher": "최원석"
+    },
+    {
+      "id": 5,
+      "title": "사회",
+      "Lecturename": "사회 세미나1",
+      "teacher": "김영욱"
+    },
+    {
+      "id": 6,
+      "title": "사회",
+      "Lecturename": "사회 세미나2",
+      "teacher": "김영욱"
+    },
+    {
+      "id": 7,
+      "title": "사회",
+      "Lecturename": "사회 세미나3",
+      "teacher": "김영욱"
+    },
+    {
+      "id": 8,
+      "title": "사회",
+      "Lecturename": "사회 세미나4",
+      "teacher": "김영욱"
+    },
+    {
+      "id": 9,
+      "title": "사회",
+      "Lecturename": "사회 세미나5",
+      "teacher": "김영욱"
+    },
+    {
+      "id": 10,
+      "title": "교육",
+      "Lecturename": "교육 세미나1",
+      "teacher": "김태훈"
+    },
+    {
+      "id": 11,
+      "title": "자연",
+      "Lecturename": "자연 세미나1",
+      "teacher": "최원석"
+    },
+    {
+      "id": 12,
+      "title": "의약",
+      "Lecturename": "의약 세미나1",
+      "teacher": "김영욱"
+    },
+    {
+      "id": 13,
+      "title": "예체능",
+      "Lecturename": "예체능 세미나1",
+      "teacher": "김영욱"
+    }
+  ],
+  "Lecture_Video": [
+    {
+      "title": "인문",
+      "Introduce": "설명은 생략",
+      "titlename": "인문세미나1 OT",
+      "Lecturename": "인문 세미나1"
+    },
+    {
+      "title": "인문",
+      "Introduce": "설명은 생략",
+      "titlename": "1주차 강의",
+      "Lecturename": "인문 세미나1"
+    },
+    {
+      "title": "인문",
+      "Introduce": "설명은 생략",
+      "titlename": "2주차 강의",
+      "Lecturename": "인문 세미나1"
+    },
+    {
+      "title": "인문",
+      "Introduce": "설명은 생략",
+      "titlename": "인문세미나2 OT",
+      "Lecturename": "인문 세미나2"
+    },
+    {
+      "title": "인문",
+      "Introduce": "설명은 생략",
+      "titlename": "인문세미나3 OT",
+      "Lecturename": "인문 세미나3"
+    },
+    {
+      "title": "사회",
+      "Introduce": "설명은 생략",
+      "titlename": "사회세미나4 OT",
+      "Lecturename": "사회 세미나4"
+    },
+    {
+      "title": "사회",
+      "Introduce": "설명은 생략",
+      "titlename": "사회세미나1 OT",
+      "Lecturename": "사회 세미나1"
+    },
+    {
+      "title": "교육",
+      "Introduce": "설명은 생략",
+      "titlename": "교육세미나2 OT",
+      "Lecturename": "교육 세미나1"
+    },
+    {
+      "title": "자연",
+      "Introduce": "설명은 생략",
+      "titlename": "자연세미나4 OT",
+      "Lecturename": "자연 세미나1"
+    }
+  ],
+  "MyColletion": [
+    {
+      "title": "인문",
+      "Lecturename": "인문 세미나1",
+      "teacher": "최원석"
+    },
+    {
+      "title": "인문",
+      "Lecturename": "인문 세미나4",
+      "teacher": "최원석"
+    },
+    {
+      "title": "사회",
+      "Lecturename": "사회 세미나1",
+      "teacher": "김영욱"
+    },
+    {
+      "title": "사회",
+      "Lecturename": "사회 세미나6",
+      "teacher": "김영욱"
+    },
+    {
+      "title": "인문",
+      "Lecturename": "인문 세미나1",
+      "teacher": "최원석"
+    },
+    {
+      "title": "인문",
+      "Lecturename": "인문 세미나4",
+      "teacher": "최원석"
+    },
+    {
+      "title": "사회",
+      "Lecturename": "사회 세미나1",
+      "teacher": "김영욱"
+    },
+    {
+      "title": "사회",
+      "Lecturename": "사회 세미나6",
+      "teacher": "김영욱"
+    }
+  ],
+  "MyDibs": [
+    {
+      "title": "인문",
+      "Lecturename": "인문 세미나3",
+      "teacher": "최원석"
+    },
+    {
+      "title": "사회",
+      "Lecturename": "사회 세미나2",
+      "teacher": "김영욱"
+    },
+    {
+      "title": "사회",
+      "Lecturename": "사회 세미나3",
+      "teacher": "김영욱"
+    }
+  ]
 }
