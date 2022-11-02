@@ -19,8 +19,5 @@ from django.urls import path, include
 app_name = 'backend_api'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('get/', LectureListAPI.as_view()),
     path('get/', include('backend_api.urls')),
-
-
 ]

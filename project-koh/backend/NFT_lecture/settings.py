@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,6 +76,19 @@ WSGI_APPLICATION = "NFT_lecture.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+# 	'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'lecture',
+#         'USER': 'admin',
+#         'PASSWORD': 'chambich82250',
+#         'PORT': '3306',
+#         'HOST': 'nft-lecture.cuc7akurulpb.ap-northeast-1.rds.amazonaws.com',
+#         'OPTIONS': {
+#             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+#             },
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
