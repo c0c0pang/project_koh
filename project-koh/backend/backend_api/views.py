@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from .models import Lecture, Reply
-from .serializers import LectureSerializer, ReplySerializer, testpost
+from .models import Lecture, Reply,testLecture
+from .serializers import LectureSerializer, ReplySerializer, testpost, testLectureSerializer
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -12,6 +12,13 @@ from rest_framework.generics import CreateAPIView
 def get_lecture(request):
     posts = Lecture.objects.all()
     serailized_posts= LectureSerializer(posts, many=True)
+    return Response(serailized_posts.data)
+
+
+@api_view(['GET'])
+def get_testlecture(request):
+    posts = testLecture.objects.all()
+    serailized_posts= testLectureSerializer(posts, many=True)
     return Response(serailized_posts.data)
 
 @api_view(['GET'])

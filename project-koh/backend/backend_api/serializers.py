@@ -1,6 +1,6 @@
 from unicodedata import category
 from rest_framework import serializers
-from .models import Lecture, Reply
+from .models import Lecture, Reply,testLecture
 
 class LectureSerializer(serializers.ModelSerializer) :
     class Meta :
@@ -13,6 +13,14 @@ class LectureSerializer(serializers.ModelSerializer) :
     teacher = serializers.CharField(max_length=100)
     created_at = serializers.DateTimeField(input_formats=["%Y-%m-%d"])
 
+class testLectureSerializer(serializers.ModelSerializer) :
+    class Meta :
+        model = testLecture
+        fields = ['id', 'title', 'Lecturename','teacher']
+
+    title = serializers.CharField(max_length=100)
+    Lecturename = serializers.CharField(max_length=100)
+    teacher = serializers.CharField(max_length=100)
 
 class ReplySerializer(serializers.ModelSerializer) :
     class Meta :
