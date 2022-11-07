@@ -4,16 +4,15 @@ import { CollectionsDiv, ContentDiv } from './StyledComponent'
 import ColletionsCard from './ColletionsCard'
 import { useState } from 'react';
 function Content() {
-  const ColletionKeyApi = "http://localhost:4000/title";
+  const ColletionKeyApi = "/get/title/?format=json";
   useEffect(() => {
     axios.get(
       ColletionKeyApi
     )
       .then((response) => {
-        setCollectionsList(response.data)
+        setCollectionsList(response.data.title);
       });
   }, []);
-
   const [CollectionsList, setCollectionsList] = useState([]);
   return (
     <ContentDiv>
