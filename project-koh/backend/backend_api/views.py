@@ -1,12 +1,24 @@
 from django.shortcuts import render
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Lecture, Reply,testLecture
-from .serializers import LectureSerializer, ReplySerializer, testpost, testLectureSerializer
+from .models import Lecture, Reply,testLecture, category
+from .serializers import LectureSerializer, ReplySerializer, testpost, testLectureSerializer,TitleSerializer
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.http.response import HttpResponse
 from rest_framework.generics import CreateAPIView
+
+class titleShow(APIView):
+    def get(self, request, *args, **kwargs):
+      titleList = category.objects.all()
+      data = {
+        'title' : titleList,
+      }
+      # 2. serialize
+      serializer = TitleSerializer(instance=data)
+      # 3. response
+      return Response(serializer.data)
 
 @api_view(['GET'])
 def get_lecture(request):

@@ -1,6 +1,9 @@
 from unicodedata import category
 from rest_framework import serializers
-from .models import Lecture, Reply,testLecture
+from .models import Lecture, Reply,testLecture, category
+
+class TitleSerializer(serializers.Serializer):
+    title =  serializers.ListField(child = serializers.CharField())
 
 class LectureSerializer(serializers.ModelSerializer) :
     class Meta :
@@ -16,7 +19,7 @@ class LectureSerializer(serializers.ModelSerializer) :
 class testLectureSerializer(serializers.ModelSerializer) :
     class Meta :
         model = testLecture
-        fields = ['id', 'title', 'Lecturename','teacher']
+        fields = ['title', 'Lecturename','teacher']
 
     title = serializers.CharField(max_length=100)
     Lecturename = serializers.CharField(max_length=100)

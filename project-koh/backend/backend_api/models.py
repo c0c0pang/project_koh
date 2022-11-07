@@ -1,6 +1,11 @@
 from csv import writer
 from django.db import models
 
+class category(models.Model):
+    category = models.CharField(max_length=20, blank=False, null=False)
+    def __str__(self):
+        return self.category
+
 class testLecture(models.Model):
     id = models.BigAutoField( primary_key=True )
     title = models.CharField(max_length=20, blank=False, null=False)
