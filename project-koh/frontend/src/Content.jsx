@@ -11,6 +11,7 @@ function Content() {
     )
       .then((response) => {
         setCollectionsList(response.data.title);
+        console.log(response.data)
       });
   }, []);
   const [CollectionsList, setCollectionsList] = useState([]);
