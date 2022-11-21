@@ -92,9 +92,9 @@ WSGI_APPLICATION = "NFT_lecture.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'board',
+        'NAME': 'NFT_lecture',
         'USER': 'root',
-        'PASSWORD': '4135',
+        'PASSWORD': '413535',
         'HOST': 'localhost',
         'PORT': '3306'
     }

@@ -1,18 +1,9 @@
-from csv import writer
 from django.db import models
 
 class category(models.Model):
     category = models.CharField(max_length=20, blank=False, null=False)
     def __str__(self):
         return self.category
-
-class testLecture(models.Model):
-    id = models.BigAutoField( primary_key=True )
-    title = models.CharField(max_length=20, blank=False, null=False)
-    Lecturename = models.CharField(max_length=20, blank=False, null=False)
-    teacher = models.CharField(max_length=20, blank=False, null=False)
-    def __str__(self):
-        return self.title
 
 class Lecture(models.Model):
     id = models.BigAutoField( primary_key=True )
@@ -21,6 +12,7 @@ class Lecture(models.Model):
     title = models.CharField(max_length=20, blank=False, null=False)
     teacher = models.CharField(max_length=20, blank=False, null=False)
     le_contents = models.TextField(blank=False, null=False)
+    is_public = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
