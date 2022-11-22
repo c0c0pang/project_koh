@@ -5,17 +5,25 @@ import { RegisterDiv, RegisterForm } from './StyledComponent'
 import axios from 'axios'
 function LcetureRegisterfrom() {
   const imgRef = useRef();
-  const [imageUrl, setImageUrl] = useState(null);
-  const LectureKeyApi = "/api/test/";
-  const [inputs, setInputs] = useState({
-    img: "",
-    title: "",
-    Lecturename: "",
-    teacher: "",
-    usernum: "",
-    category: ""
-  });
-  let location = useLocation();
+  const [imageUrl,setImageUrl] = useState(null);
+  const LectureKeyApi="http://localhost:4000/Lecture";
+  const [inputs,setInputs]=useState({
+    img:"",
+    title:"",
+    Lecturename:"",
+    teacher:"",
+    usernum:"",
+});
+  /*
+              <option value="인문">인문</option>
+            <option value="교육">교육</option>
+            <option value="공학">공학</option>
+            <option value="자연">자연</option>
+            <option value="의약">의약</option>  
+            <option value="예체능">예체능</option>
+            <option value="IT">IT</option>
+            <option value="기타">기타</option>
+            */
   const selectbox = [
     { value: "인문", name: "인문" },
     { value: "교육", name: "교육" },
@@ -55,34 +63,17 @@ function LcetureRegisterfrom() {
     imgRef.current.click();
   };
   const navigate = useNavigate();
-
-  const onSubmit = async (e) => {
-    let data = {
-      category: inputs.category,
-      title: inputs.title,
-      thumbnail:inputs.thumbnail,  
-      teacher: inputs.le_contents,
-      content:'sad'
-    } 
-    console.log(inputs.thumbnail);
-    const formData = new FormData();
-    formData.append("thumbnail",data.thumbnail);
-    formData.append("category",data.category);
-    formData.append("title",data.content);
-    formData.append("teacher",data.teacher);
-    formData.append("content",data.content);
-    e.preventDefault();
-    await axios.
-      post(LectureKeyApi, formData,{
-        headers: { "Content-Type": `multipart/form-data`},
-        withCredentials: true,
-        transformRequest: (data, headers) => {
-          return data;
-        },
-      }).then((err) => {
-        console.log(err);
-        // window.location.reload(); 
-      })
+  const onSubmit=()=>{
+    axios.
+    post(LectureKeyApi,{
+      // img:inputs.img,
+      title:inputs.title,
+      Lecturename:inputs.Lecturename,
+      teacher:inputs.teacher,
+      usernum:inputs.usernum
+    }).then(()=>{
+      navigate('./');
+    })
   }
 
   return (
