@@ -21,6 +21,7 @@ function SearchViewPage() {
   function getSearchView(){
     const filterData = LectureList.filter(
       props=>{
+        // props.toLowerCase().indexOf(Params.name.toLocaleLowerCase())>-1
         if(Params.name===props.Lecturename){
          return props;
         }

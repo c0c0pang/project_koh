@@ -6,8 +6,8 @@ import LectureListCrad from './LectureListCrad'
 import ColletionsSubTitle from './ColletionsSubTitle';
 import LcetureRegisterfrom from './LcetureRegisterfrom'
 function Lecture() {
-  const ColletionKeyApi="http://localhost:4000/title";
-  const LectureKeyApi="http://localhost:4000/Lecture";
+  const ColletionKeyApi="/get/category/?format=json";
+  const LectureKeyApi="lecture/?format=json";
   const [CollectionsList,setCollectionsList] =useState([]);
   const [LectureList,setLectureList]= useState([{}]);
   const [register,setRegister] = useState(false);
@@ -25,7 +25,7 @@ function Lecture() {
       ColletionKeyApi
     )
     .then((response) => {
-      setCollectionsList(response.data)
+      setCollectionsList(response.data.title);
     });
   },[]);
 
