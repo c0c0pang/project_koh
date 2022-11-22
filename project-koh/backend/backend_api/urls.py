@@ -19,6 +19,7 @@ urlpatterns = [
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('',include(router.urls)),    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 =======
@@ -56,6 +57,11 @@ urlpatterns = [
     path('',include(router.urls)),  
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT), # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 
+=======
+    path('',include(router.urls)),  
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
+=======
+>>>>>>> d92bf90c (refactor: api 주소 변경)
     path('',include(router.urls)),
     path('test',views.test.as_view()),
     
@@ -63,6 +69,7 @@ urlpatterns = [
     
     # path('reply/', views.get_reply),
     # path('post/', views.Lecture_create.as_view()),
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -114,3 +121,7 @@ urlpatterns = [
     path('',include(router.urls)),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 >>>>>>> 05114840 (image and delete)
+=======
+]
+>>>>>>> f189ab41 (refactor: api 주소 변경)
+>>>>>>> d92bf90c (refactor: api 주소 변경)
