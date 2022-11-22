@@ -96,9 +96,9 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'NFT_lecture',
+        'NAME': 'board',
         'USER': 'root',
-        'PASSWORD': '413535',
+        'PASSWORD': '4135',
         'HOST': 'localhost',
         'PORT': '3306'
     }

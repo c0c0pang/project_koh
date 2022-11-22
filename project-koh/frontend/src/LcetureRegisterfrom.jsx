@@ -5,7 +5,7 @@ import axios from 'axios'
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const [imageUrl,setImageUrl] = useState(null);
-  const LectureKeyApi="http://localhost:4000/Lecture";
+  const LectureKeyApi="/lecture/?format=json";
   const [inputs,setInputs]=useState({
     img:"",
     title:"",
@@ -13,16 +13,6 @@ function LcetureRegisterfrom() {
     teacher:"",
     usernum:"",
 });
-  /*
-              <option value="인문">인문</option>
-            <option value="교육">교육</option>
-            <option value="공학">공학</option>
-            <option value="자연">자연</option>
-            <option value="의약">의약</option>  
-            <option value="예체능">예체능</option>
-            <option value="IT">IT</option>
-            <option value="기타">기타</option>
-            */
   const selectbox = [
     {value:"인문",name:"인문"},
     {value:"교육",name:"교육"},
@@ -59,10 +49,10 @@ function LcetureRegisterfrom() {
     axios.
     post(LectureKeyApi,{
       // img:inputs.img,
-      title:inputs.title,
-      Lecturename:inputs.Lecturename,
+      category:inputs.title,
+      title:inputs.Lecturename,
       teacher:inputs.teacher,
-      usernum:inputs.usernum
+      le_contents:inputs.usernum
     }).then(()=>{
       navigate('./');
     })

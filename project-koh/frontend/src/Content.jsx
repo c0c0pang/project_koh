@@ -4,7 +4,7 @@ import { CollectionsDiv, ContentDiv } from './StyledComponent'
 import ColletionsCard from './ColletionsCard'
 import { useState } from 'react';
 function Content() {
-  const ColletionKeyApi = "/get/title/?format=json";
+  const ColletionKeyApi = "/get/category/?format=json";
   useEffect(() => {
     axios.get(
       ColletionKeyApi
