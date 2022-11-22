@@ -25,6 +25,10 @@ class test(APIView):
 =======
 >>>>>>> 7570cef5 (11.28 update,delete 구현)
 
+class test(APIView):
+    def post(self, request):
+        return Response("test",status=200)
+
 class titleShow(APIView):
     def get(self, request):
       titleList = category.objects.all().order_by('category')

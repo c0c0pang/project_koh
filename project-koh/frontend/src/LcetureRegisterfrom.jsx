@@ -6,7 +6,11 @@ import axios from 'axios'
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const [imageUrl,setImageUrl] = useState(null);
+<<<<<<< HEAD
   const LectureKeyApi="http://localhost:4000/Lecture";
+=======
+  const LectureKeyApi="/lecture/post";
+>>>>>>> a46d4209 (refactor: api 주소 변경)
   const [inputs,setInputs]=useState({
     img:"",
     title:"",
