@@ -5,7 +5,7 @@ import axios from 'axios'
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const [imageUrl,setImageUrl] = useState(null);
-  const LectureKeyApi="/lecture/?format=json";
+  const LectureKeyApi="/lecture/post";
   const [inputs,setInputs]=useState({
     img:"",
     title:"",

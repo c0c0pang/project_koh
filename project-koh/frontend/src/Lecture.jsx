@@ -7,7 +7,7 @@ import ColletionsSubTitle from './ColletionsSubTitle';
 import LcetureRegisterfrom from './LcetureRegisterfrom'
 function Lecture() {
   const ColletionKeyApi="/get/category/?format=json";
-  const LectureKeyApi="lecture/?format=json";
+  const LectureKeyApi="/lecture/?format=json";
   const [CollectionsList,setCollectionsList] =useState([]);
   const [LectureList,setLectureList]= useState([{}]);
   const [register,setRegister] = useState(false);

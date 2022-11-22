@@ -8,6 +8,10 @@ from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import get_object_or_404
 
+class test(APIView):
+    def post(self, request):
+        return Response("test",status=200)
+
 class titleShow(APIView):
     def get(self, request):
       titleList = category.objects.all().order_by('category')

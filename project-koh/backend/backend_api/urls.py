@@ -10,6 +10,7 @@ app_name = 'backend_api'
 urlpatterns = [
     path('get/category/', views.titleShow.as_view()), # 카테고리 목록
     path('',include(router.urls)),
+    path('test',views.test.as_view()),
     
     
     
