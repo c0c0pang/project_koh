@@ -3,7 +3,7 @@ from . import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'lecture',views.LectureViewSet)
+router.register(r'api/test',views.LectureViewSet)
 router.register(r'user',views.UserViewSet)
 
 app_name = 'backend_api'
