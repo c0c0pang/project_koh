@@ -1,3 +1,4 @@
+***mint NFT***
 npm init -y
 npm install --save-dev hardhat
 
@@ -27,3 +28,7 @@ variables : .env의 private key,
              mint-nft.js의 contractaddress & tokenURI
 
 node scripts/mint-nft.js
+
+
+***token_balance***
+npm install alchemy-sdk
