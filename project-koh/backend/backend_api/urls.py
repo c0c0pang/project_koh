@@ -12,6 +12,7 @@ app_name = 'backend_api'
 urlpatterns = [
     path('get/category/', views.titleShow.as_view()), # 카테고리 목록
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('',include(router.urls)),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 =======
@@ -22,5 +23,8 @@ urlpatterns = [
     
     # path('reply/', views.get_reply),
     # path('post/', views.Lecture_create.as_view()),
+=======
+    path('',include(router.urls)),    
+>>>>>>> 741655a7 (fix: 병합 테스트)
 ]
 >>>>>>> f189ab41 (refactor: api 주소 변경)
