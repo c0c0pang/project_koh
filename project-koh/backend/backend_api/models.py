@@ -24,10 +24,11 @@ class User(models.Model):
     wallet_address = models.CharField(primary_key=True, max_length=35)
     userName = models.CharField(max_length=10, blank=False, null=False)
     email = models.CharField(max_length=40, blank=True, null=True)
+    is_public = models.BooleanField(default=True)
     regdate = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.UserName
+        return self.userName
 
 class Reply(models.Model):
     lecture_id = models.ForeignKey("Lecture", related_name="Lecture", on_delete=models.CASCADE, db_column="lecture_id")

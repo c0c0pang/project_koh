@@ -6,7 +6,6 @@ from rest_framework.decorators import action
 from django.http.response import HttpResponse
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
-from django.shortcuts import get_object_or_404
 
 class test(APIView):
     def post(self, request):
@@ -24,7 +23,7 @@ class titleShow(APIView):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer 
-
+    
     def list(self, request):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
@@ -33,25 +32,31 @@ class UserViewSet(ModelViewSet):
     def retrieve(self, request, pk=None): # pk를 주소로 연결
         user = User.objects.get(wallet_address=pk)
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        if serializer.is_valid():
+            return Response(serializer.data)
+        else :
+            return Response("test")
 
-    @action(detail=False) 
+    @action(detail=False, methods=['get'])  # /user/check_user/?address=0000
     def check_user(self,request): # 검색을 통한 강의목록 확인 
-        qs = User.objects.all()
+        qs = self.queryset.filter(is_public = True)
         search_address = self.request.GET.get('address','') 
 
         if search_address:
-            search_list = qs.filter(
-                Q(wallet_address__icontains = search_address) 
-            )
-            if len(search_list) == 0 :
-                return Response(status =200)
-            serailized_posts= self.get_serializer(search_list)
-            return Response(serailized_posts.data)
+            search_list = qs.filter(wallet_address = search_address)
+            if len(search_list) == 0:
+                return Response(status=200) # 검색 결과 없으므로 생성하도록 한다
+            serailized_posts= self.get_serializer(search_list, many=True)
         else :
             return Response(status =200)
-
+        return Response(serailized_posts.data)
     
+    def create(self,request):
+        serializer =  UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
 
 
 class LectureViewSet(ModelViewSet):
@@ -98,20 +103,11 @@ class LectureViewSet(ModelViewSet):
             return Response(status = 200)
         
         return Response(serailized_posts.data)
-    
-    def post(request):
-        if request.method == 'POST':
-            category = request.POST['category']
-            title = request.POST['title']
-            teacher = request.POST['teacher']
-            le_contains = request.POST['le_contains']
-            data = {
-                'category': category,
-                'title': title,
-                'teacher': teacher,
-                'le_contains': le_contains
-            }
-            serializer = LectureSerializer(instance=data)
-            return Response(serializer.data)
 
-    
+    def create(self,request):
+        serializer =  LectureSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+ 
