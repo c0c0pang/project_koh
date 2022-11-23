@@ -2,7 +2,6 @@ from django.core.exceptions import *
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.viewsets import views
 from rest_framework.response import Response
 from .models import Lecture, Reply, category, User
 from .serializers import LectureSerializer, ReplySerializer, TitleSerializer, UserSerializer
@@ -10,6 +9,7 @@ from rest_framework.decorators import action
 from django.http.response import HttpResponse
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 from django.shortcuts import get_object_or_404
@@ -36,11 +36,12 @@ class test(APIView):
     def post(self, request):
         return Response("test",status=200)
 =======
+=======
+>>>>>>> 27c12e58 (fix: api post 요청 충돌 해결)
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
->>>>>>> 05114840 (image and delete)
 
 class test(APIView):
     def post(self, request):
@@ -104,6 +105,7 @@ class UserViewSet(ModelViewSet):
             serailized_posts= self.get_serializer(search_list, many=True)
         else :
             return Response(status =200)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         return Response(serailized_posts.data)   
@@ -189,6 +191,8 @@ class LectureViewSet(ModelViewSet):
             return Response({"message": "존재하지 않는 UUID({})입니다".format(pk)}, status=status.HTTP_404_NOT_FOUND)
 =======
 =======
+=======
+>>>>>>> 27c12e58 (fix: api post 요청 충돌 해결)
         return Response(serailized_posts.data)   
 
     # user데이터 생성, 중복이름을 방지한다
@@ -230,7 +234,6 @@ class LectureViewSet(ModelViewSet):
     def list(self, request):
         queryset = self.queryset.filter(is_public=True)
         serializer = self.get_serializer(queryset, many=True)
->>>>>>> 05114840 (image and delete)
         return Response(serializer.data)
 
     # 원하는 번호의 강의 추출 url: /lecture/3
@@ -274,6 +277,7 @@ class LectureViewSet(ModelViewSet):
         return Response(serailized_posts.data)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     # 이미지 파일과 같이 강의를 생성
     def create(self,request):
@@ -284,11 +288,12 @@ class LectureViewSet(ModelViewSet):
     def create(self,request):
         print("check post")
 =======
+=======
+>>>>>>> 27c12e58 (fix: api post 요청 충돌 해결)
 
     # 이미지 파일과 같이 강의를 생성
     def create(self,request):
         # Lecture.thumbnail = request.FILES['thumbnail']
->>>>>>> 05114840 (image and delete)
         serializer =  LectureSerializer(data=request.data)
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
         if serializer.is_valid():
