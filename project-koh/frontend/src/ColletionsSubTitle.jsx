@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 function ColletionsSubTitle({title,RegisterNotCheck}) {
     const navigate = useNavigate();
     const goPost = () => {
-      navigate(`${"/Lecture/" + title}`);
+      navigate(`${"/lecture/" + title}`);
     };
   return (
     <AllSub>

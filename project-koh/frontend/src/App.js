@@ -20,8 +20,8 @@ function App() {
     <HeaderNav darkMode={darkMode} setDarkMode={setDarkMode}/>
     <Routes>
         <Route path="/" element={<Content />}></Route>
-        <Route path="/Lecture/:title" element={<Lecture />}></Route>
-        <Route path="/Lecture/:title/:Lecturename/" element={<LectureContentList />}></Route>
+        <Route path="/lecture/:title" element={<Lecture />}></Route>
+        <Route path="/lecture/:title/:Lecturename/" element={<LectureContentList />}></Route>
         <Route path="/Search/:name" element={<SearchViewPage />}></Route>
         <Route path="/Profile" element={<ProfilePage/>}></Route>
     </Routes>

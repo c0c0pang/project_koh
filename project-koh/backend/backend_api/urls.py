@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = DefaultRouter()
-router.register(r'lecture',views.LectureViewSet)
+router.register(r'api/test',views.LectureViewSet)
 router.register(r'user',views.UserViewSet)
 
 app_name = 'backend_api'

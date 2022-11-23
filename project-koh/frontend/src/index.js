@@ -4,13 +4,15 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import './index.css';
 import App from './App';
-
+import axios from 'axios';
+import {Cookies} from 'react-cookie'
 function getLibrary(provider) {
   const library = new Web3Provider(provider, "any");
   return library;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>

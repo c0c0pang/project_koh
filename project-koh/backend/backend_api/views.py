@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework.viewsets import views
 from rest_framework.response import Response
 from .models import Lecture, Reply, category, User
 from .serializers import LectureSerializer, ReplySerializer, TitleSerializer, UserSerializer
@@ -6,10 +7,15 @@ from rest_framework.decorators import action
 from django.http.response import HttpResponse
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
+<<<<<<< HEAD
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
+=======
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+>>>>>>> a228152d (fix: api post 요청 충돌 해결)
 
 class test(APIView):
     def post(self, request):
@@ -56,6 +62,7 @@ class UserViewSet(ModelViewSet):
             serailized_posts= self.get_serializer(search_list, many=True)
         else :
             return Response(status =200)
+<<<<<<< HEAD
         return Response(serailized_posts.data)   
 
     # user데이터 생성, 중복이름을 방지한다
@@ -97,6 +104,24 @@ class LectureViewSet(ModelViewSet):
     def list(self, request):
         queryset = self.queryset.filter(is_public=True)
         serializer = self.get_serializer(queryset, many=True)
+=======
+        return Response(serailized_posts.data)
+    
+    # def create(self,request):
+    #     serializer =  UserSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class LectureViewSet(ModelViewSet):
+    queryset = Lecture.objects.all()
+    serializer_class = LectureSerializer # get_serializer
+    def list(self, request): # 모든 강의목록 확인
+        queryset = Lecture.objects.all()
+        serializer = LectureSerializer(queryset, many=True)
+>>>>>>> a228152d (fix: api post 요청 충돌 해결)
         return Response(serializer.data)
 
     # 원하는 번호의 강의 추출 url: /lecture/3
@@ -137,10 +162,15 @@ class LectureViewSet(ModelViewSet):
             return Response(status = 200)
         
         return Response(serailized_posts.data)
+<<<<<<< HEAD
 
     # 이미지 파일과 같이 강의를 생성
     def create(self,request):
         # Lecture.thumbnail = request.FILES['thumbnail']
+=======
+    def create(self,request):
+        print("check post")
+>>>>>>> a228152d (fix: api post 요청 충돌 해결)
         serializer =  LectureSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(is_public =True)
