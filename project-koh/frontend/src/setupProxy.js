@@ -17,6 +17,7 @@ module.exports = (app) => {
                 }
             )
 
+<<<<<<< HEAD
         ),
         app.use('/user',
             createProxyMiddleware(
@@ -26,6 +27,8 @@ module.exports = (app) => {
                 }
             )
 
+=======
+>>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
         )
 
 };

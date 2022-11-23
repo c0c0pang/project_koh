@@ -8,10 +8,14 @@ import LcetureRegisterfrom from './LcetureRegisterfrom'
 function Lecture() {
   const ColletionKeyApi="/get/category/?format=json";
 <<<<<<< HEAD
+<<<<<<< HEAD
   const LectureKeyApi="/api/test/?format=json";
 =======
   const LectureKeyApi="/lecture/?format=json";
 >>>>>>> a46d4209 (refactor: api 주소 변경)
+=======
+  const LectureKeyApi="/api/test/?format=json";
+>>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
   const [CollectionsList,setCollectionsList] =useState([]);
   const [LectureList,setLectureList]= useState([{}]);
   const [register,setRegister] = useState(false);
