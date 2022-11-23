@@ -9,9 +9,5 @@ router.register(r'user',views.UserViewSet)
 app_name = 'backend_api'
 urlpatterns = [
     path('get/category/', views.titleShow.as_view()), # 카테고리 목록
-    path('',include(router.urls)),
-    path('post/user/',views.user_post.as_view()),
-    
-    # path('reply/', views.get_reply),
-    path('post/', views.Lecture_create.as_view()),
+    path('',include(router.urls)),    
 ]

@@ -6,22 +6,6 @@ from rest_framework.decorators import action
 from django.http.response import HttpResponse
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import CreateAPIView
-
-class user_post(APIView):
-    def post(self, request):
-        print(request.data)
-        serializer =  UserSerializer(data=request.data)
-        # serializer.is_valid(raise_exception=True)
-        if serializer.is_valid():
-            print("tststststs")
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors)
-
-class Lecture_create(CreateAPIView):
-    queryset = Lecture.objects.all()
-    serializer_class = LectureSerializer
 
 class titleShow(APIView):
     def get(self, request):
