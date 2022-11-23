@@ -15,6 +15,7 @@ urlpatterns = [
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('',include(router.urls)),    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 =======
@@ -30,6 +31,13 @@ urlpatterns = [
 =======
 >>>>>>> 6dda080b (refactor: api 주소 변경)
 >>>>>>> 7df054e5 (refactor: api 주소 변경)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 6dda080b (refactor: api 주소 변경)
+=======
+>>>>>>> 159a0272 (fix: 병합 테스트)
+>>>>>>> 24706d93 (fix: 병합 테스트)
     path('',include(router.urls)),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 =======
@@ -41,6 +49,9 @@ urlpatterns = [
     # path('reply/', views.get_reply),
     # path('post/', views.Lecture_create.as_view()),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 159a0272 (fix: 병합 테스트)
 =======
 <<<<<<< HEAD
 =======
