@@ -10,9 +10,16 @@ class Lecture(models.Model):
     category = models.CharField(max_length=20, blank=False, null=False)
     title = models.CharField(max_length=20, blank=False, null=False)
     teacher = models.CharField(max_length=20, blank=False, null=False)
+<<<<<<< HEAD
     content = models.TextField(blank=True, null=False, default="")
     headcount = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')
+=======
+    content = models.TextField(blank=False, null=False)
+    headcount = models.IntegerField(default=0)
+    thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')
+    is_public = models.BooleanField(default=True)
+>>>>>>> bc7eba51 (image and delete)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.title

@@ -11,9 +11,12 @@ from django.http.response import HttpResponse
 from django.db.models import Q
 from rest_framework.viewsets import ModelViewSet
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.shortcuts import get_object_or_404
 =======
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
+=======
+>>>>>>> bc7eba51 (image and delete)
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 <<<<<<< HEAD
@@ -32,6 +35,12 @@ class test(APIView):
 class test(APIView):
     def post(self, request):
         return Response("test",status=200)
+=======
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.shortcuts import redirect
+>>>>>>> 05114840 (image and delete)
 
 class titleShow(APIView):
     def get(self, request):
@@ -49,6 +58,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer 
     parser_classes = [JSONParser]
     def list(self, request):
+<<<<<<< HEAD
         queryset = self.queryset
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
@@ -63,6 +73,22 @@ class UserViewSet(ModelViewSet):
             return Response({"message": "존재하지 않는 address({})입니다".format(pk)}, status=status.HTTP_404_NOT_FOUND)
 
     # user에 중복된 address가 있는지 여부 판단 GET /user/check_user/?address=0000
+=======
+        queryset = self.queryset.filter(is_public=True)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    # user데이터를 지갑주소값으로 접근 url: /user/00000 wallet_address로 검색
+    def retrieve(self, request, pk=None): 
+        user = User.objects.get(wallet_address=pk)
+        serializer = UserSerializer(user)
+        if serializer.is_valid():
+            return Response(serializer.data)
+        else :
+            return Response(serializer.errors)
+
+    # user에 중복된 address가 있는지 여부 판단 url: /user/check_user/?address=0000
+>>>>>>> bc7eba51 (image and delete)
     @action(detail=False, methods=['get'])  
     def check_user(self,request): # 검색을 통한 강의목록 확인 
         qs = self.queryset
@@ -74,6 +100,7 @@ class UserViewSet(ModelViewSet):
             serailized_posts= self.get_serializer(search_list, many=True)
         else :
             return Response(status =200)
+<<<<<<< HEAD
 <<<<<<< HEAD
         return Response(serailized_posts.data)   
 
@@ -113,6 +140,8 @@ class UserViewSet(ModelViewSet):
 
 @method_decorator(csrf_exempt,name='dispatch')
 =======
+=======
+>>>>>>> bc7eba51 (image and delete)
         return Response(serailized_posts.data)
     
     # def create(self,request):
@@ -142,6 +171,7 @@ class LectureViewSet(ModelViewSet):
     def list(self, request): # 모든 강의목록 확인
         queryset = Lecture.objects.all()
         serializer = LectureSerializer(queryset, many=True)
+<<<<<<< HEAD
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
         return Response(serializer.data)
 
@@ -153,6 +183,66 @@ class LectureViewSet(ModelViewSet):
             return Response(serializer.data)
         except ObjectDoesNotExist:
             return Response({"message": "존재하지 않는 UUID({})입니다".format(pk)}, status=status.HTTP_404_NOT_FOUND)
+=======
+=======
+        return Response(serailized_posts.data)   
+
+    # user데이터 생성, 중복이름을 방지한다
+    def create(self,request):
+        serializer =  UserSerializer(data=request.data)
+        same_name = self.queryset.filter(Q(userName__icontains = request.data['userName'])) # 중복된 이름 확인
+        if len(same_name) != 0:
+            return Response("same user name")
+        if serializer.is_valid():
+            serializer.save(is_public =True)
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+    # @action(detail=True, methods=['post'])
+    # def set_username(self, request, pk=None):
+    #     user = self.get_object()
+    #     serializer = UserSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         user.set_username(serializer.validated_data['userName'])
+    #         user.save()
+    #         return Response({'status': 'username set'})
+    #     else:
+    #         return Response(serializer.errors)
+
+    # url : PATCH user/wallet_address/delete/ , 삭제
+    @action(detail=True, methods=['patch'])
+    def delete(self, request, pk):
+        instance = self.get_object()
+        instance.is_public = False
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+@method_decorator(csrf_exempt,name='dispatch')
+class LectureViewSet(ModelViewSet):
+    queryset = Lecture.objects.all()
+    serializer_class = LectureSerializer # get_serializer
+
+    def list(self, request):
+        queryset = self.queryset.filter(is_public=True)
+        serializer = self.get_serializer(queryset, many=True)
+>>>>>>> 05114840 (image and delete)
+        return Response(serializer.data)
+
+    # 원하는 번호의 강의 추출 url: /lecture/3
+    def retrieve(self, request, pk=None): 
+        queryset = Lecture.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = LectureSerializer(user)
+        return Response(serializer.data)
+
+    # 삭제되지않은 강의 리스트를 보여준다
+    @action(detail=False)
+    def lecture_list(self,request): # 삭제안된 강의 목록을 확인
+        qs = self.queryset.filter(is_public=True) # is_public = True인 값만을 확인가능
+        serializer = self.get_serializer(qs,many=True) 
+        return Response(serializer.data)
+>>>>>>> bc7eba51 (image and delete)
     
     # 강의리스트중에서 입력으로 넣은 이름,강사,카테고리에 맞는 리스트를 보여준다
     @action(detail=False) 
@@ -179,19 +269,29 @@ class LectureViewSet(ModelViewSet):
         
         return Response(serailized_posts.data)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     # 이미지 파일과 같이 강의를 생성
     def create(self,request):
         serializer =  self.get_serializer(data=request.data)
 =======
+=======
+>>>>>>> bc7eba51 (image and delete)
     def create(self,request):
         print("check post")
+=======
+
+    # 이미지 파일과 같이 강의를 생성
+    def create(self,request):
+        # Lecture.thumbnail = request.FILES['thumbnail']
+>>>>>>> 05114840 (image and delete)
         serializer =  LectureSerializer(data=request.data)
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(is_public =True)
             return Response(serializer.data)
         return Response(serializer.errors)
+<<<<<<< HEAD
 
     # 삭제, DELETE /lecture/{id}/delete_lecture/
     @action(detail=True, methods=['delete'])  
@@ -222,4 +322,6 @@ class LectureViewSet(ModelViewSet):
             return Response(serializer.data)
         else:
             return Response("일치되는 강의가 없습니다")
+=======
+>>>>>>> bc7eba51 (image and delete)
  

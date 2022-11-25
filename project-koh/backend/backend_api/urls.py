@@ -13,6 +13,7 @@ urlpatterns = [
     path('get/category/', views.titleShow.as_view()), # 카테고리 목록
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('',include(router.urls)),    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 =======
@@ -20,6 +21,9 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 >>>>>>> 05114840 (image and delete)
 =======
+=======
+<<<<<<< HEAD
+>>>>>>> c7841dcf (image and delete)
     path('',include(router.urls)),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
 =======
@@ -32,4 +36,11 @@ urlpatterns = [
     # path('post/', views.Lecture_create.as_view()),
 ]
 >>>>>>> f189ab41 (refactor: api 주소 변경)
+<<<<<<< HEAD
 >>>>>>> a46d4209 (refactor: api 주소 변경)
+=======
+=======
+    path('',include(router.urls)),  
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # 이미지 접근 http://localhost:8000/image/leaf_detaction.jpeg
+>>>>>>> bc7eba51 (image and delete)
+>>>>>>> c7841dcf (image and delete)

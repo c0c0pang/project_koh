@@ -143,6 +143,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # CORS_ORIGIN_ALLOW_ALL = True
 
@@ -173,10 +174,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 >>>>>>> 05114840 (image and delete)
 =======
 >>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
+=======
+>>>>>>> c7841dcf (image and delete)
 MEDIA_URL = '/image/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
 =======
+=======
+>>>>>>> bc7eba51 (image and delete)
 
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -204,4 +209,12 @@ CORS_ALLOW_HEADERS = (
     'csrftoken',
     'x-requested-with',
 )
+<<<<<<< HEAD
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
+=======
+=======
+MEDIA_URL = '/image/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
+>>>>>>> 05114840 (image and delete)
+>>>>>>> bc7eba51 (image and delete)
