@@ -8,15 +8,13 @@ class category(models.Model):
 class Lecture(models.Model):
     id = models.BigAutoField( primary_key=True )
     category = models.CharField(max_length=20, blank=False, null=False)
-    subhead = models.CharField(max_length=30, blank=True, null=True)
     title = models.CharField(max_length=20, blank=False, null=False)
     teacher = models.CharField(max_length=20, blank=False, null=False)
-    le_contents = models.TextField(blank=False, null=False)
+    content = models.TextField(blank=False, null=False)
+    headcount = models.IntegerField(default=0)
+    thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')
     is_public = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    deleted_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.title
 
@@ -26,7 +24,6 @@ class User(models.Model):
     email = models.CharField(max_length=40, blank=True, null=True)
     is_public = models.BooleanField(default=True)
     regdate = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.userName
 

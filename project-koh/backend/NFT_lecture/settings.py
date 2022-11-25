@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+import pymysql
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,6 +89,9 @@ WSGI_APPLICATION = "NFT_lecture.wsgi.application"
 #             },
 #     }
 # }
+
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -118,11 +122,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L18N = True
+
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -135,6 +141,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+<<<<<<< HEAD
 
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -162,3 +169,8 @@ CORS_ALLOW_HEADERS = (
     'csrftoken',
     'x-requested-with',
 )
+=======
+MEDIA_URL = '/image/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
+>>>>>>> 05114840 (image and delete)
