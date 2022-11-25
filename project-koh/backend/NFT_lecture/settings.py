@@ -142,6 +142,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+<<<<<<< HEAD
 
 # CORS_ORIGIN_ALLOW_ALL = True
 
@@ -168,6 +169,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #     'csrftoken',
 #     'x-requested-with',
 # )
+=======
+>>>>>>> 05114840 (image and delete)
 MEDIA_URL = '/image/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')

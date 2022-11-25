@@ -10,11 +10,14 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
+<<<<<<< HEAD
 from rest_framework.parsers import JSONParser
 from rest_framework.parsers import MultiPartParser
 class test(APIView):
     def post(self, request):
         return Response("test",status=200)
+=======
+>>>>>>> 05114840 (image and delete)
 
 class titleShow(APIView):
     def get(self, request):
@@ -94,7 +97,11 @@ class UserViewSet(ModelViewSet):
 class LectureViewSet(ModelViewSet):
     queryset = Lecture.objects.all()
     serializer_class = LectureSerializer # get_serializer
+<<<<<<< HEAD
     parser_classes = [MultiPartParser]
+=======
+
+>>>>>>> 05114840 (image and delete)
     def list(self, request):
         queryset = self.queryset.filter(is_public=True)
         serializer = self.get_serializer(queryset, many=True)
@@ -141,6 +148,7 @@ class LectureViewSet(ModelViewSet):
 
     # 이미지 파일과 같이 강의를 생성
     def create(self,request):
+        # Lecture.thumbnail = request.FILES['thumbnail']
         serializer =  LectureSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(is_public =True)
