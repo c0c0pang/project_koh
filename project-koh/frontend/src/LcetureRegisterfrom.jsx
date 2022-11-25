@@ -5,31 +5,6 @@ import { RegisterDiv, RegisterForm } from './StyledComponent'
 import axios from 'axios'
 function LcetureRegisterfrom() {
   const imgRef = useRef();
-<<<<<<< HEAD
-  const [imageUrl,setImageUrl] = useState(null);
-<<<<<<< HEAD
-  const LectureKeyApi="http://localhost:4000/Lecture";
-=======
-  const LectureKeyApi="/lecture/post";
->>>>>>> a46d4209 (refactor: api 주소 변경)
-  const [inputs,setInputs]=useState({
-    img:"",
-    title:"",
-    Lecturename:"",
-    teacher:"",
-    usernum:"",
-});
-  /*
-              <option value="인문">인문</option>
-            <option value="교육">교육</option>
-            <option value="공학">공학</option>
-            <option value="자연">자연</option>
-            <option value="의약">의약</option>  
-            <option value="예체능">예체능</option>
-            <option value="IT">IT</option>
-            <option value="기타">기타</option>
-            */
-=======
   const [imageUrl, setImageUrl] = useState(null);
   const LectureKeyApi = "/api/test/";
   const [inputs, setInputs] = useState({
@@ -41,7 +16,6 @@ function LcetureRegisterfrom() {
     category: ""
   });
   let location = useLocation();
->>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
   const selectbox = [
     { value: "인문", name: "인문" },
     { value: "교육", name: "교육" },
@@ -52,15 +26,8 @@ function LcetureRegisterfrom() {
     { value: "IT", name: "IT" },
     { value: "기타", name: "기타" },
   ];
-<<<<<<< HEAD
-<<<<<<< HEAD
   const { category, img, title, Lecturename, teacher, usernum, le_contents, thumbnail } = inputs;
-=======
-  const { category, img, title, Lecturename, teacher, usernum, le_contents } = inputs;
->>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
-=======
-  const { category, img, title, Lecturename, teacher, usernum, le_contents, thumbnail } = inputs;
->>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
+
   const onChange = (e) => {
     console.log(e.target);
     const { value, name } = e.target;
@@ -79,15 +46,7 @@ function LcetureRegisterfrom() {
       setImageUrl(reader.result);
       setInputs({
         ...inputs,
-<<<<<<< HEAD
-<<<<<<< HEAD
         [name]: file
-=======
-        [name]: (reader.result)
->>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
-=======
-        [name]: file
->>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
       });
       // console.log("이미지주소", reader.result);
     };
@@ -97,19 +56,6 @@ function LcetureRegisterfrom() {
     imgRef.current.click();
   };
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const onSubmit=()=>{
-    axios.
-    post(LectureKeyApi,{
-      // img:inputs.img,
-      title:inputs.title,
-      Lecturename:inputs.Lecturename,
-      teacher:inputs.teacher,
-      usernum:inputs.usernum
-    }).then(()=>{
-      navigate('./');
-    })
-=======
 
   const onSubmit = async (e) => {
     let data = {
@@ -138,23 +84,13 @@ function LcetureRegisterfrom() {
         console.log(err);
         // window.location.reload(); 
       })
->>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
   }
 
   return (
     <RegisterDiv>
-<<<<<<< HEAD
-<<<<<<< HEAD
       <RegisterForm  method='POST' encType='multipart/form-data'>
         <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
-=======
-      <RegisterForm  method='POST' action='' encType='multipart/form-data'>
-        <input name='teacher' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
->>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
-=======
-      <RegisterForm  method='POST' encType='multipart/form-data'>
-        <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
->>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
+
         <div className='imgbtn' onClick={(e) => {
           e.preventDefault();
           onClickFileBtn();

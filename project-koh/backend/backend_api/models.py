@@ -11,10 +11,13 @@ class Lecture(models.Model):
     title = models.CharField(max_length=20, blank=False, null=False)
     teacher = models.CharField(max_length=20, blank=False, null=False)
 <<<<<<< HEAD
+<<<<<<< HEAD
     content = models.TextField(blank=True, null=False, default="")
     headcount = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')
 =======
+=======
+>>>>>>> 05114840 (image and delete)
     content = models.TextField(blank=False, null=False)
     headcount = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')

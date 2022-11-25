@@ -146,6 +146,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # CORS_ORIGIN_ALLOW_ALL = True
 
@@ -255,3 +256,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
 =======
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
 >>>>>>> 27c12e58 (fix: api post 요청 충돌 해결)
+=======
+MEDIA_URL = '/image/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
+>>>>>>> 05114840 (image and delete)

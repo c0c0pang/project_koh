@@ -16,11 +16,6 @@ module.exports = (app) => {
                     changeOrigin: true,
                 }
             )
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 809816b7 (feat: 개인 정보 post 요청 기능 구현)
         ),
         app.use('/user',
             createProxyMiddleware(
@@ -29,12 +24,6 @@ module.exports = (app) => {
                     changeOrigin: true,
                 }
             )
-
-<<<<<<< HEAD
-=======
->>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
-=======
->>>>>>> 809816b7 (feat: 개인 정보 post 요청 기능 구현)
         )
 
 };
