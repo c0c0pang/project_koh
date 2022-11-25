@@ -10,10 +10,10 @@ const provider = new ethers.providers.AlchemyProvider('goerli', API_KEY)
 const contract = require("../artifacts/contracts/LectureNFT.sol/LectureNFT.json"); 
 // const privateKey = process.env.PRIVATE_KEY
     
-export const mintNFT = async (contractAddress,tokenUri,privateKey) => {
+export const mintNFT = async (tokenUri,privateKey) => {
     const signer = new ethers.Wallet(privateKey, provider)
     const abi = contract.abi
-    const myNftContract = new ethers.Contract(contractAddress, abi, signer)
+    const myNftContract = new ethers.Contract('0xfa1B05966456fF8eDA0B136A6b2f731C6a09F35C', abi, signer)
     let nftTxn = await myNftContract.mintNFT(signer.address, tokenUri)
     await nftTxn.wait()
     console.log(`NFT Minted! Check it out at: https://goerli.etherscan.io/tx/${nftTxn.hash}`)
