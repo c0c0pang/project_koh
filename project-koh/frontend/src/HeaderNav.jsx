@@ -9,8 +9,9 @@ import { useWeb3React } from '@web3-react/core';
 import { injected } from './lib/connectors';
 import SearchList from "./SearchList";
 import Modal from "./Modal";
-import menu from './img/menu.png'
-import Logout from './img/logout.png'
+import menu from './img/menu.png';
+import Logout from './img/logout.png';
+import Setting from './img/settings.png';
 import { useEffect } from "react";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
@@ -48,15 +49,17 @@ function HeaderNav({ darkMode, setDarkMode }) {
     navigate('./');
   }
   const goProfile=()=>{
-    // if(!item.value){
-    //   // window.location.reload();
-    //   // navigate('/Profile');
-    // // window.location.replace('http://localhost:3000');
-    // }
+    if(!item.value){
+      // window.location.reload();
+      // navigate('/Profile');
+      // window.location.replace('http://localhost:3000');
+      navigate('./');
+    }
   }
   const userinfo=[
     {text:"Profile",img:user},
     {text:"Favorited",img:love},
+    {text:"Setting",img:Setting},
     {text:"Night Mode",img:wallet},
   ] 
    const userwallet=[

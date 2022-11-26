@@ -26,7 +26,7 @@ function LcetureRegisterfrom() {
     { value: "IT", name: "IT" },
     { value: "기타", name: "기타" },
   ];
-  const { category, img, title, Lecturename, teacher, usernum, le_contents } = inputs;
+  const { category, img, title, Lecturename, teacher, usernum, le_contents, thumbnail } = inputs;
   const onChange = (e) => {
     console.log(e.target);
     const { value, name } = e.target;
@@ -45,7 +45,7 @@ function LcetureRegisterfrom() {
       setImageUrl(reader.result);
       setInputs({
         ...inputs,
-        [name]: (reader.result)
+        [name]: file
       });
       // console.log("이미지주소", reader.result);
     };
@@ -56,30 +56,39 @@ function LcetureRegisterfrom() {
   };
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true;
   const onSubmit = async (e) => {
     let data = {
       category: inputs.category,
       title: inputs.title,
-      teacher: 'inputs.teacher',
-      le_contents: inputs.le_contents
-    }
-
+      thumbnail:inputs.thumbnail,  
+      teacher: inputs.le_contents,
+      content:'sad'
+    } 
+    console.log(inputs.thumbnail);
+    const formData = new FormData();
+    formData.append("thumbnail",data.thumbnail);
+    formData.append("category",data.category);
+    formData.append("title",data.content);
+    formData.append("teacher",data.teacher);
+    formData.append("content",data.content);
     e.preventDefault();
     await axios.
-      post(LectureKeyApi, JSON.stringify(data) ,{
-        headers: { "Content-Type": `application/json`},
+      post(LectureKeyApi, formData,{
+        headers: { "Content-Type": `multipart/form-data`},
         withCredentials: true,
+        transformRequest: (data, headers) => {
+          return data;
+        },
       }).then((err) => {
         console.log(err);
-        window.location.reload(); 
+        // window.location.reload(); 
       })
   }
 
   return (
     <RegisterDiv>
-      <RegisterForm  method='POST' action='' encType='multipart/form-data'>
-        <input name='teacher' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
+      <RegisterForm  method='POST' encType='multipart/form-data'>
+        <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
         <div className='imgbtn' onClick={(e) => {
           e.preventDefault();
           onClickFileBtn();

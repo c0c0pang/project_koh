@@ -77,11 +77,12 @@ function ModalText({ text, src, accountinfo, darkMode, setDarkMode }) {
         ) : (<div></div>)
       ) : (
         nightcheck ? (
-          <ModalTextDiv>
-            <div onClick={goProfile} style={{ cursor: "pointer" }}>
-              <img id='imgbox' src={src} /> {text}
-            </div>
-          </ModalTextDiv>
+        logoutCheck ? (          <ModalTextDiv>
+          <div onClick={goProfile} style={{ cursor: "pointer" }}>
+            <img id='imgbox' src={src} /> {text}
+          </div>
+        </ModalTextDiv>):(<div></div>)
+
         ) : (darkMode && text !== "Logout" ? (
 
           <ModalTextDiv>
