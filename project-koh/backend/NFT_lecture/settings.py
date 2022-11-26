@@ -145,6 +145,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # CORS_ORIGIN_ALLOW_ALL = True
 
@@ -177,14 +178,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 >>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
 =======
 >>>>>>> c7841dcf (image and delete)
+=======
+>>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
 MEDIA_URL = '/image/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image')
 =======
 =======
 >>>>>>> bc7eba51 (image and delete)
+=======
+>>>>>>> cd12a465 (feat: 유저 정보 입력 페이지 추가)
 
+# CORS_ORIGIN_ALLOW_ALL = True
 
+<<<<<<< HEAD
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
@@ -214,6 +221,31 @@ CORS_ALLOW_HEADERS = (
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
 =======
 =======
+=======
+# CORS_ALLOW_CREDENTIALS = True
+# CSRF_COOKIE_NAME = 'XSRF-TOKEN'
+# CSRF_HEADER_NAME = 'X-XSRF-TOKEN'
+# CORS_ALLOW_HEADERS = (
+#     'access-control-allow-credentials',
+#     'access-control-allow-origin',
+#     'access-control-request-method',
+#     'access-control-request-headers',
+#     'accept',
+#     'accept-encoding',
+#     'accept-language',
+#     'authorization',
+#     'connection',
+#     'content-type',
+#     'dnt',
+#     'credentials',
+#     'host',
+#     'origin',
+#     'user-agent',
+#     'X-CSRFToken',
+#     'csrftoken',
+#     'x-requested-with',
+# )
+>>>>>>> cd12a465 (feat: 유저 정보 입력 페이지 추가)
 MEDIA_URL = '/image/'
 
 <<<<<<< HEAD

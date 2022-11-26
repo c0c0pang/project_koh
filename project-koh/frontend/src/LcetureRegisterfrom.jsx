@@ -53,10 +53,14 @@ function LcetureRegisterfrom() {
     { value: "기타", name: "기타" },
   ];
 <<<<<<< HEAD
+<<<<<<< HEAD
   const { category, img, title, Lecturename, teacher, usernum, le_contents, thumbnail } = inputs;
 =======
   const { category, img, title, Lecturename, teacher, usernum, le_contents } = inputs;
 >>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
+=======
+  const { category, img, title, Lecturename, teacher, usernum, le_contents, thumbnail } = inputs;
+>>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
   const onChange = (e) => {
     console.log(e.target);
     const { value, name } = e.target;
@@ -76,10 +80,14 @@ function LcetureRegisterfrom() {
       setInputs({
         ...inputs,
 <<<<<<< HEAD
+<<<<<<< HEAD
         [name]: file
 =======
         [name]: (reader.result)
 >>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
+=======
+        [name]: file
+>>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
       });
       // console.log("이미지주소", reader.result);
     };
@@ -103,23 +111,32 @@ function LcetureRegisterfrom() {
     })
 =======
 
-  axios.defaults.withCredentials = true;
   const onSubmit = async (e) => {
     let data = {
       category: inputs.category,
       title: inputs.title,
-      teacher: 'inputs.teacher',
-      le_contents: inputs.le_contents
-    }
-
+      thumbnail:inputs.thumbnail,  
+      teacher: inputs.le_contents,
+      content:'sad'
+    } 
+    console.log(inputs.thumbnail);
+    const formData = new FormData();
+    formData.append("thumbnail",data.thumbnail);
+    formData.append("category",data.category);
+    formData.append("title",data.content);
+    formData.append("teacher",data.teacher);
+    formData.append("content",data.content);
     e.preventDefault();
     await axios.
-      post(LectureKeyApi, JSON.stringify(data) ,{
-        headers: { "Content-Type": `application/json`},
+      post(LectureKeyApi, formData,{
+        headers: { "Content-Type": `multipart/form-data`},
         withCredentials: true,
+        transformRequest: (data, headers) => {
+          return data;
+        },
       }).then((err) => {
         console.log(err);
-        window.location.reload(); 
+        // window.location.reload(); 
       })
 >>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
   }
@@ -127,12 +144,17 @@ function LcetureRegisterfrom() {
   return (
     <RegisterDiv>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <RegisterForm  method='POST' encType='multipart/form-data'>
         <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
 =======
       <RegisterForm  method='POST' action='' encType='multipart/form-data'>
         <input name='teacher' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
 >>>>>>> 039a4455 (fix: api post 요청 충돌 해결)
+=======
+      <RegisterForm  method='POST' encType='multipart/form-data'>
+        <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
+>>>>>>> b2886b69 (feat: 유저 정보 입력 페이지 추가)
         <div className='imgbtn' onClick={(e) => {
           e.preventDefault();
           onClickFileBtn();

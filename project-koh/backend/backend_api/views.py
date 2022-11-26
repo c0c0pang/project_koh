@@ -42,7 +42,6 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
-
 class test(APIView):
     def post(self, request):
         return Response("test",status=200)
@@ -230,7 +229,7 @@ class LectureViewSet(ModelViewSet):
 class LectureViewSet(ModelViewSet):
     queryset = Lecture.objects.all()
     serializer_class = LectureSerializer # get_serializer
-
+    # parser_classes = [MultiPartParser]
     def list(self, request):
         queryset = self.queryset.filter(is_public=True)
         serializer = self.get_serializer(queryset, many=True)
@@ -293,7 +292,6 @@ class LectureViewSet(ModelViewSet):
 
     # 이미지 파일과 같이 강의를 생성
     def create(self,request):
-        # Lecture.thumbnail = request.FILES['thumbnail']
         serializer =  LectureSerializer(data=request.data)
 >>>>>>> a228152d (fix: api post 요청 충돌 해결)
         if serializer.is_valid():
