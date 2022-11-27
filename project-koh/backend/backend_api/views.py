@@ -10,6 +10,8 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
+from rest_framework.parsers import JSONParser
+from rest_framework.parsers import MultiPartParser
 class test(APIView):
     def post(self, request):
         return Response("test",status=200)
@@ -27,7 +29,7 @@ class titleShow(APIView):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer 
-    
+    parser_classes = [JSONParser]
     def list(self, request):
         queryset = self.queryset.filter(is_public=True)
         serializer = self.get_serializer(queryset, many=True)
@@ -92,7 +94,7 @@ class UserViewSet(ModelViewSet):
 class LectureViewSet(ModelViewSet):
     queryset = Lecture.objects.all()
     serializer_class = LectureSerializer # get_serializer
-    # parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser]
     def list(self, request):
         queryset = self.queryset.filter(is_public=True)
         serializer = self.get_serializer(queryset, many=True)

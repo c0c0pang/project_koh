@@ -74,18 +74,46 @@ const UserInput = styled.input`
     border-radius: 5px;
 `
 function UserFormPage() {
-  const [inputs, setInputs] = useState(null);
+  const USER_API_KEY = '/user/';
+  const user = localStorage.getItem("user_id");
+  const item = JSON.parse(user);
+  const [inputs, setInputs] = useState({
+    wallet_address: `${item.value}`,
+    userName: "",
+    email: ""
+  });
 
+  const { userName,email } = inputs;
+  const onChange = (e) => {
+    console.log(e.target);
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+    console.log(inputs);
+  };
+  const onSubmit = async (e) => {
+    console.log(inputs);
+    e.preventDefault();
+    await axios.post(USER_API_KEY,inputs  ,{
+      headers: { "Content-Type": `application/json`},
+      withCredentials: true,
+    }).then((err)=>{
+      console.log(err);
+    }
+    )
+  }
   return (
     <Div>
       <FormDiv>
-      <Title>상세 정보 입력</Title>
-        <UserDataForm method='POST'>
-          <UserInput type='text' placeholder='이름'/>
-          <UserInput type='text' placeholder='이메일'/>
+        <Title>상세 정보 입력</Title>
+        <UserDataForm method='post' encType='application/json'>
+          <UserInput name='userName' value={userName} onChange={onChange} type='text' placeholder='이름' />
+          <UserInput name='email' value={email} onChange={onChange} type='email' placeholder='이메일' />
           <UserInputDiv>
-          <UserInput className='subbtn' type='submit' value='수정'/>  
-          <UserInput className='subbtn' type='submit' value='입력완료'/>   
+            <UserInput className='subbtn' type='submit' value='수정' />
+            <UserInput className='subbtn' type='submit' value='입력완료' onClick={onSubmit} />
           </UserInputDiv>
         </UserDataForm>
       </FormDiv>
