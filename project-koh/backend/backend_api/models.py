@@ -10,19 +10,17 @@ class Lecture(models.Model):
     category = models.CharField(max_length=20, blank=False, null=False)
     title = models.CharField(max_length=20, blank=False, null=False)
     teacher = models.CharField(max_length=20, blank=False, null=False)
-    content = models.TextField(blank=False, null=False)
+    content = models.TextField(blank=True, null=False, default="")
     headcount = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')
-    is_public = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.title
 
 class User(models.Model):
-    wallet_address = models.CharField(primary_key=True, max_length=35)
-    userName = models.CharField(max_length=10, blank=False, null=False)
-    email = models.CharField(max_length=40, blank=True, null=True)
-    is_public = models.BooleanField(default=True)
+    wallet_address = models.CharField(primary_key=True, max_length=200)
+    userName = models.CharField(max_length=30, blank=False, null=False)
+    email = models.CharField(max_length=50, blank=True, null=False)
     regdate = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.userName
