@@ -2,11 +2,11 @@ import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { RegisterDiv, RegisterForm } from './StyledComponent'
+import { LectureKeyApi } from './ApiState';
 import axios from 'axios'
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
-  const LectureKeyApi = "/api/test/";
   const [inputs, setInputs] = useState({
     img: "",
     title: "",
@@ -82,13 +82,13 @@ function LcetureRegisterfrom() {
         },
       }).then((err) => {
         console.log(err);
-        // window.location.reload(); 
+        window.location.reload(); 
       })
   }
 
   return (
     <RegisterDiv>
-      <RegisterForm  method='POST' encType='multipart/form-data'>
+      <RegisterForm  method='POST' encType='multipart/form-data' onSubmit={onSubmit}>
         <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
 
         <div className='imgbtn' onClick={(e) => {
@@ -103,12 +103,12 @@ function LcetureRegisterfrom() {
         </div>
         <select onChange={onChange} name="category" value={category}>
           {selectbox.map((e) => (
-            <option value={e.value} >{e.name}</option>
+            <option value={e.value} required>{e.name}</option>
           ))}
         </select>
         <input name='title' value={title} className='text' type="text" id="LcetureName" placeholder='강의명' onChange={onChange} required />
         <input name='le_contents' value={le_contents} className='text' type="text" id="limitUser" placeholder='수강인원' onChange={onChange} required />
-        <input className='subbtn' onClick={onSubmit} type="submit" value="입력 완료" />
+        <input className='subbtn' type="submit" value="입력 완료"/>
       </RegisterForm>
 
     </RegisterDiv>

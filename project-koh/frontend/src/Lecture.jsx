@@ -4,14 +4,13 @@ import { useParams,useNavigate} from "react-router-dom";
 import { LectureTitle, LectureBack, LectureContent, LectureLeft, LectureRight, LectureLeftDiv, LectureRightDiv, RegisterButton,LectureRightForm } from './StyledComponent';
 import LectureListCrad from './LectureListCrad'
 import ColletionsSubTitle from './ColletionsSubTitle';
-import LcetureRegisterfrom from './LcetureRegisterfrom'
+import LcetureRegisterfrom from './LcetureRegisterfrom';
+import { LectureViewKeyApi } from './ApiState';
+import Category from './data';
 function Lecture() {
-  const ColletionKeyApi="/get/category/?format=json";
-  const LectureKeyApi="/api/test/?format=json";
   const [CollectionsList,setCollectionsList] =useState([]);
   const [LectureList,setLectureList]= useState([{}]);
   const [register,setRegister] = useState(false);
-  // const [newLectureList,setnewLectureList]=useState([{}]);
   const Params = useParams();
   const RegisterCheck = () => {
     setRegister(true);
@@ -19,16 +18,9 @@ function Lecture() {
   const RegisterNotCheck = () => {
     setRegister(false);
   };
-  useEffect(() => {
-    axios
-    .get(
-      ColletionKeyApi
-    )
-    .then((response) => {
-      setCollectionsList(response.data.title);
-    });
+  useEffect(()=>{
+    setCollectionsList(Category.title);
   },[]);
-
   const newCollectionsList=[]
   for(let i=0;i<CollectionsList.length;i++){
       if(Params.title!==CollectionsList[i]){
@@ -38,9 +30,10 @@ function Lecture() {
   useEffect(() => {
     axios
     .get(
-    LectureKeyApi
+      LectureViewKeyApi
     )
     .then((response) => {
+      console.log(response.data);
     setLectureList(response.data)
     });
   },[]);
@@ -75,13 +68,14 @@ function Lecture() {
           ) : (
             <LectureRight>
               {LectureList
-                .filter((element) => Params.title === element.title)
+                .filter((element) => Params.title === element.category)
                 .map((element, index) => (
                   <LectureListCrad
                     key={index}
+                    category={element.category}
                     title={element.title}
-                    Lecturename={element.Lecturename}
                     teacher={element.teacher}
+                    thumbnail = {element.thumbnail}
                   />
                 )
                 )

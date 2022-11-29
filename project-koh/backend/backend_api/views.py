@@ -92,7 +92,7 @@ class UserViewSet(ModelViewSet):
 
 @method_decorator(csrf_exempt,name='dispatch')
 class LectureViewSet(ModelViewSet):
-    # parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser]
     queryset = Lecture.objects.all()
     serializer_class = LectureSerializer # get_serializer
 
@@ -143,7 +143,7 @@ class LectureViewSet(ModelViewSet):
         return Response(serializer.errors)
 
     # 삭제, DELETE /lecture/{id}/delete_lecture/
-    @action(detail=True, methods=['delete'])  
+    @action(detail=True, methods=['get'])  
     def delete_lecture(self,request, pk=None):
         lecture = Lecture.objects.filter(id = pk)
         lecture.delete()

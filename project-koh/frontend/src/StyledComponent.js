@@ -201,11 +201,12 @@ export const LectureListDiv = styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     margin: 15px;
     cursor: pointer;    
+
+    overflow: hidden;
 `
 export const LectureBox = styled.div`
-    height: 20px;
+
     position:relative;
-    top:60px;
     width: 260px;
     h2{
         display: flex;
@@ -218,8 +219,12 @@ export const LectureBox = styled.div`
     border-top: solid 1px #CCCCCC; 
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-
     font-family: 'NEXON Lv1 Gothic OTF Light';
+    }
+    img{
+        padding-top: 10px;
+        width: 260px;
+        height: 140px;
     }
 `
 export const AllSub = styled.div`

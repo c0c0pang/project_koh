@@ -3,17 +3,12 @@ import axios from 'axios'
 import { CollectionsDiv, ContentDiv } from './StyledComponent'
 import ColletionsCard from './ColletionsCard'
 import { useState } from 'react';
+import Category from './data'
 function Content() {
-  const ColletionKeyApi = "/get/category/?format=json";
-  useEffect(() => {
-    axios.get(
-      ColletionKeyApi
-    )
-      .then((response) => {
-        setCollectionsList(response.data.title);
-      });
-  }, []);
   const [CollectionsList, setCollectionsList] = useState([]);
+  useEffect(()=>{
+    setCollectionsList(Category.title);
+  },[]);
   return (
     <ContentDiv>
       <CollectionsDiv>

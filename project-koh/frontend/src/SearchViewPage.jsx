@@ -3,9 +3,9 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import{LectureRight,SearchDiv} from'./StyledComponent';
 import LectureListCrad from './LectureListCrad';
+import {LectureKeyApi} from './ApiState';
 function SearchViewPage() {
   const Params = useParams();
-  const LectureKeyApi="http://localhost:4000/Lecture";
   const [LectureList,setLectureList]= useState([{}]);
   const [searchview,setSearchview]=useState([]);
   useEffect(() => {
