@@ -1,14 +1,48 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom";
+import { useLocation, useParams,useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
+import { DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
 import LcetureListRegisterfrom from './LcetureListRegisterfrom';
 import LectureVideoCard from './LectureVideoCard'
+import { LectureDeleteKeyApi } from './ApiState'
 function LectureContentList() {
   const Params = useParams();
   const LectureVideoKeyApi = "http://localhost:4000/Lecture_Video";
   const [LectureVideo, setLectureVideo] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { id } = location.state;
+  const useConfirm = (message = null, onConfirm, onCancel) => {
+    if (!onConfirm || typeof onConfirm !== "function") {
+      return;
+    }
+    if (onCancel && typeof onCancel !== "function") {
+      return;
+    }
+    const confirmAction = async () => {
+      if (window.confirm(message)) {
+        await axios.delete(
+          LectureDeleteKeyApi(id)
+        ).then((response) => {
+          console.log(response);
+          navigate(`../lecture/${Params.title}`);
+        })
+        onConfirm();
+      } else {
+        onCancel();
+      }
+    };
+
+    return confirmAction;
+  };
+  const deleteConfirm = () => console.log("삭제했습니다.");
+  const cancelConfirm = () => console.log("취소했습니다.");
+  const confirmDelete = useConfirm(
+    "삭제하시겠습니까?",
+    deleteConfirm,
+    cancelConfirm
+  );
   useEffect(() => {
     axios
       .get(
@@ -20,11 +54,11 @@ function LectureContentList() {
   }, []);
   const videocheck = []
 
-    for (let i = 0; i < LectureVideo.length; i++) {
-      if (Params.Lecturename === LectureVideo[i].Lecturename) {
-        videocheck.push(LectureVideo[i])
-      }
+  for (let i = 0; i < LectureVideo.length; i++) {
+    if (Params.Lecturename === LectureVideo[i].Lecturename) {
+      videocheck.push(LectureVideo[i])
     }
+  }
 
   const CollectionsList = [
     { title: "인문" }
@@ -44,9 +78,17 @@ function LectureContentList() {
   const RegisterNotCheck = () => {
     setRegister(false);
   };
+  const DeletLectrue = async (e) => {
+    e.preventDefault();
+    await axios.delete(
+      LectureDeleteKeyApi(id)
+    ).then((response) => {
+      console.log(response);
+    })
+  }
   const newCollectionsList = []
   const RegiCollections = [];
-   for (let i = 0; i < CollectionsList.length; i++) {
+  for (let i = 0; i < CollectionsList.length; i++) {
     if (Params.title !== CollectionsList[i].title) {
       newCollectionsList.push(CollectionsList[i]);
     }
@@ -58,15 +100,16 @@ function LectureContentList() {
     <>
       <LectureBack>
         <LectureTitle>
-          {Params.Lecturename}
+          강의
         </LectureTitle>
         <RegisterButton onClick={RegisterCheck}>영상등록</RegisterButton>
         <ReviseButton>영상수정</ReviseButton>
+        <DeleteButton onClick={confirmDelete}>영상삭제</DeleteButton>
       </LectureBack>
 
       <LectureContentListDiv>
         <LectureLeft>
-          {newCollectionsList.map((element,index) => (
+          {newCollectionsList.map((element, index) => (
             <ColletionsSubTitle
               key={index}
               title={element.title}
@@ -81,7 +124,7 @@ function LectureContentList() {
             </LectureRightForm>
           ) : (
             <LectureVideoDiv num={videocheck.length}>
-              {videocheck.map((element,index)=>(
+              {videocheck.map((element, index) => (
                 <LectureVideoCard
                   key={index}
                   Introduce={element.Introduce}
@@ -90,17 +133,9 @@ function LectureContentList() {
               ))}
             </LectureVideoDiv>
           )}
-
         </LectureContentRight>
       </LectureContentListDiv>
     </>
-
-    //   <LectureListDiv>
-    //   <LectureBox >
-
-    //   <div>{Param.Lecturename}</div>
-    //     </LectureBox>
-    // </LectureListDiv>
   )
 }
 export default LectureContentList;

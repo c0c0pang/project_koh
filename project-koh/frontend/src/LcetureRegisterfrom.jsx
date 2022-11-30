@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { RegisterDiv, RegisterForm } from './StyledComponent'
-import { LectureKeyApi } from './ApiState';
+import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
+import { useEffect } from 'react';
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
@@ -13,9 +13,11 @@ function LcetureRegisterfrom() {
     Lecturename: "",
     teacher: "",
     usernum: "",
-    category: ""
+    category: "인문",
+    thumbnail: "",
+    content: ""
   });
-  let location = useLocation();
+  const [userName,setUserName] = useState("")
   const selectbox = [
     { value: "인문", name: "인문" },
     { value: "교육", name: "교육" },
@@ -26,7 +28,7 @@ function LcetureRegisterfrom() {
     { value: "IT", name: "IT" },
     { value: "기타", name: "기타" },
   ];
-  const { category, img, title, Lecturename, teacher, usernum, le_contents, thumbnail } = inputs;
+  const { category, img, title, Lecturename, teacher, usernum, content, thumbnail } = inputs;
 
   const onChange = (e) => {
     console.log(e.target);
@@ -57,38 +59,46 @@ function LcetureRegisterfrom() {
   };
   const navigate = useNavigate();
 
+  useEffect(() => {
+    axios
+      .get(UserViewKeyApi)
+      .then((response)=>{
+        setUserName(response.data[0].userName);
+      })
+  }, [])
+
   const onSubmit = async (e) => {
     let data = {
       category: inputs.category,
       title: inputs.title,
-      thumbnail:inputs.thumbnail,  
-      teacher: inputs.le_contents,
-      content:'sad'
-    } 
-    console.log(inputs.thumbnail);
+      thumbnail: inputs.thumbnail,
+      teacher: userName,
+      //inputs.le_contents,
+      content: inputs.content
+    };
     const formData = new FormData();
-    formData.append("thumbnail",data.thumbnail);
-    formData.append("category",data.category);
-    formData.append("title",data.content);
-    formData.append("teacher",data.teacher);
-    formData.append("content",data.content);
+    formData.append("thumbnail", data.thumbnail);
+    formData.append("category", data.category);
+    formData.append("title", data.title);
+    formData.append("teacher", data.teacher);
+    formData.append("content", data.content);
     e.preventDefault();
     await axios.
-      post(LectureKeyApi, formData,{
-        headers: { "Content-Type": `multipart/form-data`},
+      post(LectureKeyApi, formData, {
+        headers: { "Content-Type": 'multipart/form-data' },
         withCredentials: true,
         transformRequest: (data, headers) => {
           return data;
         },
       }).then((err) => {
         console.log(err);
-        window.location.reload(); 
       })
+    window.location.reload();
   }
 
   return (
     <RegisterDiv>
-      <RegisterForm  method='POST' encType='multipart/form-data' onSubmit={onSubmit}>
+      <RegisterForm method='POST' encType='multipart/form-data' onSubmit={onSubmit}>
         <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
 
         <div className='imgbtn' onClick={(e) => {
@@ -103,12 +113,12 @@ function LcetureRegisterfrom() {
         </div>
         <select onChange={onChange} name="category" value={category}>
           {selectbox.map((e) => (
-            <option value={e.value} required>{e.name}</option>
+            <option value={e.value}>{e.name}</option>
           ))}
         </select>
         <input name='title' value={title} className='text' type="text" id="LcetureName" placeholder='강의명' onChange={onChange} required />
-        <input name='le_contents' value={le_contents} className='text' type="text" id="limitUser" placeholder='수강인원' onChange={onChange} required />
-        <input className='subbtn' type="submit" value="입력 완료"/>
+        <input name='content' value={content} className='text' type="text" id="limitUser" placeholder='수강인원' onChange={onChange} required />
+        <input className='subbtn' type="submit" value="입력 완료" />
       </RegisterForm>
 
     </RegisterDiv>

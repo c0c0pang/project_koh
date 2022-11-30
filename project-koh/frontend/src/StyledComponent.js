@@ -182,7 +182,7 @@ export const LectureRightDiv=styled.div`
 `
 export const LectureRight = styled.div`
     display: grid;
-    max-height: 800px;
+    max-height: 700px;
     overflow: scroll;
     grid-template-columns: repeat(4 ,300px);
 `
@@ -356,7 +356,25 @@ export const ReviseButton=styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 `
-
+export const DeleteButton=styled.div`
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 69px;
+    height: 26px;
+    position: relative;
+    left:82%;
+    top: 17%;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+`
 export const LectureRightForm = styled.div`
 display: flex;
 align-items: center;

@@ -1,5 +1,5 @@
 from django.core.exceptions import *
-from rest_framework.parsers import JSONParser, MultiPartParser
+from rest_framework.parsers import JSONParser, MultiPartParser,FormParser
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -29,7 +29,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer 
     
     def list(self, request):
-        queryset = self.queryset
+        queryset = User.objects.all()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
@@ -97,7 +97,8 @@ class LectureViewSet(ModelViewSet):
     serializer_class = LectureSerializer # get_serializer
 
     def list(self, request):
-        serializer = self.get_serializer(self.queryset, many=True)
+        queryset = Lecture.objects.all()
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     # 원하는 번호의 강의 추출 GET /lecture/{pk}
@@ -143,7 +144,7 @@ class LectureViewSet(ModelViewSet):
         return Response(serializer.errors)
 
     # 삭제, DELETE /lecture/{id}/delete_lecture/
-    @action(detail=True, methods=['get'])  
+    @action(detail=True, methods=['delete'])  
     def delete_lecture(self,request, pk=None):
         lecture = Lecture.objects.filter(id = pk)
         lecture.delete()
@@ -166,7 +167,7 @@ class LectureViewSet(ModelViewSet):
                 elif i =='headcount':
                     lecture.update(headcount = request.data['headcount'])
                 elif i =='thumbnail':
-                    lecture.update(thumbnail = request.data['thumbnail'])
+                    lecture.update(thumbnail = request.data['thumbnail'])   
             serializer = self.get_serializer(lecture, many=True)
             return Response(serializer.data)
         else:

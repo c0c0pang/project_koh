@@ -76,6 +76,7 @@ function Lecture() {
                     title={element.title}
                     teacher={element.teacher}
                     thumbnail = {element.thumbnail}
+                    id = {element.id}
                   />
                 )
                 )
