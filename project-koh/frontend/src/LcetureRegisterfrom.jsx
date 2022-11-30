@@ -1,23 +1,26 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { RegisterDiv, RegisterForm } from './StyledComponent'
+import { RegisterDiv, RegisterForm, FileDiv } from './StyledComponent'
 import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
 import { useEffect } from 'react';
+
 function LcetureRegisterfrom() {
   const imgRef = useRef();
+  const videoRef = useRef();
+
   const [imageUrl, setImageUrl] = useState(null);
+  const [videoUrl, setVideoUrl] = useState(null);
   const [inputs, setInputs] = useState({
-    img: "",
     title: "",
-    Lecturename: "",
     teacher: "",
     usernum: "",
     category: "인문",
     thumbnail: "",
-    content: ""
+    content: "",
+    video: ""
   });
-  const [userName,setUserName] = useState("")
+  const [userName, setUserName] = useState("")
   const selectbox = [
     { value: "인문", name: "인문" },
     { value: "교육", name: "교육" },
@@ -28,7 +31,7 @@ function LcetureRegisterfrom() {
     { value: "IT", name: "IT" },
     { value: "기타", name: "기타" },
   ];
-  const { category, img, title, Lecturename, teacher, usernum, content, thumbnail } = inputs;
+  const { category, title, teacher, usernum, content, thumbnail } = inputs;
 
   const onChange = (e) => {
     console.log(e.target);
@@ -52,17 +55,35 @@ function LcetureRegisterfrom() {
       });
       // console.log("이미지주소", reader.result);
     };
-
   };
-  const onClickFileBtn = (e) => {
+
+  const onChangeVideo = (e) => {
+    const reader = new FileReader();
+    const file = videoRef.current.files[0];
+    const { name } = e.target;
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setVideoUrl(reader.result);
+      setInputs({
+        ...inputs,
+        [name]: file
+      });
+      console.log("이미지주소", reader.result);
+    };
+  };
+
+  const onClickImgBtn = (e) => {
     imgRef.current.click();
+  };
+  const onClickVideoBtn = (e) => {
+    videoRef.current.click();
   };
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get(UserViewKeyApi)
-      .then((response)=>{
+      .then((response) => {
         setUserName(response.data[0].userName);
       })
   }, [])
@@ -99,25 +120,40 @@ function LcetureRegisterfrom() {
   return (
     <RegisterDiv>
       <RegisterForm method='POST' encType='multipart/form-data' onSubmit={onSubmit}>
-        <input multiple="multiple" name='thumbnail' type="file" id="file" accept='image/*' ref={imgRef} onChange={onChangeImage} />
+        <FileDiv>
+          <input multiple="multiple" name='thumbnail' type="file" id="img" accept='image/*' ref={imgRef} onChange={onChangeImage} />
+          <div className='imgbtn' onClick={(e) => {
+            e.preventDefault();
+            onClickImgBtn();
+          }}>
+            {imageUrl === null ? (
+              <h2>이미지 업로드</h2>
+            ) : (
+              <img src={imageUrl} />)}
+          </div>
 
-        <div className='imgbtn' onClick={(e) => {
-          e.preventDefault();
-          onClickFileBtn();
-        }}>
-          {imageUrl === null ? (
-            <h2>이미지 업로드</h2>
-          ) : (
-            <img src={imageUrl} />)}
-
-        </div>
+          <input multiple="multiple" name='video' type="file" id="video" accept='video/*' ref={videoRef} onChange={onChangeVideo} />
+          <div className='imgbtn' onClick={(e) => {
+            e.preventDefault();
+            onClickVideoBtn();
+          }}>
+            {videoUrl === null ? (
+              <h2>동영상 업로드</h2>
+            ) : (
+              <video width="250"  autoplay loop muted>
+                <source src={videoUrl} type="video/mp4"></source>
+              </video>
+            )
+            }
+          </div>
+        </FileDiv>
         <select onChange={onChange} name="category" value={category}>
           {selectbox.map((e) => (
             <option value={e.value}>{e.name}</option>
           ))}
         </select>
         <input name='title' value={title} className='text' type="text" id="LcetureName" placeholder='강의명' onChange={onChange} required />
-        <input name='content' value={content} className='text' type="text" id="limitUser" placeholder='수강인원' onChange={onChange} required />
+        <input name='content' value={content} className='text' type="number" id="limitUser" placeholder='수강인원' onChange={onChange} min="1" max="100" required />
         <input className='subbtn' type="submit" value="입력 완료" />
       </RegisterForm>
 

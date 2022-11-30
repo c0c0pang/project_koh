@@ -8,8 +8,6 @@ import LectureVideoCard from './LectureVideoCard'
 import { LectureDeleteKeyApi } from './ApiState'
 function LectureContentList() {
   const Params = useParams();
-  const LectureVideoKeyApi = "http://localhost:4000/Lecture_Video";
-  const [LectureVideo, setLectureVideo] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = location.state;
@@ -43,22 +41,6 @@ function LectureContentList() {
     deleteConfirm,
     cancelConfirm
   );
-  useEffect(() => {
-    axios
-      .get(
-        LectureVideoKeyApi
-      )
-      .then((response) => {
-        setLectureVideo(response.data)
-      });
-  }, []);
-  const videocheck = []
-
-  for (let i = 0; i < LectureVideo.length; i++) {
-    if (Params.Lecturename === LectureVideo[i].Lecturename) {
-      videocheck.push(LectureVideo[i])
-    }
-  }
 
   const CollectionsList = [
     { title: "인문" }
@@ -78,14 +60,6 @@ function LectureContentList() {
   const RegisterNotCheck = () => {
     setRegister(false);
   };
-  const DeletLectrue = async (e) => {
-    e.preventDefault();
-    await axios.delete(
-      LectureDeleteKeyApi(id)
-    ).then((response) => {
-      console.log(response);
-    })
-  }
   const newCollectionsList = []
   const RegiCollections = [];
   for (let i = 0; i < CollectionsList.length; i++) {
@@ -102,9 +76,8 @@ function LectureContentList() {
         <LectureTitle>
           강의
         </LectureTitle>
-        <RegisterButton onClick={RegisterCheck}>영상등록</RegisterButton>
-        <ReviseButton>영상수정</ReviseButton>
-        <DeleteButton onClick={confirmDelete}>영상삭제</DeleteButton>
+        <ReviseButton>강의수정</ReviseButton>
+        <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
       </LectureBack>
 
       <LectureContentListDiv>
@@ -118,21 +91,7 @@ function LectureContentList() {
           ))}
         </LectureLeft>
         <LectureContentRight>
-          {register ? (
-            <LectureRightForm>
-              <LcetureListRegisterfrom RegiCollections={RegiCollections[0].title}></LcetureListRegisterfrom>
-            </LectureRightForm>
-          ) : (
-            <LectureVideoDiv num={videocheck.length}>
-              {videocheck.map((element, index) => (
-                <LectureVideoCard
-                  key={index}
-                  Introduce={element.Introduce}
-                  titlename={element.titlename}
-                />
-              ))}
-            </LectureVideoDiv>
-          )}
+          
         </LectureContentRight>
       </LectureContentListDiv>
     </>

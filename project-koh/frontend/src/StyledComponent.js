@@ -338,7 +338,26 @@ export const RegisterButton=styled.div`
     cursor: pointer;
 `
 export const ReviseButton=styled.div`
-    -webkit-user-select:none;
+ -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 69px;
+    height: 26px;
+    position: relative;
+    left:94%;
+    top: 43%;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+`
+export const DeleteButton=styled.div`
+        -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
@@ -356,25 +375,6 @@ export const ReviseButton=styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 `
-export const DeleteButton=styled.div`
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 69px;
-    height: 26px;
-    position: relative;
-    left:82%;
-    top: 17%;
-    font-family: 'NEXON Lv1 Gothic OTF';
-    background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-`
 export const LectureRightForm = styled.div`
 display: flex;
 align-items: center;
@@ -385,7 +385,8 @@ display: flex;
 align-items: center;
 justify-content: center;
 width: 500px;
-height: 500px;
+height: auto;
+padding: 15px;
 /* background-color: blue; */
 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 margin-top: 80px;
@@ -413,7 +414,10 @@ grid-gap: 30px;
     padding: 3px;
     border-radius: 5px;
 }
- #file{
+ #img{
+    display: none;
+ }
+ #video{
     display: none;
  }
  .imgbtn{
@@ -589,4 +593,8 @@ export const MyColletionCardList= styled.div`
     background-color: #5DC7FD;
     font-family: 'NEXON Lv1 Gothic OTF';
 
+`
+export const FileDiv = styled.div`
+    display: grid;
+    gap: 20px;
 `
