@@ -3,8 +3,6 @@ import { useLocation, useParams,useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
-import LcetureListRegisterfrom from './LcetureListRegisterfrom';
-import LectureVideoCard from './LectureVideoCard'
 import { LectureDeleteKeyApi } from './ApiState'
 function LectureContentList() {
   const Params = useParams();
@@ -54,9 +52,6 @@ function LectureContentList() {
     , { title: "기타" }
   ];
   const [register, setRegister] = useState(false);
-  const RegisterCheck = () => {
-    setRegister(true);
-  };
   const RegisterNotCheck = () => {
     setRegister(false);
   };

@@ -7,6 +7,8 @@ import ColletionsSubTitle from './ColletionsSubTitle';
 import LcetureRegisterfrom from './LcetureRegisterfrom';
 import { LectureViewKeyApi } from './ApiState';
 import Category from './data';
+import MOON from './img/moon.jpg';
+import NFT from './img/NFT.jpg'
 function Lecture() {
   const [CollectionsList,setCollectionsList] =useState([]);
   const [LectureList,setLectureList]= useState([{}]);
@@ -41,9 +43,10 @@ function Lecture() {
   return (
     
     <>
-    <LectureBack>
-    <LectureTitle>{Params.title}</LectureTitle>
-    <RegisterButton onClick={RegisterCheck}>강의등록</RegisterButton>
+    <LectureBack className='main_div'>
+      <LectureTitle>{Params.title}</LectureTitle>
+      <RegisterButton onClick={RegisterCheck}>강의등록</RegisterButton>
+      <img src={NFT}/>
     </LectureBack>
     
     <LectureContent>

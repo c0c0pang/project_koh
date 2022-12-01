@@ -1,0 +1,1 @@
+const myNFT = await MyNFT.deploy();

@@ -14,6 +14,8 @@ export const HeaderNavdiv = styled.div`
     justify-content: space-around;
     align-items: center;
     
+    position: relative;
+    z-index: 20;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
@@ -96,6 +98,7 @@ export const ContentDiv=styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
 `
 export const CollectionsDiv=styled.div`
     display: grid;
@@ -114,17 +117,19 @@ export const CollectionsDiv=styled.div`
 `
 
 export const CardList=styled.div`
-
     display: flex;
     justify-content: center;
     align-items: center;    
     box-shadow:  0 0 1rem 0 rgba(0,0,0,.1);
+    /* border: 4px solid black; */
     border-radius: 10px;
     margin:20px;
     font-size: 23px;
     font-family: 'NEXON Lv1 Gothic OTF';
     font-weight: bold;
-    background: linear-gradient(180deg, #F8E5E5 0%, rgba(214, 204, 204, 0.33) 99.99%);
+    /* background: linear-gradient(180deg, #F8E5E5 0%, rgba(214, 204, 204, 0.33) 99.99%); */
+    /* background: linear-gradient(180deg, #9BA7C8 39.06%, rgba(181, 169, 193, 0) 100%); */
+    background: linear-gradient(180deg, #D9E3FF 37.5%, rgba(222, 231, 255, 0) 100%);
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
@@ -132,11 +137,19 @@ export const CardList=styled.div`
     cursor: pointer;
 `
 export const LectureBack = styled.div`
-height: 200px;
-background: linear-gradient(180deg, #7483B9 0%, rgba(149, 147, 225, 0.33) 99.99%);
+height: 220px;
 border-bottom: 1px solid #CCCCCC;
+img{
+    z-index: auto;
+    position: relative;
+    bottom: 170px;
+    width: 100%;
+    height: 330px;
+}
 `
 export const LectureTitle=styled.div`
+
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,13 +187,16 @@ export const LectureLeft = styled.div`
 width: 200px;
 height: auto;
 border-right: solid 1px #CCCCCC;
-
+position: relative;
+    z-index: 13;
 `
 
 export const LectureRightDiv=styled.div`
 
 `
 export const LectureRight = styled.div`
+    position: relative;
+    z-index: 13;
     display: grid;
     max-height: 700px;
     overflow: scroll;
@@ -336,6 +352,8 @@ export const RegisterButton=styled.div`
     background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+
+    z-index: 11;
 `
 export const ReviseButton=styled.div`
  -webkit-user-select:none;

@@ -25,5 +25,13 @@ module.exports = (app) => {
                 }
             )
         )
+    //     app.use('/pinning',
+    //     createProxyMiddleware(
+    //         {
+    //             target: "https://api.pinata.cloud",
+    //             changeOrigin: true,
+    //         }
+    //     )
+    // )
 
 };
