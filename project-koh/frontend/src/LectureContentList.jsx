@@ -4,6 +4,7 @@ import axios from 'axios';
 import { DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
 import { LectureDeleteKeyApi } from './ApiState'
+import NFT from './img/NFT.jpg'
 function LectureContentList() {
   const Params = useParams();
   const location = useLocation();
@@ -21,7 +22,6 @@ function LectureContentList() {
         await axios.delete(
           LectureDeleteKeyApi(id)
         ).then((response) => {
-          console.log(response);
           navigate(`../lecture/${Params.title}`);
         })
         onConfirm();
@@ -67,12 +67,14 @@ function LectureContentList() {
   }
   return (
     <>
-      <LectureBack>
+      <LectureBack className='main_div'>
         <LectureTitle>
           강의
         </LectureTitle>
         <ReviseButton>강의수정</ReviseButton>
+        <img src={NFT} />
         <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
+        
       </LectureBack>
 
       <LectureContentListDiv>

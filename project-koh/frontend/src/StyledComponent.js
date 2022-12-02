@@ -74,10 +74,16 @@ export const Search = styled.div`
     
 `
 export const MainTitle = styled.h1`
-  font-family: 'NEXON Lv1 Gothic OTF';
-  font-weight: bold;
-  font-size: 35px;
+
+font-family: 'LeferiPoint-BlackObliqueA';
+font-style: oblique;
+  font-size: 30px;
   cursor: pointer;
+
+background: linear-gradient(184.97deg, #436C91 62.25%, rgba(58, 109, 156, 0) 96%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
 `
 export const MenuTitle = styled.h2`
 font-family: 'GmarketSansLight';
@@ -105,14 +111,18 @@ export const CollectionsDiv=styled.div`
     grid-template-columns: 270px 270px 270px;
     grid-template-rows: 230px 230px 230px;
     #box:hover{
-    background: linear-gradient(180deg, #E4E3E3 0%, rgba(250, 114, 114, 0.33) 99.99%);
-    color: #050801;
+    background: linear-gradient(180deg, #B9CBFF 45.31%, rgba(222, 231, 255, 0.33) 99.99%);
+    border: 2px solid #7D7D7D;
+    color: black;
+    font-weight: bold;
+
     box-shadow: 0 0 10px 0 rgba(107, 83, 83,.15),
                 0 0 10px 0 rgba(107, 83, 83,.15),
                 0 0 10px 0 rgba(107, 83, 83,.15),
                 0 0 10px 0 rgba(107, 83, 83,.15);
      -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
-     transition: all ease 0.7s 0s;
+     transition: all ease 0.3s 0s;
+    
 }
 `
 
@@ -125,8 +135,10 @@ export const CardList=styled.div`
     border-radius: 10px;
     margin:20px;
     font-size: 23px;
-    font-family: 'NEXON Lv1 Gothic OTF';
-    font-weight: bold;
+    /* font-family: 'GmarketSansLigth';
+    font-weight: bold; */
+    /* font-family: 'LeferiPoint-WhiteObliqueA'; */
+    font-family: 'LeferiBaseType-RegularA';
     /* background: linear-gradient(180deg, #F8E5E5 0%, rgba(214, 204, 204, 0.33) 99.99%); */
     /* background: linear-gradient(180deg, #9BA7C8 39.06%, rgba(181, 169, 193, 0) 100%); */
     background: linear-gradient(180deg, #D9E3FF 37.5%, rgba(222, 231, 255, 0) 100%);
@@ -145,22 +157,22 @@ img{
     bottom: 170px;
     width: 100%;
     height: 330px;
+
 }
 `
 export const LectureTitle=styled.div`
-
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 110px;
     height: 80px;
-    background-color: #fFF0F0;
-    border: 3px solid black;
+    background: linear-gradient(180deg, #D9E3FF 37.5%, rgba(222, 231, 255, 0) 100%);
+    /* border: 1px solid black; */
     border-radius: 10px;
     position:relative;
     left:45px;
-    top:160px;
+    top:170px;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     font-weight: bold;
 `
@@ -186,7 +198,6 @@ export const LectureLeftDiv=styled.div`
 export const LectureLeft = styled.div`
 width: 200px;
 height: auto;
-border-right: solid 1px #CCCCCC;
 position: relative;
     z-index: 13;
 `
@@ -199,8 +210,11 @@ export const LectureRight = styled.div`
     z-index: 13;
     display: grid;
     max-height: 700px;
+    height: 700px;
     overflow: scroll;
     grid-template-columns: repeat(4 ,300px);
+    border-top: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
 `
 export const LectureContentRight = styled.div`
     display: flex;
@@ -217,7 +231,6 @@ export const LectureListDiv = styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     margin: 15px;
     cursor: pointer;    
-
     overflow: hidden;
 `
 export const LectureBox = styled.div`
@@ -367,6 +380,7 @@ export const ReviseButton=styled.div`
     width: 69px;
     height: 26px;
     position: relative;
+    z-index: 13;
     left:94%;
     top: 43%;
     font-family: 'NEXON Lv1 Gothic OTF';
@@ -375,7 +389,7 @@ export const ReviseButton=styled.div`
     cursor: pointer;
 `
 export const DeleteButton=styled.div`
-        -webkit-user-select:none;
+    -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
@@ -387,10 +401,11 @@ export const DeleteButton=styled.div`
     height: 26px;
     position: relative;
     left:88%;
-    top: 30%;
+    bottom: 120%;
     font-family: 'NEXON Lv1 Gothic OTF';
     background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    z-index: 15;
     cursor: pointer;
 `
 export const LectureRightForm = styled.div`
@@ -431,6 +446,15 @@ grid-gap: 30px;
     font-size: 15px;
     padding: 3px;
     border-radius: 5px;
+}
+.textarea{
+    width: 400px;
+    height: 300px;
+    padding: 5px;
+    border-radius: 7px;
+}
+.textarea::placeholder{
+    font-size: 15px;
 }
  #img{
     display: none;

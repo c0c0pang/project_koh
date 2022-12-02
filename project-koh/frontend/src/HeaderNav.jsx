@@ -69,7 +69,7 @@ function HeaderNav({ darkMode, setDarkMode }) {
     <>
     <HeaderNavdiv>
       <MainTitle onClick={goHome}>
-        KOH
+        Lecture KOH
       </MainTitle>
       <Search className="searchbox">
         <div className="searchimg">
@@ -78,8 +78,6 @@ function HeaderNav({ darkMode, setDarkMode }) {
         <SearchList >
         </SearchList>
       </Search>
-      <MenuTitle>강의실</MenuTitle>
-      <MenuTitle>강의실</MenuTitle>
       <MenuTitle>강의실</MenuTitle>
         <div className="menuimg">
           <div >

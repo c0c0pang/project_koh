@@ -5,12 +5,14 @@ import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
 import { useEffect } from 'react';
 import {SendFileToIPFS} from './blockchain/MyLecture/upload-pinata'
-
+import {useRecoilState, useSetRecoilState } from 'recoil';
+import {VideoLinkAtom} from './atom';
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const videoRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [videoLink,setVideoLink] = useState("");
   const [inputs, setInputs] = useState({
     title: "",
     teacher: "",
@@ -34,13 +36,11 @@ function LcetureRegisterfrom() {
   const { category, title, teacher, usernum, content, thumbnail,video } = inputs;
 
   const onChange = (e) => {
-    console.log(e.target);
     const { value, name } = e.target;
     setInputs({
       ...inputs,
       [name]: value
     });
-    console.log(inputs);
   };
   const onChangeImage = (e) => {
     const reader = new FileReader();
@@ -59,7 +59,6 @@ function LcetureRegisterfrom() {
   const onChangeVideo = (e) => {
     const reader = new FileReader();
     const file = videoRef.current.files[0];
-    console.log("형식 테스트",file);
     
     const { name } = e.target;
     reader.readAsDataURL(file);
@@ -100,7 +99,6 @@ function LcetureRegisterfrom() {
     };
     const formData = new FormData();
     formData.append("thumbnail", data.thumbnail);
-    console.log("이미지테스트",formData);
     formData.append("category", data.category);
     formData.append("title", data.title);
     formData.append("teacher", data.teacher);
@@ -114,7 +112,8 @@ function LcetureRegisterfrom() {
           return data;
         },
       }).then((err) => {
-        SendFileToIPFS(data.title,data.content,video);
+        SendFileToIPFS(data.title,data.content,video); 
+        console.log(videoLink);
         console.log(err);
       })
     // window.location.reload();
@@ -135,7 +134,7 @@ function LcetureRegisterfrom() {
               <img src={imageUrl} />)}
           </div>
 
-          <input multiple="multiple" name='video' type="file" id="video" accept='video/*' ref={videoRef} onChange={onChangeVideo} />
+          <input multiple="multiple" name='video' type="file" id="video" accept='video/mp4' ref={videoRef} onChange={onChangeVideo} />
           <div className='imgbtn' onClick={(e) => {
             e.preventDefault();
             onClickVideoBtn();
@@ -156,7 +155,7 @@ function LcetureRegisterfrom() {
           ))}
         </select>
         <input name='title' value={title} className='text' type="text" id="LcetureName" placeholder='강의명' onChange={onChange} required />
-        <input name='content' value={content} className='text' type="number" id="limitUser" placeholder='수강인원' onChange={onChange} min="1" max="100" required />
+        <textarea name='content' value={content} className='textarea' type="text" id="limitUser" placeholder='강의 설명' onChange={onChange} required />
         <input className='subbtn' type="submit" value="입력 완료" />
       </RegisterForm>
 

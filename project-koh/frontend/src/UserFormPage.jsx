@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
 import { useState } from 'react';
+import {UserKeyApi,UserViewKeyApi} from './ApiState'
 const Title = styled.h1`
   display: flex;
   justify-content: center;
@@ -74,16 +75,26 @@ const UserInput = styled.input`
     border-radius: 5px;
 `
 function UserFormPage() {
-  const USER_API_KEY = '/user/';
   const user = localStorage.getItem("user_id");
   const item = JSON.parse(user);
+  useEffect(()=>{
+    axios.get(UserViewKeyApi)
+    .then((response)=>{
+      setInputs({
+        wallet_address: `${item.value}`,
+        userName: `${response.data[0].userName}`,
+        email: `${response.data[0].email}`
+      })
+    })
+  },[])
   const [inputs, setInputs] = useState({
     wallet_address: `${item.value}`,
     userName: "",
     email: ""
   });
-
   const { userName,email } = inputs;
+
+  
   const onChange = (e) => {
     console.log(e.target);
     const { value, name } = e.target;
@@ -96,7 +107,7 @@ function UserFormPage() {
   const onSubmit = async (e) => {
     console.log(inputs);
     e.preventDefault();
-    await axios.post(USER_API_KEY,inputs  ,{
+    await axios.post(UserKeyApi,inputs  ,{
       headers: { "Content-Type": `application/json`},
       withCredentials: true,
     }).then((err)=>{

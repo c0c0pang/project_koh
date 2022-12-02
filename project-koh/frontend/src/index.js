@@ -4,8 +4,7 @@ import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import './index.css';
 import App from './App';
-import axios from 'axios';
-import {Cookies} from 'react-cookie'
+import { RecoilRoot } from 'recoil';
 function getLibrary(provider) {
   const library = new Web3Provider(provider, "any");
   return library;
