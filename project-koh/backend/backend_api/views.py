@@ -13,23 +13,14 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-class titleShow(APIView):
-    def get(self, request):
-      titleList = category.objects.all().order_by('category')
-      data = {
-        'title' : titleList,
-      }
-      serializer = TitleSerializer(instance=data)
-      return Response(serializer.data)
-
 @method_decorator(csrf_exempt,name='dispatch')
 class UserViewSet(ModelViewSet):
-    parser_classes = [JSONParser]
+    parser_classes = [JSONParser, MultiPartParser]
     queryset = User.objects.all()
     serializer_class = UserSerializer 
     
     def list(self, request):
-        queryset = self.queryset
+        queryset = User.objects.all()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
@@ -68,11 +59,15 @@ class UserViewSet(ModelViewSet):
         return Response(serializer.errors)
 
     # 삭제, DELETE /user/{wallet_address}/delete_user/
-    @action(detail=True, methods=['delete'])  
+    @action(detail=True, methods=['delete'])
     def delete_user(self,request, pk=None):
-        user = User.objects.filter(wallet_address = pk)
-        user.delete()
-        return Response("complete delete")
+        user = self.queryset.objects.filter(wallet_address = pk)
+        if len(user)!=0:
+            user.delete()
+            return Response("complete delete")
+        else:
+            return Response("not found user")
+
 
     # 수정, PUT /user/{wallet_address}/update_user/
     @action(detail=True, methods=['put'])
@@ -97,7 +92,8 @@ class LectureViewSet(ModelViewSet):
     serializer_class = LectureSerializer # get_serializer
 
     def list(self, request):
-        serializer = self.get_serializer(self.queryset, many=True)
+        queryset = Lecture.objects.all()
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     # 원하는 번호의 강의 추출 GET /lecture/{pk}
@@ -112,7 +108,7 @@ class LectureViewSet(ModelViewSet):
     # 강의리스트중에서 입력으로 넣은 이름,강사,카테고리에 맞는 리스트를 보여준다
     @action(detail=False) 
     def search(self,request): # 검색을 통한 강의목록 확인 
-        qs = self.queryset.filter(is_public=True)
+        qs = self.queryset
         search_title = self.request.GET.get('search','') # ex) GET /lecture/search/?search=자료구조
         search_category = self.request.GET.get('category','') # ex) GET /lecture/search/?category=IT
         
@@ -145,14 +141,17 @@ class LectureViewSet(ModelViewSet):
     # 삭제, DELETE /lecture/{id}/delete_lecture/
     @action(detail=True, methods=['delete'])  
     def delete_lecture(self,request, pk=None):
-        lecture = Lecture.objects.filter(id = pk)
-        lecture.delete()
-        return Response("complete delete")
+        lecture = self.queryset.filter(id = pk)
+        if len(lecture)!=0:
+            lecture.delete()
+            return Response("complete delete")
+        else:
+            return Response("not found lecture")
 
     # 수정, PUT /lecture/{id}/update_lecture/
     @action(detail=True, methods=['put'])
     def update_lecture(self, request, pk=None):
-        lecture  = Lecture.objects.filter(id = pk)
+        lecture  = self.queryset.filter(id = pk)
         if len(lecture) != 0 :
             for i in request.data.keys():
                 if i == 'category':
@@ -165,6 +164,10 @@ class LectureViewSet(ModelViewSet):
                     lecture.update(content = request.data['content'])
                 elif i =='headcount':
                     lecture.update(headcount = request.data['headcount'])
+                elif i =='video_url':
+                    lecture.update(video_url = request.data['video_url'])
+                elif i =='image_url':
+                    lecture.update(image_url = request.data['image_url'])
                 elif i =='thumbnail':
                     lecture.update(thumbnail = request.data['thumbnail'])
             serializer = self.get_serializer(lecture, many=True)
