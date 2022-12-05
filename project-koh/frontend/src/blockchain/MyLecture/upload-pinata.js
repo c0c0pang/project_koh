@@ -20,6 +20,8 @@ export const SendFileToIPFS = async (name,description,fileVideo) => {
 	const ImgHash = `ipfs://${data.IpfsHash}`;
 	// console.log(name,description,ImgHash);
 	Uploader(name,description,ImgHash);
+	console.log(typeof(ImgHash));
+	return `ipfs/${data.IpfsHash}`;
 	//Take a look at your Pinata Pinned section, you will see a new file added to you list.   
 }
 

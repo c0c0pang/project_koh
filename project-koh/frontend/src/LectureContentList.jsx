@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation, useParams,useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
+import { DescriptionDiv,VideoDiv, LectureTextDiv, LectureMainDiv, LectureContentDiv, DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
 import { LectureDeleteKeyApi } from './ApiState'
 import NFT from './img/NFT.jpg'
@@ -9,7 +9,10 @@ function LectureContentList() {
   const Params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { id } = location.state;
+  const { id, lectureData } = location.state;
+
+  // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
+
   const useConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
@@ -65,6 +68,7 @@ function LectureContentList() {
       RegiCollections.push(CollectionsList[i]);
     }
   }
+  console.log(lectureData.video_url);
   return (
     <>
       <LectureBack className='main_div'>
@@ -74,7 +78,7 @@ function LectureContentList() {
         <ReviseButton>강의수정</ReviseButton>
         <img src={NFT} />
         <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
-        
+
       </LectureBack>
 
       <LectureContentListDiv>
@@ -87,8 +91,26 @@ function LectureContentList() {
             />
           ))}
         </LectureLeft>
+
         <LectureContentRight>
-          
+          <LectureContentDiv>
+            <LectureMainDiv>
+              <img src={lectureData.thumbnail} />
+              <LectureTextDiv>
+                <h1>[ {lectureData.title} ]</h1>
+                <h2>수강인원: {lectureData.headcount}</h2>
+              </LectureTextDiv>
+            </LectureMainDiv>
+            <DescriptionDiv>
+              <h1>{lectureData.content}</h1>
+            </DescriptionDiv>
+
+            <VideoDiv>
+              <video controls muted name='media' width={400} height={300}>
+                <source src={lectureData.video_url} type="video/mp4"></source>
+              </video>
+            </VideoDiv>
+          </LectureContentDiv>
         </LectureContentRight>
       </LectureContentListDiv>
     </>

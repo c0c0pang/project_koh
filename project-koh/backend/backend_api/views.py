@@ -166,6 +166,10 @@ class LectureViewSet(ModelViewSet):
                     lecture.update(content = request.data['content'])
                 elif i =='headcount':
                     lecture.update(headcount = request.data['headcount'])
+                elif i =='video_url':
+                    lecture.update(video_url = request.data['video_url'])
+                elif i =='image_url':
+                    lecture.update(image_url = request.data['image_url'])
                 elif i =='thumbnail':
                     lecture.update(thumbnail = request.data['thumbnail'])   
             serializer = self.get_serializer(lecture, many=True)

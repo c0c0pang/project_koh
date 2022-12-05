@@ -5,7 +5,6 @@ import Footer from './Footer';
 import {darkTheme, GlobalStyles, lightTheme} from './Style';
 import { Routes, Route ,BrowserRouter} from "react-router-dom";
 import Lecture from './Lecture';
-import EntrancePage from './EntrancePage';
 import LectureContentList from './LectureContentList'
 import SearchViewPage from './SearchViewPage';
 import ProfilePage from './ProfilePage'

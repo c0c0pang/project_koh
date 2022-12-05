@@ -15,7 +15,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </Web3ReactProvider>
+
   </StrictMode>
 )

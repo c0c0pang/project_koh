@@ -12,7 +12,7 @@ function LcetureRegisterfrom() {
   const videoRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
-  const [videoLink,setVideoLink] = useState("");
+  // const [videoLink,setVideoLink] = useRecoilState(VideoLinkAtom);
   const [inputs, setInputs] = useState({
     title: "",
     teacher: "",
@@ -25,6 +25,7 @@ function LcetureRegisterfrom() {
   const [userName, setUserName] = useState("")
   const selectbox = [
     { value: "인문", name: "인문" },
+    { value: "사회", name: "사회" },
     { value: "교육", name: "교육" },
     { value: "공학", name: "공학" },
     { value: "자연", name: "자연" },
@@ -104,6 +105,9 @@ function LcetureRegisterfrom() {
     formData.append("teacher", data.teacher);
     formData.append("content", data.content);
     e.preventDefault();
+    const VideoUrl = await SendFileToIPFS(data.title,data.content,video);
+    formData.append("video_url",`https://gateway.pinata.cloud/${VideoUrl}`);
+    
     await axios.
       post(LectureKeyApi, formData, {
         headers: { "Content-Type": 'multipart/form-data' },
@@ -112,10 +116,11 @@ function LcetureRegisterfrom() {
           return data;
         },
       }).then((err) => {
-        SendFileToIPFS(data.title,data.content,video); 
-        console.log(videoLink);
+        // SendFileToIPFS(data.title,data.content,video); 
+        // console.log(videoLink);
         console.log(err);
       })
+    
     // window.location.reload();
   }
 
@@ -134,7 +139,7 @@ function LcetureRegisterfrom() {
               <img src={imageUrl} />)}
           </div>
 
-          <input multiple="multiple" name='video' type="file" id="video" accept='video/mp4' ref={videoRef} onChange={onChangeVideo} />
+          <input multiple="multiple" name='video' type="file" id="video" accept='video/*' ref={videoRef} onChange={onChangeVideo} />
           <div className='imgbtn' onClick={(e) => {
             e.preventDefault();
             onClickVideoBtn();

@@ -219,7 +219,11 @@ export const LectureRight = styled.div`
 export const LectureContentRight = styled.div`
     display: flex;
     justify-content: center;
-    overflow: scroll;
+    align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    padding-right: 50px;
 `
 
 export const LectureListDiv = styled.div`
@@ -639,4 +643,52 @@ export const MyColletionCardList= styled.div`
 export const FileDiv = styled.div`
     display: grid;
     gap: 20px;
+`
+
+export const LectureContentDiv = styled.div`
+    display: grid;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    max-height: 700px;
+    /* height: 700px;    */
+
+    h1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+    }
+    source{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+`
+export const LectureMainDiv = styled.div`
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    width: 1200px;
+    
+    img{
+        width: 200px;
+    }
+    border-bottom: 0.5px solid gray;
+
+`
+export const LectureTextDiv = styled.div`
+    display: grid;
+    
+`  
+export const VideoDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content:center;
+`
+export const DescriptionDiv = styled.div`
+  display: flex;
+    border-bottom: 0.5px solid gray;
+    padding: 50px;
 `

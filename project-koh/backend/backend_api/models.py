@@ -12,6 +12,8 @@ class Lecture(models.Model):
     teacher = models.CharField(max_length=20, blank=False, null=False)
     content = models.TextField(blank=True, null=False, default="")
     headcount = models.IntegerField(default=0)
+    video_url = models.CharField(max_length=200, blank=True, null=False)
+    image_url = models.CharField(max_length=200, blank=True, null=False)
     thumbnail = models.ImageField(upload_to="", blank=True, default='no_image.gif')
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
