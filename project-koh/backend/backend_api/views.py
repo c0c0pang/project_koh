@@ -1,10 +1,10 @@
 from django.core.exceptions import *
-from rest_framework.parsers import JSONParser, MultiPartParser,FormParser
+from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Lecture, Reply, category, User
-from .serializers import LectureSerializer, ReplySerializer, TitleSerializer, UserSerializer
+from .models import Lecture, User
+from .serializers import LectureSerializer, UserSerializer
 from rest_framework.decorators import action
 from django.http.response import HttpResponse
 from django.db.models import Q
@@ -13,18 +13,9 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
-class titleShow(APIView):
-    def get(self, request):
-      titleList = category.objects.all().order_by('category')
-      data = {
-        'title' : titleList,
-      }
-      serializer = TitleSerializer(instance=data)
-      return Response(serializer.data)
-
 @method_decorator(csrf_exempt,name='dispatch')
 class UserViewSet(ModelViewSet):
-    parser_classes = [JSONParser]
+    parser_classes = [JSONParser, MultiPartParser]
     queryset = User.objects.all()
     serializer_class = UserSerializer 
     
@@ -68,11 +59,15 @@ class UserViewSet(ModelViewSet):
         return Response(serializer.errors)
 
     # 삭제, DELETE /user/{wallet_address}/delete_user/
-    @action(detail=True, methods=['delete'])  
+    @action(detail=True, methods=['delete'])
     def delete_user(self,request, pk=None):
-        user = User.objects.filter(wallet_address = pk)
-        user.delete()
-        return Response("complete delete")
+        user = self.queryset.objects.filter(wallet_address = pk)
+        if len(user)!=0:
+            user.delete()
+            return Response("complete delete")
+        else:
+            return Response("not found user")
+
 
     # 수정, PUT /user/{wallet_address}/update_user/
     @action(detail=True, methods=['put'])
@@ -88,7 +83,32 @@ class UserViewSet(ModelViewSet):
             return Response(serializer.data)
         else:
             return Response("일치되는 유저가 없습니다")
-            
+    
+    # token번호 부여, PUT /user/{wallet_address}/add_token/
+    @action(detail=True, methods=['put'])
+    def add_token(self,request, pk=None):
+        entry = User.objects.filter(wallet_address = pk)
+        for temp in entry:
+            temp.tokens.add(request.data['tokens'])
+            temp.save()
+        serializer = self.get_serializer(entry, many=True)
+        return Response(serializer.data)
+
+    # token 확인, GET /user/{wallet_address}/check_token/ // form-data에 'tokens'필드를 추가하여 보내주어야 한다
+    @action(detail=True, methods=['get']) 
+    def check_token(self, request, pk=None):
+        user  = User.objects.filter(wallet_address = pk)
+        token_list =[]
+        for temp in user:
+            a = temp.tokens.values_list()
+            for i in a:
+                list(i)
+                token_list.append(i[0])
+        print(token_list)
+        if int(request.data['tokens']) in token_list:
+            return Response("have token")
+        else :
+            return Response("have not token")            
 
 @method_decorator(csrf_exempt,name='dispatch')
 class LectureViewSet(ModelViewSet):
@@ -104,11 +124,22 @@ class LectureViewSet(ModelViewSet):
     # 원하는 번호의 강의 추출 GET /lecture/{pk}
     def retrieve(self, request, pk=None): 
         try:
-            user = get_object_or_404(self.queryset, pk=pk)
-            serializer = self.get_serializer(user)
+            lecture = get_object_or_404(self.queryset, pk=pk)
+            serializer = self.get_serializer(lecture)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             return Response({"message": "존재하지 않는 UUID({})입니다".format(pk)}, status=status.HTTP_404_NOT_FOUND)
+        
+    
+    # GET /lecture/{id}/countup/
+    @action(detail=True, methods=['get'])
+    def countup(self,request, pk=None):
+        lecture  = self.queryset.filter(id = pk)
+        for temp in lecture:
+            temp.count +=1
+            temp.save()
+        serializer = self.get_serializer(lecture, many=True)
+        return Response(serializer.data)
     
     # 강의리스트중에서 입력으로 넣은 이름,강사,카테고리에 맞는 리스트를 보여준다
     @action(detail=False) 
@@ -146,14 +177,17 @@ class LectureViewSet(ModelViewSet):
     # 삭제, DELETE /lecture/{id}/delete_lecture/
     @action(detail=True, methods=['delete'])  
     def delete_lecture(self,request, pk=None):
-        lecture = Lecture.objects.filter(id = pk)
-        lecture.delete()
-        return Response("complete delete")
+        lecture = self.queryset.filter(id = pk)
+        if len(lecture)!=0:
+            lecture.delete()
+            return Response("complete delete")
+        else:
+            return Response("not found lecture")
 
     # 수정, PUT /lecture/{id}/update_lecture/
     @action(detail=True, methods=['put'])
     def update_lecture(self, request, pk=None):
-        lecture  = Lecture.objects.filter(id = pk)
+        lecture  = self.queryset.filter(id = pk)
         if len(lecture) != 0 :
             for i in request.data.keys():
                 if i == 'category':
@@ -164,14 +198,14 @@ class LectureViewSet(ModelViewSet):
                     lecture.update(teacher = request.data['teacher'])
                 elif i =='content':
                     lecture.update(content = request.data['content'])
-                elif i =='headcount':
-                    lecture.update(headcount = request.data['headcount'])
+                elif i =='count':
+                    lecture.update(count = request.data['count'])
                 elif i =='video_url':
                     lecture.update(video_url = request.data['video_url'])
                 elif i =='image_url':
                     lecture.update(image_url = request.data['image_url'])
                 elif i =='thumbnail':
-                    lecture.update(thumbnail = request.data['thumbnail'])   
+                    lecture.update(thumbnail = request.data['thumbnail'])
             serializer = self.get_serializer(lecture, many=True)
             return Response(serializer.data)
         else:

@@ -1,18 +1,11 @@
 from rest_framework import serializers
-from .models import Lecture, Reply, User
+from .models import Lecture, User
 
-class TitleSerializer(serializers.Serializer):
-    title =  serializers.ListField(child = serializers.CharField())
 
 class LectureSerializer(serializers.ModelSerializer) :
     class Meta :
         model = Lecture
         fields = '__all__'
-
-class ReplySerializer(serializers.ModelSerializer) :
-    class Meta :
-        model = Reply
-        fields = ['lecture_id', 'reply_id', 'writer', 're_contents', 'created_at']
 
 class UserSerializer(serializers.ModelSerializer) :
     class Meta :
