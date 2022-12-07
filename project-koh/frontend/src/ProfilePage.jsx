@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react'
-import { ProfileBack, ProfileImg, ProfileInfoDiv, ProfileimgDiv, ProfileContentDiv, ProfileListDiv, MyColletionsDiv, MyColletionText, MyColletionsTextDiv, MyColletionListDiv, MyColletionList } from './StyledComponent'
-import edit from './img/edit.png'
-import ethereum from './img/ethereum.png'
+import React, { useRef, useState } from 'react';
+import { ProfileBack, ProfileImg, ProfileInfoDiv, ProfileimgDiv, ProfileContentDiv, ProfileListDiv, MyColletionsDiv, MyColletionText, MyColletionsTextDiv, MyColletionListDiv, MyColletionList } from './StyledComponent';
+import edit from './img/edit.png';
+import ethereum from './img/ethereum.png';
 import { useEffect } from 'react';
-import MyColletionCard from './MyColletionCard'
+import MyColletionCard from './MyColletionCard';
 import axios from 'axios';
+import { LectureSearchApi, UserViewKeyApi } from './ApiState';
+import { useLocation } from 'react-router-dom';
 function ProfilePage() {
-  const MyColletionKeyApi = "http://localhost:4000/MyColletion";
   const MyDibsKeyApi = "http://localhost:4000/MyDibs";
   const imgRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
@@ -15,15 +16,18 @@ function ProfilePage() {
   const [MyDibs, setMyDibs] = useState([{}]);
   const [McCheck, setMcCheck] = useState(1);
   const [MdCheck, setMdCheck] = useState(0);
+  const location = useLocation();
+  const { userName } = location.state;
   useEffect(() => {
     axios
       .get(
-        MyColletionKeyApi
+        LectureSearchApi(userName)
       )
       .then((response) => {
         setMyColletion(response.data)
       });
   }, []);
+
   useEffect(() => {
     axios
       .get(
@@ -43,20 +47,20 @@ function ProfilePage() {
       console.log("이미지주소", reader.result);
     };
   };
-  const getWithExpiry =(key)=>{
-    const itemstr=localStorage.getItem(key);
-    if(!itemstr){
+  const getWithExpiry = (key) => {
+    const itemstr = localStorage.getItem(key);
+    if (!itemstr) {
       return undefined
     }
     const item = JSON.parse(itemstr);
     const now = new Date();
-    if(now.getTime()>item.expiry){
+    if (now.getTime() > item.expiry) {
       localStorage.removeItem(key);
       return undefined
     }
     return item.value
   }
-  const user =  getWithExpiry("user_id");
+  const user = getWithExpiry("user_id");
   const user_check = getWithExpiry("user_id_check");
   useEffect(() => {
     setUser_id(user)
@@ -93,6 +97,7 @@ function ProfilePage() {
                 <div>...</div>
               )}
             </h2>
+            <h2 id="userName">이름: {userName}</h2>
           </ProfileInfoDiv>
         </ProfileimgDiv>
         <ProfileListDiv>
@@ -107,8 +112,9 @@ function ProfilePage() {
                   MyColletion.map((element, index) => (
                     <MyColletionCard
                       key={index}
-                      title={element.title}
-                      Lecturename={element.Lecturename}
+                      id={element.id}
+                      title={element.category}
+                      Lecturename={element.title}
                       teacher={element.teacher}
                     />
                   ))) : (

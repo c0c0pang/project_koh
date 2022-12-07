@@ -112,7 +112,7 @@ export const CollectionsDiv=styled.div`
     grid-template-rows: 230px 230px 230px;
     #box:hover{
     background: linear-gradient(180deg, #B9CBFF 45.31%, rgba(222, 231, 255, 0.33) 99.99%);
-    border: 2px solid #7D7D7D;
+    border: 3px solid #7D7D7D;
     color: black;
     font-weight: bold;
 
@@ -121,8 +121,8 @@ export const CollectionsDiv=styled.div`
                 0 0 10px 0 rgba(107, 83, 83,.15),
                 0 0 10px 0 rgba(107, 83, 83,.15);
      -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
-     transition: all ease 0.3s 0s;
-    
+     transition: all ease 0.3s ;
+
 }
 `
 
@@ -131,7 +131,6 @@ export const CardList=styled.div`
     justify-content: center;
     align-items: center;    
     box-shadow:  0 0 1rem 0 rgba(0,0,0,.1);
-    /* border: 4px solid black; */
     border-radius: 10px;
     margin:20px;
     font-size: 23px;
@@ -139,8 +138,6 @@ export const CardList=styled.div`
     font-weight: bold; */
     /* font-family: 'LeferiPoint-WhiteObliqueA'; */
     font-family: 'LeferiBaseType-RegularA';
-    /* background: linear-gradient(180deg, #F8E5E5 0%, rgba(214, 204, 204, 0.33) 99.99%); */
-    /* background: linear-gradient(180deg, #9BA7C8 39.06%, rgba(181, 169, 193, 0) 100%); */
     background: linear-gradient(180deg, #D9E3FF 37.5%, rgba(222, 231, 255, 0) 100%);
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -203,18 +200,19 @@ position: relative;
 `
 
 export const LectureRightDiv=styled.div`
-
+    border-left: 1px solid #CCCCCC; 
+    margin-top: 45px;
 `
 export const LectureRight = styled.div`
     position: relative;
     z-index: 13;
     display: grid;
     max-height: 700px;
-    height: 700px;
+
     overflow: scroll;
     grid-template-columns: repeat(4 ,300px);
     border-top: 1px solid #CCCCCC;
-    border-left: 1px solid #CCCCCC;
+
 `
 export const LectureContentRight = styled.div`
     display: flex;
@@ -238,7 +236,6 @@ export const LectureListDiv = styled.div`
     overflow: hidden;
 `
 export const LectureBox = styled.div`
-
     position:relative;
     width: 260px;
     h2{
@@ -559,7 +556,8 @@ export const ProfileimgDiv = styled.div`
     /* height: ; */
 `
 export const ProfileInfoDiv = styled.div`
-
+    display: grid;
+    gap: 10px;
     font-family: 'NEXON Lv1 Gothic OTF';
     font-weight: bold;
     #etheimg{
@@ -571,6 +569,11 @@ export const ProfileInfoDiv = styled.div`
         align-items: center;
         justify-content: center;
         /* background-color: blue; */
+    }
+    #userName{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     position: relative;
     bottom: 65px;
@@ -622,27 +625,40 @@ export const MyColletionList = styled.div`
     display: grid;
     grid-template-columns: repeat(4,200px);
     place-content: center;
-    grid-gap: 20px;
-    
+    grid-gap: 40px;
+
 `
 export const MyColletionListCardDiv = styled.div`
-    
 `
 export const MyColletionCardList= styled.div`
-    display: flex;
-    align-items: center;
+    display: grid;
     justify-content: center;
-    width: 200px;
-    height: 100px;
-    border-radius: 5px;
+    align-items:center;
+    width: 180px;
+    height: 120px;
+    border-radius: 10px;
     margin-top: 10px;
-    background-color: #5DC7FD;
-    font-family: 'NEXON Lv1 Gothic OTF';
+    background: linear-gradient(180deg, #BFF4F8 0%, rgba(149, 233, 238, 0) 100%);
+    font-family: 'LeferiBaseType-RegularA';
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #BFF4F8;
+    :hover{
+    border: 2px solid #7D7D7D;
+    color: black;
+    font-weight: bold;
+     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+     transition: all ease 0.2s 0s;
+    }
+    
 
 `
 export const FileDiv = styled.div`
     display: grid;
     gap: 20px;
+    h2{
+        position: absolute;
+    }
 `
 
 export const LectureContentDiv = styled.div`
@@ -654,12 +670,12 @@ export const LectureContentDiv = styled.div`
     max-height: 700px;
     /* height: 700px;    */
 
-    h1{
+    /* h1{
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 50px;
-    }
+    } */
     source{
         display: flex;
         justify-content: center;
@@ -676,6 +692,12 @@ export const LectureMainDiv = styled.div`
         width: 200px;
     }
     border-bottom: 0.5px solid gray;
+    h1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+    }
 
 `
 export const LectureTextDiv = styled.div`
@@ -686,9 +708,12 @@ export const VideoDiv = styled.div`
     display: flex;
     justify-content: center;
     align-content:center;
+    padding: 20px;
+    border-bottom: 0.5px solid gray;
 `
 export const DescriptionDiv = styled.div`
   display: flex;
-    border-bottom: 0.5px solid gray;
-    padding: 50px;
+  border-bottom: 0.5px solid gray;
+  padding: 50px;
+  font-size: 20px;
 `

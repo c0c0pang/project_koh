@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import{LectureRight,SearchDiv} from'./StyledComponent';
 import LectureListCrad from './LectureListCrad';
-import {LectureKeyApi} from './ApiState';
+import {LectureSearchApi} from './ApiState';
 function SearchViewPage() {
   const Params = useParams();
   const [LectureList,setLectureList]= useState([{}]);
@@ -11,42 +11,35 @@ function SearchViewPage() {
   useEffect(() => {
     axios
     .get(
-    LectureKeyApi
+      LectureSearchApi(Params.name)
     )
     .then((response) => {
     // console.log(response.data)
-    setLectureList(response.data)
+    if(response.data.length>0){
+      setLectureList(response.data)
+    }
+    else{
+      setLectureList([{
+        title:'검색 대상 없음',
+        Lecturename:'..',
+        teacher :'다시 검색하세요',
+        thumbnail:'',
+      }])
+    }
     });
   },[]);
-  function getSearchView(){
-    const filterData = LectureList.filter(
-      props=>{
-        // props.toLowerCase().indexOf(Params.name.toLocaleLowerCase())>-1
-        if(Params.name===props.Lecturename){
-         return props;
-        }
-        else if(Params.name===props.teacher){
-          return props;
-        }
-      }
-    )
-    return filterData;
-  };
-  useEffect(()=>{
-    setSearchview(getSearchView());
-  },[LectureList]);
 
   
   return (
     <SearchDiv>
     <LectureRight>
-    {searchview.map((element,index) => (
+    {LectureList.map((element,index) => (
                     <LectureListCrad
                         key={index}
                         title={element.title}
-                        Lecturename={element.Lecturename}
+                        Lecturename={element.content}
                         teacher = {element.teacher}
-
+                        thumbnail = {element.thumbnail}
                     />
   ))}
     </LectureRight>

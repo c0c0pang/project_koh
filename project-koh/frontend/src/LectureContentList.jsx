@@ -101,15 +101,15 @@ function LectureContentList() {
                 <h2>수강인원: {lectureData.headcount}</h2>
               </LectureTextDiv>
             </LectureMainDiv>
-            <DescriptionDiv>
-              <h1>{lectureData.content}</h1>
-            </DescriptionDiv>
 
             <VideoDiv>
-              <video controls muted name='media' width={400} height={300}>
+              <video controls muted name='media' width={700} height={600}>
                 <source src={lectureData.video_url} type="video/mp4"></source>
               </video>
             </VideoDiv>
+            <DescriptionDiv>
+              <h1>{lectureData.content}</h1>
+            </DescriptionDiv>
           </LectureContentDiv>
         </LectureContentRight>
       </LectureContentListDiv>

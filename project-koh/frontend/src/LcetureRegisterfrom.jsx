@@ -4,9 +4,9 @@ import { RegisterDiv, RegisterForm, FileDiv } from './StyledComponent'
 import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
 import { useEffect } from 'react';
-import {SendFileToIPFS} from './blockchain/MyLecture/upload-pinata'
-import {useRecoilState, useSetRecoilState } from 'recoil';
-import {VideoLinkAtom} from './atom';
+import { SendFileToIPFS } from './blockchain/MyLecture/upload-pinata'
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { VideoLinkAtom } from './atom';
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const videoRef = useRef();
@@ -34,7 +34,7 @@ function LcetureRegisterfrom() {
     { value: "IT", name: "IT" },
     { value: "기타", name: "기타" },
   ];
-  const { category, title, teacher, usernum, content, thumbnail,video } = inputs;
+  const { category, title, teacher, usernum, content, thumbnail, video } = inputs;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -60,7 +60,7 @@ function LcetureRegisterfrom() {
   const onChangeVideo = (e) => {
     const reader = new FileReader();
     const file = videoRef.current.files[0];
-    
+
     const { name } = e.target;
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -105,9 +105,9 @@ function LcetureRegisterfrom() {
     formData.append("teacher", data.teacher);
     formData.append("content", data.content);
     e.preventDefault();
-    const VideoUrl = await SendFileToIPFS(data.title,data.content,video);
-    formData.append("video_url",`https://gateway.pinata.cloud/${VideoUrl}`);
-    
+    const VideoUrl = await SendFileToIPFS(data.title, data.content, video);
+    formData.append("video_url", `https://gateway.pinata.cloud/${VideoUrl}`);
+
     await axios.
       post(LectureKeyApi, formData, {
         headers: { "Content-Type": 'multipart/form-data' },
@@ -118,10 +118,9 @@ function LcetureRegisterfrom() {
       }).then((err) => {
         // SendFileToIPFS(data.title,data.content,video); 
         // console.log(videoLink);
+        window.location.reload();
         console.log(err);
       })
-    
-    // window.location.reload();
   }
 
   return (
@@ -147,9 +146,12 @@ function LcetureRegisterfrom() {
             {videoUrl === null ? (
               <h2>동영상 업로드</h2>
             ) : (
-              <video width="100%" height='100%' preload='metadata' src={videoUrl+'#t=0.5'}>
-                <source src={videoUrl} type="video/mp4"></source>
-              </video>
+              <>
+              <h2>업로드 완료</h2>
+                <video width="100%" height='100%' preload='metadata' src={videoUrl + '#t=0.5'}>
+                  <source src={videoUrl} type="video/mp4"></source>
+                </video>
+              </>
             )
             }
           </div>

@@ -1,10 +1,32 @@
 import React,{useState,useEffect} from 'react'
 import {MyColletionListCardDiv,MyColletionCardList} from './StyledComponent'
 import axios from 'axios';
-function MyColletionCard({title,Lecturename,teacher}) {
+import {LectureGetKeyApi} from './ApiState';
+import { useNavigate } from 'react-router-dom'
+function MyColletionCard({id,title,Lecturename,teacher}) {
+  const navigate = useNavigate();
+  const [lectureData,setLectureData] = useState(Object);
+  const GetApi =  LectureGetKeyApi(id);
+  useEffect(()=>{
+    axios.get(
+      GetApi
+    ).then((response)=>{
+      console.log(response.data);
+      setLectureData(response.data);
+    })
+  
+},[])
+  const goPost = () => {
+    var url = "/lecture/" + title + "/" + Lecturename + "/";
+    navigate(url,{state: {id:id,lectureData:lectureData}});
+  };
+  
   return (
-    <MyColletionListCardDiv >
-        <MyColletionCardList>{Lecturename} {teacher}</MyColletionCardList>
+    <MyColletionListCardDiv>
+        <MyColletionCardList onClick={goPost}>
+          <h1>카테고리: {title}</h1> 
+          <h1>제목: {Lecturename}</h1>
+          </MyColletionCardList>
     </MyColletionListCardDiv>
   )
 }
