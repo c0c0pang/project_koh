@@ -11,7 +11,7 @@ function ModalText({ text, src, accountinfo, darkMode, setDarkMode }) {
   const [nightcheck, setNightCheck] = useState(true);
   const { deactivate, active, account } = useWeb3React();
   const navigate = useNavigate();
-  const [userName,setuserName] = useState('');
+  const [userData,setUserData] = useState('');
   var url = `${text}`;
   useEffect(()=>{
     axios.get(
@@ -19,11 +19,11 @@ function ModalText({ text, src, accountinfo, darkMode, setDarkMode }) {
     )
     .then((response)=>{
       console.log(response.data);
-      setuserName(response.data[0].userName);
+      setUserData(response.data[0]);
     })
   },[])
   const goProfile = () => {
-    navigate(url,{state: {userName:userName}});
+    navigate(url,{state: {userData:userData}});
   };
   // console.log(active);
   const toggleDarkMode = () => {

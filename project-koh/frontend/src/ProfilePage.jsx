@@ -17,11 +17,11 @@ function ProfilePage() {
   const [McCheck, setMcCheck] = useState(1);
   const [MdCheck, setMdCheck] = useState(0);
   const location = useLocation();
-  const { userName } = location.state;
+  const { userData } = location.state;
   useEffect(() => {
     axios
       .get(
-        LectureSearchApi(userName)
+        LectureSearchApi(userData.userName)
       )
       .then((response) => {
         setMyColletion(response.data)
@@ -87,7 +87,7 @@ function ProfilePage() {
       </ProfileBack>
       <ProfileContentDiv>
         <ProfileimgDiv>
-          <ProfileImg></ProfileImg>
+          <ProfileImg src={userData.profile} ></ProfileImg>
           <ProfileInfoDiv>
             <h2 id="useridtext">
               <img id="etheimg" src={ethereum} />
@@ -97,7 +97,7 @@ function ProfilePage() {
                 <div>...</div>
               )}
             </h2>
-            <h2 id="userName">이름: {userName}</h2>
+            <h2 id="userName">이름: {userData.userName}</h2>
           </ProfileInfoDiv>
         </ProfileimgDiv>
         <ProfileListDiv>

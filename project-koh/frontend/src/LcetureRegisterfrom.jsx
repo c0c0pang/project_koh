@@ -5,11 +5,13 @@ import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
 import { useEffect } from 'react';
 import { SendFileToIPFS } from './blockchain/MyLecture/upload-pinata'
+import Loading from './Loading';
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const videoRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [loading,setLoading] = useState(false)
   // const [videoLink,setVideoLink] = useRecoilState(VideoLinkAtom);
   const [inputs, setInputs] = useState({
     title: "",
@@ -87,6 +89,7 @@ function LcetureRegisterfrom() {
   }, [])
 
   const onSubmit = async (e) => {
+    setLoading(true);
     let data = {
       category: inputs.category,
       title: inputs.title,
@@ -116,6 +119,7 @@ function LcetureRegisterfrom() {
       }).then((err) => {
         // SendFileToIPFS(data.title,data.content,video); 
         // console.log(videoLink);
+        setLoading(false);
         window.location.reload();
         console.log(err);
       })
@@ -123,6 +127,7 @@ function LcetureRegisterfrom() {
 
   return (
     <RegisterDiv>
+      {loading ? <Loading /> : null} 
       <RegisterForm method='POST' encType='multipart/form-data' onSubmit={onSubmit}>
         <FileDiv>
           <input multiple="multiple" name='thumbnail' type="file" id="img" accept='image/*' ref={imgRef} onChange={onChangeImage} />

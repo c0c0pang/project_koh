@@ -13,7 +13,6 @@ export const HeaderNavdiv = styled.div`
     height: 80px;
     justify-content: space-around;
     align-items: center;
-    
     position: relative;
     z-index: 20;
     -webkit-user-select:none;
@@ -57,7 +56,6 @@ export const Search = styled.div`
     width: 450px;
     background-color:transparent; 
     margin-left: 10px;
-    text-align: center;
     }
     input:focus{
         outline:none;
@@ -190,7 +188,8 @@ export const LectureContentListDiv = styled.div`
     user-select:none;
 `
 export const LectureLeftDiv=styled.div`
-
+    height: 700px;
+    max-height: 700px;
 `
 export const LectureLeft = styled.div`
 width: 200px;
@@ -200,18 +199,31 @@ position: relative;
 `
 
 export const LectureRightDiv=styled.div`
-    border-left: 1px solid #CCCCCC; 
+    padding-right: 20px;
     margin-top: 45px;
 `
 export const LectureRight = styled.div`
     position: relative;
+    bottom: 6%;
     z-index: 13;
     display: grid;
     max-height: 700px;
-
     overflow: scroll;
     grid-template-columns: repeat(4 ,300px);
-    border-top: 1px solid #CCCCCC;
+    grid-template-rows: 230px;
+    border: 0.5px solid #CCCCCC;
+    border-radius: 5px;
+    height: 700px;
+`
+export const LectureSearchRight = styled.div`
+    position: relative;
+    z-index: 13;
+    display: grid;
+    max-height: 700px;
+    overflow: scroll;
+    grid-template-columns: repeat(4 ,300px);
+    border: 0.5px solid #CCCCCC;
+    border-radius: 5px;
 
 `
 export const LectureContentRight = styled.div`
@@ -313,18 +325,16 @@ export const SearchDiv=styled.div`
 `
 export const ModalDiv=styled.div`   
     position: absolute;
-    right: 2%;
+    right:3%;
     margin-top: 10px;
     visibility: hidden;
-    border-radius: 12px 12px 0px 0px;
-    
-
+    border-radius: 6px 6px 6px 6px;
 `
 export const Modalbox=styled.div`
     display: grid;
     place-content: center;
     width: 200px;
-    border-radius: 12px 12px 0px 0px;
+    border-radius: 6px 6px 0px 0px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
     background-color: white;
     transition: all 0.2s;
@@ -383,7 +393,7 @@ export const ReviseButton=styled.div`
     position: relative;
     z-index: 13;
     left:94%;
-    top: 43%;
+    bottom:108%;
     font-family: 'NEXON Lv1 Gothic OTF';
     background: linear-gradient(180deg, #EBD5D5 0%, rgba(198, 188, 188, 0.33) 99.99%);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
@@ -538,7 +548,7 @@ export const ProfileBack = styled.div`
         display: none;
     }
 `
-export const ProfileImg = styled.div`
+export const ProfileImg = styled.img`
     position: relative;
     bottom: 70px;
     left: 60px;
@@ -547,7 +557,6 @@ export const ProfileImg = styled.div`
     height: 180px;
     border: 4px solid white;
     border-radius: 150px;
-    background-color: #A161D4;
 `
 export const ProfileimgDiv = styled.div`
 

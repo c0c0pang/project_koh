@@ -60,7 +60,6 @@ function HeaderNav({ darkMode, setDarkMode }) {
     {text:"Profile",img:user},
     {text:"Favorited",img:love},
     {text:"Setting",img:Setting},
-    {text:"Night Mode",img:wallet},
   ] 
    const userwallet=[
     {text:"Logout",img:Logout},

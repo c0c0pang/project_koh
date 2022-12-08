@@ -1,7 +1,7 @@
 import React,{useEffect,useState}from 'react'
 import {useParams} from 'react-router-dom'
 import axios from 'axios';
-import{LectureRight,SearchDiv} from'./StyledComponent';
+import{LectureSearchRight,SearchDiv} from'./StyledComponent';
 import LectureListCrad from './LectureListCrad';
 import {LectureSearchApi} from './ApiState';
 function SearchViewPage() {
@@ -14,7 +14,6 @@ function SearchViewPage() {
       LectureSearchApi(Params.name)
     )
     .then((response) => {
-    // console.log(response.data)
     if(response.data.length>0){
       setLectureList(response.data)
     }
@@ -32,7 +31,7 @@ function SearchViewPage() {
   
   return (
     <SearchDiv>
-    <LectureRight>
+    <LectureSearchRight>
     {LectureList.map((element,index) => (
                     <LectureListCrad
                         key={index}
@@ -42,7 +41,7 @@ function SearchViewPage() {
                         thumbnail = {element.thumbnail}
                     />
   ))}
-    </LectureRight>
+    </LectureSearchRight>
     </SearchDiv>
   );
 }

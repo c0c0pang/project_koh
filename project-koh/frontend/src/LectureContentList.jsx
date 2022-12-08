@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { DescriptionDiv,VideoDiv, LectureTextDiv, LectureMainDiv, LectureContentDiv, DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
+import { DescriptionDiv, VideoDiv, LectureTextDiv, LectureMainDiv, LectureContentDiv, DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
 import { LectureDeleteKeyApi } from './ApiState'
 import NFT from './img/NFT.jpg'
@@ -9,8 +9,9 @@ function LectureContentList() {
   const Params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const { id, lectureData } = location.state;
-
+  const { id, lectureData, userData } = location.state;
+  console.log(userData.userName);
+  console.log(lectureData);
   // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
 
   const useConfirm = (message = null, onConfirm, onCancel) => {
@@ -75,10 +76,16 @@ function LectureContentList() {
         <LectureTitle>
           강의
         </LectureTitle>
-        <ReviseButton>강의수정</ReviseButton>
         <img src={NFT} />
-        <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
-
+        {userData.userName === lectureData.teacher ? (
+          <>
+            <ReviseButton>강의수정</ReviseButton>
+            <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
+          </>
+        ) : (<>
+          <ReviseButton>수강신청</ReviseButton>
+        </>)
+        }
       </LectureBack>
 
       <LectureContentListDiv>
@@ -98,7 +105,7 @@ function LectureContentList() {
               <img src={lectureData.thumbnail} />
               <LectureTextDiv>
                 <h1>[ {lectureData.title} ]</h1>
-                <h2>수강인원: {lectureData.headcount}</h2>
+                <h2>수강인원: {lectureData.count}</h2>
               </LectureTextDiv>
             </LectureMainDiv>
 
