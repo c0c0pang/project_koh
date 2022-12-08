@@ -13,4 +13,8 @@ export const LectureSearchApi = (target)=>{
     return `/api/test/search/?format=json&search=${target}`
 };
 export const UserKeyApi = "/user/";
+
+export const UserPutKeyApi = (wallet_address)=>{
+    return `/user/${wallet_address}/update_user/`;
+};
 export const UserViewKeyApi = "/user/?format=json";

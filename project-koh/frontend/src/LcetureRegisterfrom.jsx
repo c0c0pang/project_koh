@@ -5,8 +5,6 @@ import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
 import { useEffect } from 'react';
 import { SendFileToIPFS } from './blockchain/MyLecture/upload-pinata'
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { VideoLinkAtom } from './atom';
 function LcetureRegisterfrom() {
   const imgRef = useRef();
   const videoRef = useRef();
