@@ -245,7 +245,7 @@ export const LectureListDiv = styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     margin: 15px;
     cursor: pointer;    
-    overflow: hidden;
+    overflow: scroll;
 `
 export const LectureBox = styled.div`
     position:relative;
