@@ -3,7 +3,7 @@ from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Lecture, User
+from .models import Lecture, User, Wallet
 from .serializers import LectureSerializer, UserSerializer
 from rest_framework.decorators import action
 from django.http.response import HttpResponse
@@ -89,12 +89,13 @@ class UserViewSet(ModelViewSet):
     def add_token(self,request, pk=None):
         entry = User.objects.filter(wallet_address = pk)
         for temp in entry:
-            temp.tokens.add(request.data['tokens'])
+            find_token = Wallet.objects.get(token = request.data['tokens'])
+            temp.tokens.add(find_token)
             temp.save()
         serializer = self.get_serializer(entry, many=True)
         return Response(serializer.data)
 
-    # token 확인, GET /user/{wallet_address}/check_token/ // form-data에 'tokens'필드를 추가하여 보내주어야 한다
+    # token 확인, GET /user/{wallet_address}/check_token/   // form-data에 'tokens'필드를 추가하여 보내주어야 한다
     @action(detail=True, methods=['get']) 
     def check_token(self, request, pk=None):
         user  = User.objects.filter(wallet_address = pk)
@@ -103,8 +104,7 @@ class UserViewSet(ModelViewSet):
             a = temp.tokens.values_list()
             for i in a:
                 list(i)
-                token_list.append(i[0])
-        print(token_list)
+                token_list.append(i[1])
         if int(request.data['tokens']) in token_list:
             return Response("have token")
         else :
@@ -129,7 +129,6 @@ class LectureViewSet(ModelViewSet):
             return Response(serializer.data)
         except ObjectDoesNotExist:
             return Response({"message": "존재하지 않는 UUID({})입니다".format(pk)}, status=status.HTTP_404_NOT_FOUND)
-        
     
     # GET /lecture/{id}/countup/
     @action(detail=True, methods=['get'])
@@ -171,6 +170,9 @@ class LectureViewSet(ModelViewSet):
         serializer =  self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            for key in serializer.data.keys():
+                if key =='id':
+                    new_object = Wallet.objects.create(token = serializer.data[key])
             return Response(serializer.data)
         return Response(serializer.errors)
 
