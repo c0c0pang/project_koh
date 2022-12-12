@@ -17,4 +17,12 @@ export const UserKeyApi = "/user/";
 export const UserPutKeyApi = (wallet_address)=>{
     return `/user/${wallet_address}/update_user/`;
 };
+
+export const UserPutTokenKeyApi = (wallet_address)=>{
+    return `/user/${wallet_address}/add_token/`;
+};
+
+export const UserCheckTokenKeyApi = (wallet_address)=>{
+    return `/user/${wallet_address}/check_token/ `;
+};
 export const UserViewKeyApi = "/user/?format=json";

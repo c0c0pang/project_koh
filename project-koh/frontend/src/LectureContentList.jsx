@@ -3,8 +3,10 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { DescriptionDiv, VideoDiv, LectureTextDiv, LectureMainDiv, LectureContentDiv, DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
-import { LectureDeleteKeyApi } from './ApiState'
+import { LectureDeleteKeyApi,UserPutTokenKeyApi,LecturePutKeyApi } from './ApiState'
 import LectureUpdateFrom from './LectureUpdateFrom';
+import { SendApplyFileToIPFS } from './blockchain/MyLecture/upload-pinata'
+
 import NFT from './img/NFT.jpg'
 function LectureContentList() {
   const Params = useParams();
@@ -16,7 +18,7 @@ function LectureContentList() {
   };
   // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
 
-  const useConfirm = (message = null, onConfirm, onCancel) => {
+  const useDeleteConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
     }
@@ -40,11 +42,68 @@ function LectureContentList() {
   };
   const deleteConfirm = () => console.log("삭제했습니다.");
   const cancelConfirm = () => console.log("취소했습니다.");
-  const confirmDelete = useConfirm(
+  const confirmDelete = useDeleteConfirm(
     "삭제하시겠습니까?",
     deleteConfirm,
     cancelConfirm
   );
+  
+
+const useApplyConfirm = (message = null, onConfirm, onCancel) => {
+    if (!onConfirm || typeof onConfirm !== "function") {
+      return;
+    }
+    if (onCancel && typeof onCancel !== "function") {
+      return;
+    }
+    const confirmAction = async () => {
+      if (window.confirm(message)) {
+        const privateKey = window.prompt('private key를 입력해주세요.');
+        SendApplyFileToIPFS(lectureData.title,lectureData.image_url,lectureData.count,privateKey);
+        const formTokenData = new FormData();
+        const formCountData = new FormData();
+        formTokenData.append('tokens',lectureData.id);
+        await axios.patch(UserPutTokenKeyApi(userData.wallet_address), formTokenData, {
+          headers: { "Content-Type": `multipart/form-data` },
+          withCredentials: true,
+          transformRequest: (data, headers) => {
+            return data;
+          }
+        }).then((err) => {
+          console.log(err);
+        }
+        )
+        formCountData.append('count',Number(lectureData.count)+1);
+        await axios.patch(LecturePutKeyApi(lectureData.id),formCountData,{
+          headers: { "Content-Type": `multipart/form-data` },
+          withCredentials: true,
+          transformRequest: (data, headers) => {
+            return data;
+          }
+        }).then((err)=>{
+          console.log(err);
+        })
+        onConfirm();
+      } else {
+        onCancel();
+      }
+    };
+
+    return confirmAction;
+  };
+  /*
+      const showPrompt = useCallback(async () => {
+        const inputted = await prompt("What's your name?");
+
+        setMessage(`Your name is ${inputted}`);
+    }, []); */
+  const applyConfirm = () => console.log("신청했습니다.");
+  const confirmApply = useApplyConfirm(
+    "강의를 신청 하시겠습니까?",
+    applyConfirm,
+    cancelConfirm
+  );
+
 
   const CollectionsList = [
     { title: "인문" }
@@ -84,7 +143,7 @@ function LectureContentList() {
             <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
           </>
         ) : (<>
-          <ReviseButton>수강신청</ReviseButton>
+          <ReviseButton onClick={confirmApply}>수강신청</ReviseButton>
         </>)
         }
       </LectureBack>

@@ -1,5 +1,5 @@
 
-import {SendJsonFileToIPFS} from './upload-pinata-json'
+import {SendJsonFileToIPFS,SendJsonApplyFileToIPFS} from './upload-pinata-json'
 export const Uploader = (nftName,description,hiddenImgUrl,privateKey) =>{
     try {
         let json = {name:nftName,description:description,image:hiddenImgUrl,attributes:[{trait_type: "Unknown",value: "Unknown"}]};
@@ -12,12 +12,12 @@ export const Uploader = (nftName,description,hiddenImgUrl,privateKey) =>{
     }
 }
 
-export const Uploader_Apply = (nftName,description,hiddenImgUrl,count) =>{
+export const Uploader_Apply = (nftName,hiddenImgUrl,count,privateKey) =>{
     try {
-        let json = {name:`${nftName}${count}`,description:description,image:hiddenImgUrl,attributes:[{trait_type: "Unknown",value: "Unknown"}]};
+        let json = {name:`${nftName}${count}`,description:'',image:hiddenImgUrl,attributes:[{trait_type: "Unknown",value: "Unknown"}]};
         const jsonFile = new File([JSON.stringify(json)],`${nftName}${count}.json`,{type: "text/plain"});
         console.log(jsonFile)
-        SendJsonFileToIPFS(jsonFile);
+        SendJsonApplyFileToIPFS(jsonFile,privateKey);
         console.log("complete!");
     } catch (error) {
         console.log(error);
