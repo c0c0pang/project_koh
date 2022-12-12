@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { LectureTitle, LectureBack, LectureContent, LectureLeft, LectureRight, LectureLeftDiv, LectureRightDiv, RegisterButton, LectureRightForm } from './StyledComponent';
 import LectureListCrad from './LectureListCrad'
 import ColletionsSubTitle from './ColletionsSubTitle';
-import LcetureRegisterfrom from './LcetureRegisterfrom';
+import LectureRegisterfrom from './LectureRegisterfrom';
 import { LectureViewKeyApi } from './ApiState';
 import Category from './data';
 import MOON from './img/moon.jpg';
@@ -55,7 +55,7 @@ function Lecture() {
               <ColletionsSubTitle
                 key={index}
                 title={element}
-                RegisterNotCheck={RegisterNotCheck}
+                RegisterNotCheck={RegisterNotCheck} 
               />
             ))}
           </LectureLeft>
@@ -63,7 +63,7 @@ function Lecture() {
         <LectureRightDiv>
           {register ? (
             <LectureRightForm>
-              <LcetureRegisterfrom></LcetureRegisterfrom>
+              <LectureRegisterfrom></LectureRegisterfrom>
             </LectureRightForm>
           ) : (
             <LectureRight>

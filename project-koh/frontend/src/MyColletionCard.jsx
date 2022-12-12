@@ -3,10 +3,11 @@ import {MyColletionListCardDiv,MyColletionCardList} from './StyledComponent'
 import axios from 'axios';
 import {LectureGetKeyApi} from './ApiState';
 import { useNavigate } from 'react-router-dom'
-function MyColletionCard({id,title,Lecturename,teacher}) {
+function MyColletionCard({id,title,Lecturename,userData}) {
   const navigate = useNavigate();
   const [lectureData,setLectureData] = useState(Object);
   const GetApi =  LectureGetKeyApi(id);
+  // console.log(GetApi);
   useEffect(()=>{
     axios.get(
       GetApi
@@ -14,11 +15,10 @@ function MyColletionCard({id,title,Lecturename,teacher}) {
       console.log(response.data);
       setLectureData(response.data);
     })
-  
 },[])
   const goPost = () => {
     var url = "/lecture/" + title + "/" + Lecturename + "/";
-    navigate(url,{state: {id:id,lectureData:lectureData}});
+    navigate(url,{state: {id:id,lectureData:lectureData,userData:userData}});
   };
   
   return (

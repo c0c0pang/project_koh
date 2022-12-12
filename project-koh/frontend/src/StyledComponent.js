@@ -626,8 +626,8 @@ export const MyColletionsTextDiv = styled.div`
 
 `
 export const MyColletionListDiv = styled.div`
-    height: 600px;
-    
+    max-height: 700px;
+    overflow: scroll;
     /* background-color: blue; */
 `
 export const MyColletionList = styled.div`
@@ -638,6 +638,7 @@ export const MyColletionList = styled.div`
 
 `
 export const MyColletionListCardDiv = styled.div`
+
 `
 export const MyColletionCardList= styled.div`
     display: grid;

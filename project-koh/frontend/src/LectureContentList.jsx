@@ -4,14 +4,16 @@ import axios from 'axios';
 import { DescriptionDiv, VideoDiv, LectureTextDiv, LectureMainDiv, LectureContentDiv, DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
 import { LectureDeleteKeyApi } from './ApiState'
+import LectureUpdateFrom from './LectureUpdateFrom';
 import NFT from './img/NFT.jpg'
 function LectureContentList() {
   const Params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const { id, lectureData, userData } = location.state;
-  console.log(userData.userName);
-  console.log(lectureData);
+  const RegisterCheck = () => {
+    setRegister(true);
+  };
   // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
 
   const useConfirm = (message = null, onConfirm, onCancel) => {
@@ -69,7 +71,6 @@ function LectureContentList() {
       RegiCollections.push(CollectionsList[i]);
     }
   }
-  console.log(lectureData.video_url);
   return (
     <>
       <LectureBack className='main_div'>
@@ -79,7 +80,7 @@ function LectureContentList() {
         <img src={NFT} />
         {userData.userName === lectureData.teacher ? (
           <>
-            <ReviseButton>강의수정</ReviseButton>
+            <ReviseButton onClick={RegisterCheck} >강의수정</ReviseButton>
             <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
           </>
         ) : (<>
@@ -98,9 +99,14 @@ function LectureContentList() {
             />
           ))}
         </LectureLeft>
-
+        
         <LectureContentRight>
-          <LectureContentDiv>
+          {register ? (
+            <LectureRightForm>
+            <LectureUpdateFrom lectureData={lectureData}></LectureUpdateFrom>
+          </LectureRightForm>
+          ):(
+            <LectureContentDiv>
             <LectureMainDiv>
               <img src={lectureData.thumbnail} />
               <LectureTextDiv>
@@ -118,6 +124,8 @@ function LectureContentList() {
               <h1>{lectureData.content}</h1>
             </DescriptionDiv>
           </LectureContentDiv>
+          ) }
+          
         </LectureContentRight>
       </LectureContentListDiv>
     </>

@@ -2,8 +2,9 @@ import {MintNFT} from './scripts/mint-nft'
 const REACT_APP_PINATA_API_KEY="2ecfdfdeebe7f222ffef"
 const REACT_APP_PINATA_API_SECRET="465bd8f4bddf38456e011ae4164f34a734bee415a1f9fc11124e3f300de2fc4e"
 
-const PRIVATE_KEY = "e0cc301683cf0037f584a272c9baa1bf215b94964553512319dec064ee39efaf"
-export const SendJsonFileToIPFS = async (jsonfile) => {
+// const PRIVATE_KEY = "e0cc301683cf0037f584a272c9baa1bf215b94964553512319dec064ee39efaf"
+
+export const SendJsonFileToIPFS = async (jsonfile,privateKey) => {
 	console.log(jsonfile);
     const formData = new FormData();
 	formData.append("file", jsonfile);
@@ -20,8 +21,8 @@ export const SendJsonFileToIPFS = async (jsonfile) => {
 	const data = await response.json();
 	const ImgHash = `ipfs://${data.IpfsHash}`;
 	console.log(ImgHash);
-	MintNFT(ImgHash,PRIVATE_KEY);
-	
+	console.log(privateKey);
+	MintNFT(ImgHash,privateKey);
 	//Take a look at your Pinata Pinned section, you will see a new file added to you list.   
 }
 

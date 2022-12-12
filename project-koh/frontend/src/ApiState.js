@@ -4,7 +4,7 @@ export const LectureDeleteKeyApi = (id)=>{
     return `/api/test/${id}/delete_lecture/`
 };
 export const LecturePutKeyApi = (id)=>{
-    return `/api/test/${id}/updeate_lecture/`
+    return `/api/test/${id}/update_lecture/`
 };
 export const LectureGetKeyApi = (id)=>{
     return `/api/test/${id}/`

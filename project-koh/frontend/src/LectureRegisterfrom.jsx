@@ -4,7 +4,7 @@ import { RegisterDiv, RegisterForm, FileDiv } from './StyledComponent'
 import { LectureKeyApi, UserViewKeyApi } from './ApiState';
 import axios from 'axios'
 import { useEffect } from 'react';
-import { SendFileToIPFS } from './blockchain/MyLecture/upload-pinata'
+import { SendFileToIPFS,SendImgFileToIPFS } from './blockchain/MyLecture/upload-pinata'
 import Loading from './Loading';
 function LcetureRegisterfrom() {
   const imgRef = useRef();
@@ -20,7 +20,8 @@ function LcetureRegisterfrom() {
     category: "인문",
     thumbnail: "",
     content: "",
-    video: ""
+    video: "",
+    privateKey: ""
   });
   const [userName, setUserName] = useState("")
   const selectbox = [
@@ -34,7 +35,7 @@ function LcetureRegisterfrom() {
     { value: "IT", name: "IT" },
     { value: "기타", name: "기타" },
   ];
-  const { category, title, teacher, usernum, content, thumbnail, video } = inputs;
+  const { category, title, teacher, usernum, content, thumbnail, video,privateKey } = inputs;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -95,9 +96,9 @@ function LcetureRegisterfrom() {
       title: inputs.title,
       thumbnail: inputs.thumbnail,
       teacher: userName,
-      //inputs.le_contents,
       content: inputs.content,
-      video: inputs.video
+      video: inputs.video,
+      privateKey: inputs.privateKey
     };
     const formData = new FormData();
     formData.append("thumbnail", data.thumbnail);
@@ -106,9 +107,11 @@ function LcetureRegisterfrom() {
     formData.append("teacher", data.teacher);
     formData.append("content", data.content);
     e.preventDefault();
-    const VideoUrl = await SendFileToIPFS(data.title, data.content, video);
+    console.log(data.privateKey);
+    const VideoUrl = await SendFileToIPFS(data.title, data.content, video,data.privateKey);
+    const ImageUrl = await SendImgFileToIPFS(thumbnail);
     formData.append("video_url", `https://gateway.pinata.cloud/${VideoUrl}`);
-
+    formData.append("image_url",`https://gateway.pinata.cloud/${ImageUrl}`);
     await axios.
       post(LectureKeyApi, formData, {
         headers: { "Content-Type": 'multipart/form-data' },
@@ -166,9 +169,10 @@ function LcetureRegisterfrom() {
         </select>
         <input name='title' value={title} className='text' type="text" id="LcetureName" placeholder='강의명' onChange={onChange} required />
         <textarea name='content' value={content} className='textarea' type="text" id="limitUser" placeholder='강의 설명' onChange={onChange} required />
+        <input name='privateKey' value={privateKey} className='text' type="text" id="LcetureName" placeholder='privateKey' onChange={onChange}  maxLength={64} minLength={64} required />
+        
         <input className='subbtn' type="submit" value="입력 완료" />
       </RegisterForm>
-
     </RegisterDiv>
   )
 }

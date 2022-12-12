@@ -115,7 +115,7 @@ function ProfilePage() {
                       id={element.id}
                       title={element.category}
                       Lecturename={element.title}
-                      teacher={element.teacher}
+                      userData={userData}
                     />
                   ))) : (
                   MyDibs.map((element, index) => (
