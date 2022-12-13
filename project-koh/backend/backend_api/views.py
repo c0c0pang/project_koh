@@ -84,28 +84,31 @@ class UserViewSet(ModelViewSet):
         else:
             return Response("일치되는 유저가 없습니다")
     
-    # token번호 부여, PUT /user/{wallet_address}/add_token/
-    @action(detail=True, methods=['put'])
+    # token번호 부여, PUT /user/{wallet_address}/add_token/?token=00
+    @action(detail=True, methods=['get'])
     def add_token(self,request, pk=None):
         entry = User.objects.filter(wallet_address = pk)
+        input_token = self.request.GET.get('token','') 
         for temp in entry:
-            find_token = Wallet.objects.get(token = request.data['tokens'])
+            find_token = Wallet.objects.get(token = input_token)
             temp.tokens.add(find_token)
             temp.save()
         serializer = self.get_serializer(entry, many=True)
         return Response(serializer.data)
 
-    # token 확인, GET /user/{wallet_address}/check_token/   // form-data에 'tokens'필드를 추가하여 보내주어야 한다
+    # token 확인, GET /user/{wallet_address}/check_token/?token=00   // form-data에 'tokens'필드를 추가하여 보내주어야 한다
     @action(detail=True, methods=['get']) 
     def check_token(self, request, pk=None):
         user  = User.objects.filter(wallet_address = pk)
+        input_token = self.request.GET.get('token','') 
         token_list =[]
         for temp in user:
             a = temp.tokens.values_list()
             for i in a:
                 list(i)
                 token_list.append(i[1])
-        if int(request.data['tokens']) in token_list:
+        print(token_list, input_token)
+        if int(input_token) in token_list:
             return Response("have token")
         else :
             return Response("have not token")            
