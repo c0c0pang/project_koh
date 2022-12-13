@@ -84,7 +84,7 @@ class UserViewSet(ModelViewSet):
         else:
             return Response("일치되는 유저가 없습니다")
     
-    # token번호 부여, PUT /user/{wallet_address}/add_token/?token=00
+    # token번호 부여, GET /user/{wallet_address}/add_token/?token=00
     @action(detail=True, methods=['get'])
     def add_token(self,request, pk=None):
         entry = User.objects.filter(wallet_address = pk)
@@ -96,7 +96,7 @@ class UserViewSet(ModelViewSet):
         serializer = self.get_serializer(entry, many=True)
         return Response(serializer.data)
 
-    # token 확인, GET /user/{wallet_address}/check_token/?token=00   // form-data에 'tokens'필드를 추가하여 보내주어야 한다
+    # token 확인, GET /user/{wallet_address}/check_token/?token=00   
     @action(detail=True, methods=['get']) 
     def check_token(self, request, pk=None):
         user  = User.objects.filter(wallet_address = pk)
@@ -168,7 +168,7 @@ class LectureViewSet(ModelViewSet):
         
         return Response(serailized_posts.data)
 
-    # 이미지 파일과 같이 강의를 생성
+    # 이미지 파일과 같이 강의를 생성, 강의 생성시 해당 id를 부여하는 토큰object를 생성
     def create(self,request):
         serializer =  self.get_serializer(data=request.data)
         if serializer.is_valid():
