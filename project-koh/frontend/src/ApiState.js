@@ -22,13 +22,13 @@ export const UserPutTokenKeyApi = (wallet_address)=>{
     return `/user/${wallet_address}/add_token/`;
 };
 
-export const UserCheckTokenKeyApi = (wallet_address)=>{
-    return `/user/${wallet_address}/check_token/ `;
-};
 export const UserViewKeyApi = "/user/?format=json";
 export const LectureCountUp = (id)=>{
     return `/api/test/${id}/countup/`
 }
 export const LectureCheck = (wallet_address,id)=>{
     return `/user/${wallet_address}/check_token/?token=${id}`
+}
+export const UserAllToken = (wallet_address) =>{
+    return ` /user/${wallet_address}/all_token/`
 }

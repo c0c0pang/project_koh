@@ -5,13 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { useWeb3React } from '@web3-react/core';
 import { useNavigate } from 'react-router-dom';
-import {UserViewKeyApi} from './ApiState';
+import {UserViewKeyApi,UserAllToken,LectureGetKeyApi} from './ApiState';
 import axios from 'axios';
 function ModalText({ text, src, accountinfo, darkMode, setDarkMode }) {
   const [nightcheck, setNightCheck] = useState(true);
   const { deactivate, active, account } = useWeb3React();
   const navigate = useNavigate();
   const [userData,setUserData] = useState('');
+  const [data,setData] = useState();
   var url = `${text}`;
   useEffect(()=>{
     axios.get(
@@ -20,10 +21,13 @@ function ModalText({ text, src, accountinfo, darkMode, setDarkMode }) {
     .then((response)=>{
       console.log(response.data);
       setUserData(response.data[0]);
+      
     })
   },[])
+  
+
   const goProfile = () => {
-    navigate(url,{state: {userData:userData}});
+    navigate(url,{state: {userData:userData,data:data}});
   };
   // console.log(active);
   const toggleDarkMode = () => {

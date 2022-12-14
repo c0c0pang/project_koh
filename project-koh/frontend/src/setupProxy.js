@@ -4,7 +4,7 @@ module.exports = (app) => {
     app.use('/get',
         createProxyMiddleware(
             {
-                target: "http://127.0.0.1:8000",
+                target: "http://3.36.201.241:8000",
                 changeOrigin: true,
             }
         )
@@ -12,7 +12,7 @@ module.exports = (app) => {
         app.use('/api',
             createProxyMiddleware(
                 {
-                    target: "http://127.0.0.1:8000",
+                    target: "http://3.36.201.241:8000",
                     changeOrigin: true,
                 }
             )
@@ -20,7 +20,7 @@ module.exports = (app) => {
         app.use('/user',
             createProxyMiddleware(
                 {
-                    target: "http://127.0.0.1:8000",
+                    target: "http://3.36.201.241:8000",
                     changeOrigin: true,
                 }
             )

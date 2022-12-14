@@ -109,10 +109,23 @@ class UserViewSet(ModelViewSet):
                 token_list.append(i[1])
         print(token_list, input_token)
         if int(input_token) in token_list:
-            return Response("have token")
+            return Response("have token:")
         else :
-            return Response("have not token")            
-
+            return Response("have not token")
+        
+    # token 확인, GET /user/{wallet_address}/all_token/
+    @action(detail=True, methods=['get']) 
+    def all_token(self, request, pk=None):
+        user  = User.objects.filter(wallet_address = pk)
+        token_list =[]
+        for temp in user:
+            a = temp.tokens.values_list()
+            for i in a:
+                list(i)
+                token_list.append(i[1])
+        print(token_list)
+        return Response(token_list)
+        
  # token번호 삭제, PATCH /user/{wallet_address}/delete_token/
     @action(detail=True, methods=['patch'])
     def delete_token(self,request, pk=None):

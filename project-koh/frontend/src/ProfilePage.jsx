@@ -5,19 +5,21 @@ import ethereum from './img/ethereum.png';
 import { useEffect } from 'react';
 import MyColletionCard from './MyColletionCard';
 import axios from 'axios';
-import { LectureSearchApi, UserViewKeyApi } from './ApiState';
+import { LectureSearchApi,UserAllToken,LectureGetKeyApi } from './ApiState';
 import { useLocation } from 'react-router-dom';
+import MyDibsPage from './MyDibsPage';
 function ProfilePage() {
-  const MyDibsKeyApi = "http://localhost:4000/MyDibs";
   const imgRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
   const [user_id, setUser_id] = useState();
   const [MyColletion, setMyColletion] = useState([{}]);
-  const [MyDibs, setMyDibs] = useState([{}]);
+  const data= [];
+
   const [McCheck, setMcCheck] = useState(1);
   const [MdCheck, setMdCheck] = useState(0);
   const location = useLocation();
   const { userData } = location.state;
+  console.log(data);
   useEffect(() => {
     axios
       .get(
@@ -40,13 +42,17 @@ function ProfilePage() {
   useEffect(() => {
     axios
       .get(
-        MyDibsKeyApi
+        UserAllToken(userData.wallet_address)
       )
       .then((response) => {
-        setMyDibs(response.data)
+        response.data.map((element)=>{
+          axios.get(LectureGetKeyApi(element)).then((response)=>{
+            data.push(response);
+          })
+        })
       });
   }, []);
-
+  
   const onChangeImage = () => {
     const reader = new FileReader();
     const file = imgRef.current.files[0];
@@ -127,14 +133,12 @@ function ProfilePage() {
                       userData={userData}
                     />
                   ))) : (
-                  MyDibs.map((element, index) => (
-                    <MyColletionCard
-                      key={index}
-                      title={element.title}
-                      Lecturename={element.Lecturename}
-                      teacher={element.teacher}
+                  
+                    <MyDibsPage
+                      data = {data}
+                      userData = {userData}
                     />
-                  ))
+                  
                 )}
               </MyColletionList>
               <MyColletionList></MyColletionList>
