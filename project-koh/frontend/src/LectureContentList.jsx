@@ -92,7 +92,6 @@ function LectureContentList() {
         )
         //토큰 카운팅
         setCheck(await alchemy_sdk(userData.wallet_address,img_url));
-        if(check){
           await axios
           .get(
             LectureCountUp(lectureData.id)
@@ -100,11 +99,9 @@ function LectureContentList() {
           .then((response)=>{
             console.log(response.data);
           })
-        }
         
         setLoading(false);
-
-
+        navigate(`../lecture/${lectureData.category}`);
         onConfirm();
       } else {
         onCancel();
@@ -197,7 +194,7 @@ function LectureContentList() {
                   <h2>수강인원: {lectureData.count}</h2>
                 </LectureTextDiv>
               </LectureMainDiv>
-              {check ?  (<VideoDiv>
+              {check ||  userData.userName === lectureData.teacher ? (<VideoDiv>
                 <video controls muted name='media' width={700} height={600}>
                   <source src={lectureData.video_url} type="video/mp4"></source>
                 </video>
