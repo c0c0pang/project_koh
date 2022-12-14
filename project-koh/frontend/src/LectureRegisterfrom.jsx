@@ -11,7 +11,7 @@ function LcetureRegisterfrom() {
   const videoRef = useRef();
   const [imageUrl, setImageUrl] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
-  const [loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false);
   // const [videoLink,setVideoLink] = useRecoilState(VideoLinkAtom);
   const [inputs, setInputs] = useState({
     title: "",

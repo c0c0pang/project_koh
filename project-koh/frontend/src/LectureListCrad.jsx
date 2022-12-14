@@ -9,17 +9,21 @@ function LectureListCrad({ id,category, title, teacher, thumbnail }) {
   const navigate = useNavigate();
   const [lectureData,setLectureData] = useState(Object);
   const [userData,setUserData] = useState(Object);
+
   useEffect(()=>{
-    axios.get(
-      LectureGetKeyApi(id)
-    ).then((response)=>{
-      setLectureData(response.data);
-    })
+    if(id !== undefined){
+      axios.get(
+        LectureGetKeyApi(id)
+      ).then((response)=>{
+        setLectureData(response.data);
+      })
+    }
 },[]);
 useEffect(()=>{
   axios.get(
     UserViewKeyApi
   ).then((response)=>{
+    console.log(response.data[0]);
     setUserData(response.data[0]);
   })
 },[]);

@@ -19,7 +19,7 @@ export const SendFileToIPFS = async (name,description,fileVideo,privateKey) => {
 	const data = await response.json();
 	const ImgHash = `ipfs://${data.IpfsHash}`;
 	// console.log(name,description,ImgHash);
-	Uploader(name,description,ImgHash,privateKey);
+	await Uploader(name,description,ImgHash,privateKey);
 	console.log(typeof(ImgHash));
 	return `ipfs/${data.IpfsHash}`;
 }
@@ -44,24 +44,24 @@ export const SendImgFileToIPFS = async (fileVideo) => {
 	return `ipfs/${data.IpfsHash}`;
 }
 
-export const SendApplyFileToIPFS = async (name,fileimg,count,privateKey) => {
-	console.log(fileimg.name);
-	const formData = new FormData();
-	formData.append("file", fileimg);
-	const config = {
-		method: "POST",
-		maxContentLength: Infinity,
-		headers: {
-			pinata_api_key: REACT_APP_PINATA_API_KEY,
-			pinata_secret_api_key: REACT_APP_PINATA_API_SECRET,
-		},
-		body: formData,
-	};
-	const response = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", config);
-	const data = await response.json();
-	const ImgHash = `ipfs://${data.IpfsHash}`;
+export const SendApplyFileToIPFS = async (name,ImgHash,count,privateKey) => {
+	// console.log(fileimg.name);
+	// const formData = new FormData();
+	// formData.append("file", fileimg);
+	// const config = {
+	// 	method: "POST",
+	// 	maxContentLength: Infinity,
+	// 	headers: {
+	// 		pinata_api_key: REACT_APP_PINATA_API_KEY,
+	// 		pinata_secret_api_key: REACT_APP_PINATA_API_SECRET,
+	// 	},
+	// 	body: formData,
+	// };
+	// const response = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", config);
+	// const data = await response.json();
+	// const ImgHash = `ipfs://${data.IpfsHash}`;
 	// console.log(name,description,ImgHash);
-	Uploader_Apply(name,ImgHash,count,privateKey);
+	await Uploader_Apply(name,ImgHash,count,privateKey);
 	console.log(typeof(ImgHash));
-	return `ipfs/${data.IpfsHash}`;
+	return ImgHash;
 }

@@ -3,21 +3,38 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { DescriptionDiv, VideoDiv, LectureTextDiv, LectureMainDiv, LectureContentDiv, DeleteButton, LectureTitle, LectureBack, LectureContentListDiv, LectureLeft, LectureContentRight, LectureVideoDiv, RegisterButton, ReviseButton, LectureRightForm } from './StyledComponent';
 import ColletionsSubTitle from './ColletionsSubTitle';
-import { LectureDeleteKeyApi,UserPutTokenKeyApi,LecturePutKeyApi } from './ApiState'
+import { LectureDeleteKeyApi, UserPutTokenKeyApi, LectureCountUp,LectureCheck} from './ApiState'
 import LectureUpdateFrom from './LectureUpdateFrom';
-import { SendApplyFileToIPFS } from './blockchain/MyLecture/upload-pinata'
-
+import { SendApplyFileToIPFS } from './blockchain/MyLecture/upload-pinata';
+import {alchemy_sdk} from './alchemy/alchemy_sdk';
 import NFT from './img/NFT.jpg'
+import Loading from './Loading';
 function LectureContentList() {
   const Params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const { id, lectureData, userData } = location.state;
+  let img_url = "";
+  const [check,setCheck] = useState(false);
+  const [loading,setLoading] = useState(false);
   const RegisterCheck = () => {
     setRegister(true);
   };
-  // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
+  useEffect(()=>{
+    axios.get(
+      LectureCheck(userData.wallet_address,lectureData.id)
+    ).then((response)=>{
+      if(response.data === "have token"){
+        setCheck(true);
+      }
+    })
+  },[])
 
+
+  // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
+  // useEffect(()=>{
+  //   console.log(alchemy_sdk(userData.wallet_address,lectureData.image_url));
+  // },[])
   const useDeleteConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
@@ -47,9 +64,9 @@ function LectureContentList() {
     deleteConfirm,
     cancelConfirm
   );
-  
 
-const useApplyConfirm = (message = null, onConfirm, onCancel) => {
+
+  const useApplyConfirm = (message = null, onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
     }
@@ -59,10 +76,10 @@ const useApplyConfirm = (message = null, onConfirm, onCancel) => {
     const confirmAction = async () => {
       if (window.confirm(message)) {
         const privateKey = window.prompt('private key를 입력해주세요.');
-        SendApplyFileToIPFS(lectureData.title,lectureData.image_url,lectureData.count,privateKey);
+        setLoading(true);
+        img_url = await SendApplyFileToIPFS(lectureData.title, lectureData.image_url, lectureData.count, privateKey);
         const formTokenData = new FormData();
-        const formCountData = new FormData();
-        formTokenData.append('tokens',lectureData.id);
+        formTokenData.append('token', lectureData.id);
         await axios.patch(UserPutTokenKeyApi(userData.wallet_address), formTokenData, {
           headers: { "Content-Type": `multipart/form-data` },
           withCredentials: true,
@@ -73,16 +90,21 @@ const useApplyConfirm = (message = null, onConfirm, onCancel) => {
           console.log(err);
         }
         )
-        formCountData.append('count',Number(lectureData.count)+1);
-        await axios.patch(LecturePutKeyApi(lectureData.id),formCountData,{
-          headers: { "Content-Type": `multipart/form-data` },
-          withCredentials: true,
-          transformRequest: (data, headers) => {
-            return data;
-          }
-        }).then((err)=>{
-          console.log(err);
-        })
+        //토큰 카운팅
+        setCheck(await alchemy_sdk(userData.wallet_address,img_url));
+        if(check){
+          await axios
+          .get(
+            LectureCountUp(lectureData.id)
+          )
+          .then((response)=>{
+            console.log(response.data);
+          })
+        }
+        
+        setLoading(false);
+
+
         onConfirm();
       } else {
         onCancel();
@@ -132,6 +154,7 @@ const useApplyConfirm = (message = null, onConfirm, onCancel) => {
   }
   return (
     <>
+    {loading ? <Loading /> : null} 
       <LectureBack className='main_div'>
         <LectureTitle>
           강의
@@ -142,9 +165,10 @@ const useApplyConfirm = (message = null, onConfirm, onCancel) => {
             <ReviseButton onClick={RegisterCheck} >강의수정</ReviseButton>
             <DeleteButton onClick={confirmDelete}>강의삭제</DeleteButton>
           </>
-        ) : (<>
+        ) : ( check ? (null):(<>
           <ReviseButton onClick={confirmApply}>수강신청</ReviseButton>
         </>)
+        )
         }
       </LectureBack>
 
@@ -158,33 +182,33 @@ const useApplyConfirm = (message = null, onConfirm, onCancel) => {
             />
           ))}
         </LectureLeft>
-        
+
         <LectureContentRight>
           {register ? (
             <LectureRightForm>
-            <LectureUpdateFrom lectureData={lectureData}></LectureUpdateFrom>
-          </LectureRightForm>
-          ):(
+              <LectureUpdateFrom lectureData={lectureData}></LectureUpdateFrom>
+            </LectureRightForm>
+          ) : (
             <LectureContentDiv>
-            <LectureMainDiv>
-              <img src={lectureData.thumbnail} />
-              <LectureTextDiv>
-                <h1>[ {lectureData.title} ]</h1>
-                <h2>수강인원: {lectureData.count}</h2>
-              </LectureTextDiv>
-            </LectureMainDiv>
+              <LectureMainDiv>
+                <img src={lectureData.thumbnail} />
+                <LectureTextDiv>
+                  <h1>[ {lectureData.title} ]</h1>
+                  <h2>수강인원: {lectureData.count}</h2>
+                </LectureTextDiv>
+              </LectureMainDiv>
+              {check ?  (<VideoDiv>
+                <video controls muted name='media' width={700} height={600}>
+                  <source src={lectureData.video_url} type="video/mp4"></source>
+                </video>
+              </VideoDiv>):(null)}
+            
+              <DescriptionDiv>
+                <h1>{lectureData.content}</h1>
+              </DescriptionDiv>
+            </LectureContentDiv>
+          )}
 
-            <VideoDiv>
-              <video controls muted name='media' width={700} height={600}>
-                <source src={lectureData.video_url} type="video/mp4"></source>
-              </video>
-            </VideoDiv>
-            <DescriptionDiv>
-              <h1>{lectureData.content}</h1>
-            </DescriptionDiv>
-          </LectureContentDiv>
-          ) }
-          
         </LectureContentRight>
       </LectureContentListDiv>
     </>

@@ -25,32 +25,34 @@ export const alchemy_sdk = async(ownerAddr,image_url)  => {
         nft.contract.address,
         nft.tokenId
       );
-      if(ticket!==nft.contract.address){
-        continue;
-      }
+      console.log('response.rawMetadata.image: ',response.rawMetadata.image);
+      console.log('image_url: ',image_url);
       if(response.rawMetadata.image===image_url){
+        console.log("token ID:", nft.tokenId);
         check = true
         break;
         //시청 허가
       }
-      console.log("token ID:", nft.tokenId);
+      if(ticket!==nft.contract.address){
+        continue;
+      }
     };
     return check;
-    console.log("===");
+    // console.log("===");
     
-    // Fetch metadata for a particular NFT:
-    console.log("fetching metadata for a Crypto Coven NFT...");
+    // // Fetch metadata for a particular NFT:
+    // console.log("fetching metadata for a Crypto Coven NFT...");
     
     
-    // Uncomment this line to see the full api response:
-    // console.log(response);
+    // // Uncomment this line to see the full api response:
+    // // console.log(response);
     
-    // Print some commonly used fields:
-    console.log("NFT name: ", response.title);
-    console.log("token type: ", response.tokenType);
-    console.log("tokenUri: ", response.tokenUri.gateway);
-    console.log("image url: ", response.rawMetadata.image);
-    console.log("time last updated: ", response.timeLastUpdated);
-    console.log("===");
+    // // Print some commonly used fields:
+    // console.log("NFT name: ", response.title);
+    // console.log("token type: ", response.tokenType);
+    // console.log("tokenUri: ", response.tokenUri.gateway);
+    // console.log("image url: ", response.rawMetadata.image);
+    // console.log("time last updated: ", response.timeLastUpdated);
+    // console.log("===");
 }
 

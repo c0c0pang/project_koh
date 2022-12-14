@@ -7,7 +7,7 @@ import {LectureSearchApi} from './ApiState';
 function SearchViewPage() {
   const Params = useParams();
   const [LectureList,setLectureList]= useState([{}]);
-  const [searchview,setSearchview]=useState([]);
+  console.log(Params.name);
   useEffect(() => {
     axios
     .get(
@@ -28,13 +28,14 @@ function SearchViewPage() {
     });
   },[]);
 
-  
+  console.log(LectureList)
   return (
     <SearchDiv>
     <LectureSearchRight>
     {LectureList.map((element,index) => (
                     <LectureListCrad
                         key={index}
+                        id = {element.id}
                         title={element.title}
                         Lecturename={element.content}
                         teacher = {element.teacher}

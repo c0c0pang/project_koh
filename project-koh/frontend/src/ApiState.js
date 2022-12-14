@@ -26,3 +26,9 @@ export const UserCheckTokenKeyApi = (wallet_address)=>{
     return `/user/${wallet_address}/check_token/ `;
 };
 export const UserViewKeyApi = "/user/?format=json";
+export const LectureCountUp = (id)=>{
+    return `/api/test/${id}/countup/`
+}
+export const LectureCheck = (wallet_address,id)=>{
+    return `/user/${wallet_address}/check_token/?token=${id}`
+}

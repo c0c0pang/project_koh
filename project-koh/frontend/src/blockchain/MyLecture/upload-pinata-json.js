@@ -22,7 +22,7 @@ export const SendJsonFileToIPFS = async (jsonfile,privateKey) => {
 	const ImgHash = `ipfs://${data.IpfsHash}`;
 	console.log(ImgHash);
 	console.log(privateKey);
-	MintNFT(ImgHash,privateKey);
+	await MintNFT(ImgHash,privateKey);
 	//Take a look at your Pinata Pinned section, you will see a new file added to you list.   
 }
 
@@ -44,7 +44,7 @@ export const SendJsonApplyFileToIPFS = async (jsonfile,privateKey) => {
 	const ImgHash = `ipfs://${data.IpfsHash}`;
 	console.log(ImgHash);
 	console.log(privateKey);
-	MintTicketNFT(ImgHash,privateKey);
+	await MintTicketNFT(ImgHash,privateKey);
 	//Take a look at your Pinata Pinned section, you will see a new file added to you list.   
 }
 

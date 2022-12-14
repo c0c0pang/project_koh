@@ -6,15 +6,16 @@ import { useNavigate } from 'react-router-dom'
 function MyColletionCard({id,title,Lecturename,userData}) {
   const navigate = useNavigate();
   const [lectureData,setLectureData] = useState(Object);
-  const GetApi =  LectureGetKeyApi(id);
-  // console.log(GetApi);
   useEffect(()=>{
-    axios.get(
-      GetApi
-    ).then((response)=>{
-      console.log(response.data);
-      setLectureData(response.data);
-    })
+    if(id !==null){
+      axios.get(
+        LectureGetKeyApi(id)
+      ).then((response)=>{
+        console.log(response.data);
+        setLectureData(response.data);
+      })
+    }
+    
 },[])
   const goPost = () => {
     var url = "/lecture/" + title + "/" + Lecturename + "/";

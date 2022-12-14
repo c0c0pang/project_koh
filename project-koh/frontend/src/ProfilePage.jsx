@@ -24,7 +24,16 @@ function ProfilePage() {
         LectureSearchApi(userData.userName)
       )
       .then((response) => {
-        setMyColletion(response.data)
+        if(response.data.length!==0){
+          setMyColletion(response.data)
+        }
+        else{
+          setMyColletion([{
+            id: 0,
+            title :'없음',
+            Lecturename : '',
+          }])
+        }
       });
   }, []);
 
@@ -112,7 +121,7 @@ function ProfilePage() {
                   MyColletion.map((element, index) => (
                     <MyColletionCard
                       key={index}
-                      id={element.id}
+                      id={element.id!==undefined ? (element.id) : (null) }
                       title={element.category}
                       Lecturename={element.title}
                       userData={userData}

@@ -84,11 +84,11 @@ class UserViewSet(ModelViewSet):
         else:
             return Response("일치되는 유저가 없습니다")
     
-    # token번호 부여, GET /user/{wallet_address}/add_token/?token=00
-    @action(detail=True, methods=['get'])
+    # token번호 부여, PATCH /user/{wallet_address}/add_token/?token=00
+    @action(detail=True, methods=['patch'])
     def add_token(self,request, pk=None):
         entry = User.objects.filter(wallet_address = pk)
-        input_token = self.request.GET.get('token','') 
+        input_token = request.data['token']
         for temp in entry:
             find_token = Wallet.objects.get(token = input_token)
             temp.tokens.add(find_token)
@@ -113,6 +113,17 @@ class UserViewSet(ModelViewSet):
         else :
             return Response("have not token")            
 
+ # token번호 삭제, PATCH /user/{wallet_address}/delete_token/
+    @action(detail=True, methods=['patch'])
+    def delete_token(self,request, pk=None):
+        entry = User.objects.filter(wallet_address = pk)
+        input_token = request.data['token']
+        for temp in entry:
+            Wallet.objects.filter(token = input_token).delete()
+            temp.save()
+        serializer = self.get_serializer(entry, many=True)
+        return Response(serializer.data)
+    
 @method_decorator(csrf_exempt,name='dispatch')
 class LectureViewSet(ModelViewSet):
     parser_classes = [MultiPartParser]
