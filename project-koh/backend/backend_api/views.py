@@ -124,7 +124,9 @@ class UserViewSet(ModelViewSet):
                 list(i)
                 token_list.append(i[1])
         print(token_list)
-        return Response(token_list)
+        have_lecture = Lecture.objects.filter(id = token_list)
+        serializer = LectureSerializer(have_lecture, many=True)
+        return Response(serializer.data)
         
  # token번호 삭제, PATCH /user/{wallet_address}/delete_token/
     @action(detail=True, methods=['patch'])
