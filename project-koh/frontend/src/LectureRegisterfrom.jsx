@@ -169,10 +169,10 @@ function LcetureRegisterfrom() {
         </select>
         <input name='title' value={title} className='text' type="text" id="LcetureName" placeholder='강의명' onChange={onChange} required />
         <textarea name='content' value={content} className='textarea' type="text" id="limitUser" placeholder='강의 설명' onChange={onChange} required />
-        <input name='privateKey' value={privateKey} className='text' type="text" id="LcetureName" placeholder='privateKey' onChange={onChange}  maxLength={64} minLength={64} required />
+        <input name='privateKey' value={privateKey} className='text' type="password" id="LcetureName" placeholder='privateKey' onChange={onChange}  maxLength={64} minLength={64} required />
         
         <input className='subbtn' type="submit" value="입력 완료" />
-      </RegisterForm>
+      </RegisterForm> 
     </RegisterDiv>
   )
 }

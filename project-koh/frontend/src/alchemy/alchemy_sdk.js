@@ -7,7 +7,7 @@ export const alchemy_sdk = async(ownerAddr,image_url)  => {
       };
     let check = false;
     const alchemy = new Alchemy(settings);
-    const ticket= '0x7d5861676b68A398b3E835C362EA322eB91F1Bd2';
+    const ticket= '0x4da883211c2cD98Db1132c8961ad7264fBA5d53B';
     // const ownerAddr = "0x632001efcf13AEbBCB59E66ADF4f3490313d5482";
     console.log("fetching NFTs for address:", ownerAddr);
     console.log("...");

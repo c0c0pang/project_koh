@@ -32,3 +32,6 @@ export const LectureCheck = (wallet_address,id)=>{
 export const UserAllToken = (wallet_address) =>{
     return ` /user/${wallet_address}/all_token/`
 }
+export const UserWalletCheck = (wallet_address) =>{
+    return `/user/check_user/?address=${wallet_address}`
+}

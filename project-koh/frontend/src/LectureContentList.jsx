@@ -24,12 +24,12 @@ function LectureContentList() {
     axios.get(
       LectureCheck(userData.wallet_address,lectureData.id)
     ).then((response)=>{
-      if(response.data === "have token"){
+      console.log(response.data)
+      if(response.data === "have token:"){
         setCheck(true);
       }
     })
   },[])
-
 
   // const asd = 'https://gateway.pinata.cloud/ipfs/QmZidsvXUCqZe1w9fJ3LQX3iwrRHajxLTk4xUFdRvrVhNc';
   // useEffect(()=>{
@@ -76,7 +76,8 @@ function LectureContentList() {
     const confirmAction = async () => {
       if (window.confirm(message)) {
         const privateKey = window.prompt('private key를 입력해주세요.');
-        setLoading(true);
+        if(privateKey.length === 64){
+          setLoading(true);
         img_url = await SendApplyFileToIPFS(lectureData.title, lectureData.image_url, lectureData.count, privateKey);
         const formTokenData = new FormData();
         formTokenData.append('token', lectureData.id);
@@ -102,6 +103,11 @@ function LectureContentList() {
         
         setLoading(false);
         navigate(`../lecture/${lectureData.category}`);
+        }
+        else{
+          alert('다시 입력해 주세요(private key는 64자 입니다.)')
+        }
+        
         onConfirm();
       } else {
         onCancel();

@@ -13,6 +13,8 @@ import menu from './img/menu.png';
 import Logout from './img/logout.png';
 import Setting from './img/settings.png';
 import { useEffect } from "react";
+import {UserKeyApi,UserWalletCheck} from "./ApiState";
+import axios from "axios";
 function HeaderNav({ darkMode, setDarkMode }) {
   const navigate=useNavigate();
   const { connector, library, chainId, account, active, error, activate, deactivate } = useWeb3React();
@@ -35,14 +37,54 @@ function HeaderNav({ darkMode, setDarkMode }) {
     };
     localStorage.setItem(key,JSON.stringify(item));
   }
+  const getId = (key) => {
+    const itemstr = localStorage.getItem(key);
+    if (!itemstr) {
+      return undefined
+    }
+    const item = JSON.parse(itemstr);
+    const now = new Date();
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key);
+      return undefined
+    }
+    return item.value
+  }
+  const user_id=getId('user_id');
+  const user_id_check=localStorage.getItem('user_id_check');
+
+  useEffect(()=>{
+    axios.get(UserWalletCheck(user_id)).then((response)=>{
+      if(response.data === 'no user'){
+        console.log(user_id)
+        const formData = new FormData();
+        formData.append('wallet_address', user_id);
+        formData.append('userName', '미정');
+        formData.append('tokens', 23);
+        
+        axios.post(UserKeyApi, formData, {
+          headers: { "Content-Type": `multipart/form-data` },
+          withCredentials: true,
+          transformRequest: (data, headers) => {
+            return data;
+          },
+        }).then((err) => {
+          console.log(err);
+        }
+        )
+      }
+      else{
+        console.log(response.data);
+      }
+    })
+
+  },[])
 
   if(active){
     setWithExpiry("user_id",account,72000000)
     setWithExpiry("user_id_check",active,72000000)
   }
   // 72000000 -> 120분
-  const user_id=localStorage.getItem('user_id');
-  const user_id_check=localStorage.getItem('user_id_check');
 
   const item = JSON.parse(user_id_check);
   const goHome=()=>{
